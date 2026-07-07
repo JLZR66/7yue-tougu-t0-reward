@@ -2132,6 +2132,31 @@ tr:last-child td {
   margin-top: 14px;
 }
 
+.employee-record-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.employee-record-heading h2 {
+  margin-bottom: 4px;
+}
+
+.record-write-note {
+  max-width: 360px;
+  margin: 0;
+  padding: 9px 11px;
+  border: 1px solid #c8dde4;
+  border-left: 4px solid var(--brand-2);
+  border-radius: 8px;
+  background: #f5fafb;
+  color: #315760;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .ledger-write-callout {
   display: inline-flex;
   align-items: center;
@@ -2489,6 +2514,17 @@ tr:last-child td {
 
   .customer-meta select {
     max-width: 140px;
+  }
+
+  .employee-record-heading {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .record-write-note {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
   }
 
   .option-note[open] p {
@@ -3853,8 +3889,13 @@ function renderManualEntry() {
 function renderEmployeeRecordSection() {
   return `
     <section class="section employee-record-section">
-      <h2>查看员工记录</h2>
-      <p class="hint">点开员工姓名后查看该员工当前台账里的全部记录。</p>
+      <div class="employee-record-heading">
+        <div>
+          <h2>查看员工记录</h2>
+          <p class="hint">点开员工姓名后查看该员工当前台账里的全部记录。</p>
+        </div>
+        <p class="record-write-note">提示：客户信息只是自动预览；点击“写入台账”后，明细才会进入这里和 Excel。</p>
+      </div>
       ${employeeRecordPanels(state.stats?.by_employee?.length ? state.stats.by_employee : state.employees, state.records)}
     </section>
   `;
