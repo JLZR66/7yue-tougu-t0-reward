@@ -1,11 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7月投顾与T0奖励惩罚核算台账</title>
-  <style>
-:root {
+  <title>7????T0????????</title>
+  <style>:root {
   --bg: #f6f7f9;
   --panel: #ffffff;
   --panel-soft: #f1f5f7;
@@ -212,6 +211,16 @@ input:focus, select:focus, textarea:focus {
 
 .btn.excel-btn {
   background: #13795b;
+}
+
+.btn.header-recalc {
+  background: #eef5f7;
+  color: #205662;
+  border: 1px solid #c8dce3;
+}
+
+.btn.header-recalc:hover {
+  background: #dcecef;
 }
 
 .btn.full {
@@ -1111,6 +1120,26 @@ tr:last-child td {
   font-size: 11px;
 }
 
+.process-新增订单 .process-chip,
+.process-订单奖励 .process-chip {
+  background: #e7f6f2;
+  color: #08705e;
+  border: 1px solid rgba(8, 112, 94, 0.22);
+}
+
+.process-创收补充 .process-chip,
+.process-订单创收 .process-chip {
+  background: #fff1dd;
+  color: #9a5a00;
+  border: 1px solid rgba(181, 107, 0, 0.22);
+}
+
+.process-订单净增 .process-chip {
+  background: #e8f4ef;
+  color: #1b6b54;
+  border: 1px solid rgba(27, 107, 84, 0.22);
+}
+
 .process-订单净增 .process-chip {
   background: #e8f4ef;
   color: #1b6b54;
@@ -1174,8 +1203,10 @@ tr:last-child td {
   margin-bottom: 0;
   padding: 14px;
   border: 1px solid #d7e2e6;
+  border-left: 4px solid #9dc8d1;
   border-radius: 8px;
-  background: #fbfcfd;
+  background: linear-gradient(135deg, #ffffff 0%, #fbfcfd 70%);
+  box-shadow: 0 6px 16px rgba(31, 42, 55, 0.04);
 }
 
 .calculation-input-pane .calculator-block {
@@ -1195,12 +1226,32 @@ tr:last-child td {
   background: #ffffff;
 }
 
+.calculation-input-pane .ia-customer-row {
+  border-left-color: #0b6b78;
+  background:
+    linear-gradient(90deg, rgba(11, 107, 120, 0.055), transparent 42%),
+    #ffffff;
+}
+
+.calculation-input-pane .ia-customer-row:nth-child(even) {
+  background:
+    linear-gradient(90deg, rgba(160, 25, 34, 0.045), transparent 42%),
+    #ffffff;
+}
+
+.calculation-input-pane .t0-customer-row {
+  border-left-color: #13795b;
+  background:
+    linear-gradient(90deg, rgba(19, 121, 91, 0.055), transparent 42%),
+    #ffffff;
+}
+
 .ia-customer-row {
   grid-template-columns: minmax(150px, 1.1fr) minmax(150px, 1fr) minmax(100px, .7fr) minmax(90px, .65fr) minmax(190px, 1.1fr);
 }
 
 .calculation-input-pane .ia-customer-row {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(120px, 1fr) minmax(96px, .7fr) minmax(96px, .7fr);
 }
 
 .calculation-input-pane .ia-customer-row .customer-meta {
@@ -1211,6 +1262,49 @@ tr:last-child td {
   padding: 7px 9px;
   border-radius: 8px;
   background: #f4f8fa;
+}
+
+.order-revenue-grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+  gap: 9px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e1ecef;
+  background: rgba(31, 89, 102, 0.055);
+}
+
+.order-revenue-grid label {
+  min-width: 0;
+}
+
+.customer-revenue-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid #cfe1e8;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #ffffff, #f6fbfc);
+  font-size: 12px;
+  color: #53656d;
+}
+
+.customer-revenue-total strong {
+  color: #0b5968;
+  font-size: 14px;
+}
+
+.order-count-hint {
+  margin: 6px 0 12px;
+}
+
+.warning-text {
+  color: #a16207;
+  font-weight: 700;
 }
 
 .t0-customer-row {
@@ -2692,6 +2786,7 @@ tr:last-child td {
 :root[data-theme="dark"] .calculator-block,
 :root[data-theme="dark"] .customer-row,
 :root[data-theme="dark"] .customer-meta,
+:root[data-theme="dark"] .order-revenue-grid,
 :root[data-theme="dark"] .empty-result-grid > div,
 :root[data-theme="dark"] .inline-ledger-cards > div,
 :root[data-theme="dark"] .source-summary > div,
@@ -2706,6 +2801,24 @@ tr:last-child td {
   background: var(--panel-soft);
   border-color: var(--line);
   color: var(--text);
+}
+
+:root[data-theme="dark"] .order-revenue-grid {
+  background: rgba(125, 211, 252, 0.08);
+}
+
+:root[data-theme="dark"] .customer-revenue-total {
+  background: #10242c;
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .customer-revenue-total strong {
+  color: #9be7f5;
+}
+
+:root[data-theme="dark"] .warning-text {
+  color: #f8d98c;
 }
 
 :root[data-theme="dark"] label,
@@ -2842,6 +2955,26 @@ tr:last-child td {
 :root[data-theme="dark"] .process-T0有效户 .process-chip,
 :root[data-theme="dark"] .process-订单净增 .process-chip {
   background: rgba(100, 183, 192, 0.18);
+  color: #a9eff1;
+}
+
+:root[data-theme="dark"] .process-新增订单 .process-chip,
+:root[data-theme="dark"] .process-订单奖励 .process-chip {
+  background: rgba(92, 200, 158, 0.18);
+  border-color: rgba(92, 200, 158, 0.34);
+  color: #a8f0d7;
+}
+
+:root[data-theme="dark"] .process-创收补充 .process-chip,
+:root[data-theme="dark"] .process-订单创收 .process-chip {
+  background: rgba(240, 180, 91, 0.18);
+  border-color: rgba(240, 180, 91, 0.34);
+  color: #ffd28a;
+}
+
+:root[data-theme="dark"] .process-订单净增 .process-chip {
+  background: rgba(100, 183, 192, 0.18);
+  border-color: rgba(100, 183, 192, 0.34);
   color: #a9eff1;
 }
 
@@ -3220,12 +3353,165 @@ tr:last-child td {
   }
 }
 
-  </style>
+.floating-navigator.is-large {
+  width: 230px;
+}
+
+.floating-nav-title {
+  min-height: 38px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--text);
+  font-weight: 800;
+  cursor: grab;
+}
+
+.floating-navigator.is-dragging .floating-nav-title {
+  cursor: grabbing;
+}
+
+.floating-nav-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.floating-nav-controls button {
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--brand-2) 36%, var(--line));
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--brand-2) 10%, var(--panel-soft));
+  color: var(--brand-2);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.floating-nav-body {
+  display: block;
+}
+
+.floating-navigator.is-collapsed {
+  width: 128px;
+}
+
+.floating-navigator.is-collapsed .floating-nav-body {
+  display: none;
+}
+
+:root[data-theme="dark"] .btn.header-recalc {
+  background: rgba(100, 183, 192, 0.14);
+  border-color: rgba(100, 183, 192, 0.38);
+  color: #d8f3f5;
+}
+
+:root[data-theme="dark"] .btn.header-recalc:hover {
+  background: rgba(100, 183, 192, 0.22);
+}
+
+:root[data-theme="dark"] .calculation-input-pane .ia-customer-row,
+:root[data-theme="dark"] .calculation-input-pane .t0-customer-row {
+  background:
+    linear-gradient(90deg, rgba(100, 183, 192, 0.11), transparent 46%),
+    var(--panel);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+:root[data-theme="dark"] .calculation-input-pane .ia-customer-row:nth-child(even) {
+  background:
+    linear-gradient(90deg, rgba(214, 94, 103, 0.1), transparent 46%),
+    var(--panel);
+}
+
+:root[data-theme="dark"] .floating-nav-controls button {
+  background: rgba(100, 183, 192, 0.12);
+  border-color: rgba(100, 183, 192, 0.42);
+  color: #b7f4f5;
+}
+
+/* Final desktop polish: keep operational buttons together and let the region panel resize freely. */
+.header-actions {
+  flex-wrap: nowrap;
+}
+
+.header-danger-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.header-danger-group .btn,
+.header-clear,
+.btn.header-recalc {
+  margin: 0;
+}
+
+.floating-navigator {
+  min-width: 156px;
+  max-width: min(360px, calc(100vw - 24px));
+  min-height: 44px;
+  max-height: calc(100vh - 24px);
+  resize: both;
+  overflow: auto;
+  touch-action: auto;
+}
+
+.floating-nav-title {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: color-mix(in srgb, var(--panel) 96%, transparent);
+}
+
+.floating-nav-body {
+  min-width: 148px;
+}
+
+.floating-navigator.is-collapsed {
+  width: 128px;
+  min-height: 40px;
+  resize: none;
+  overflow: hidden;
+}
+
+:root[data-theme="dark"] .floating-nav-title {
+  background: color-mix(in srgb, var(--panel) 92%, #10242b);
+}
+
+:root[data-theme="dark"] .manual-correction .quick-footer .btn {
+  background: rgba(100, 183, 192, 0.18);
+  border: 1px solid rgba(100, 183, 192, 0.44);
+  color: #dff6f7;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .manual-correction .quick-footer .btn:hover {
+  background: rgba(100, 183, 192, 0.26);
+}
+
+@media (max-width: 900px) {
+  .header-actions {
+    flex-wrap: wrap;
+  }
+
+  .header-danger-group {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+</style>
 </head>
 <body>
   <div id="app"></div>
-  <script>
-(() => {
+  <script>(() => {
   const KEY = "rp_full_standalone_2026_07_v1";
   const EMPLOYEE_NAMES = [
     "唐安伦", "王双豹", "奚琴华", "肖俊寅", "李刚", "朱顺军", "蔡晓清", "张莉丽", "石闽",
@@ -3275,10 +3561,10 @@ tr:last-child td {
     ["IA_BRANCH_REVENUE_4000_PLUS", "上海分公司创收激励4000以上", "投顾创收", 250],
     ["IA_BRANCH_ICEBREAK_ORDER", "上海分公司订单破冰奖", "投顾破冰", 100],
     ["IA_BRANCH_ICEBREAK_REVENUE", "上海分公司订单破冰创收追加", "投顾破冰", 100],
-    ["IA_DEPT_NEW_CUSTOMER_BASE", "营业部新增投顾客户奖", "投顾客户", 50],
-    ["IA_DEPT_REVENUE_0_500", "营业部新增投顾客户创收0-500", "投顾创收", 50],
-    ["IA_DEPT_REVENUE_500_1000", "营业部新增投顾客户创收500-1000", "投顾创收", 100],
-    ["IA_DEPT_REVENUE_1000_PLUS", "营业部新增投顾客户创收1000以上", "投顾创收", 150],
+    ["IA_DEPT_NEW_CUSTOMER_BASE", "营业部投顾新增订单基础奖", "投顾新增订单", 50],
+    ["IA_DEPT_REVENUE_0_500", "营业部投顾新增客户综合创收0-500", "投顾创收补充", 50],
+    ["IA_DEPT_REVENUE_500_1000", "营业部投顾新增客户综合创收500-1000", "投顾创收补充", 100],
+    ["IA_DEPT_REVENUE_1000_PLUS", "营业部投顾新增客户综合创收1000以上", "投顾创收补充", 150],
     ["IA_DEPT_REVENUE_INCREMENT_5000", "营业部投顾创收增量超5000", "投顾创收增量", 500],
     ["IA_DEPT_REVENUE_INCREMENT_10000", "营业部投顾创收增量超10000", "投顾创收增量", 1000],
     ["IA_DEPT_REVENUE_INCREMENT_15000", "营业部投顾创收增量超15000", "投顾创收增量", 2000],
@@ -3359,17 +3645,33 @@ tr:last-child td {
     return null;
   }
 
+  function normalizeOrderRevenues(x) {
+    if (Array.isArray(x.order_revenues)) {
+      return x.order_revenues.map(value => Math.max(0, +value || 0));
+    }
+    const count = Math.max(0, +x.new_orders || 0);
+    const fallbackRevenue = Math.max(0, +x.revenue || 0);
+    if (count <= 0) return fallbackRevenue > 0 ? [fallbackRevenue] : [];
+    return Array.from({ length: count }, (_, index) => index === 0 ? fallbackRevenue : 0);
+  }
+
   function employeeCalc(payload, store = db()) {
     const employee = store.employees?.find(item => String(item.id) === String(payload.employee_id));
     const employeeName = employee?.name || payload.employee_name || "";
-    const ia = (payload.ia_customers || []).map((x, i) => ({
-      label: x.label || `客户${i + 1}`,
-      is_new: x.is_new !== false && x.is_new !== "false",
-      revenue: Math.max(0, +x.revenue || 0),
-      new_orders: Math.max(0, +x.new_orders || 0),
-      withdrawn_orders: Math.max(0, +x.withdrawn_orders || 0),
-      service_mature: x.service_mature !== false && x.service_mature !== "false",
-    }));
+    const ia = (payload.ia_customers || []).map((x, i) => {
+      const orderRevenues = normalizeOrderRevenues(x);
+      const orderCount = Math.max(0, +x.new_orders || orderRevenues.length || 0);
+      const normalizedOrderRevenues = Array.from({ length: orderCount }, (_, index) => Math.max(0, +orderRevenues[index] || 0));
+      return {
+        label: x.label || `客户${i + 1}`,
+        is_new: x.is_new !== false && x.is_new !== "false",
+        revenue: normalizedOrderRevenues.reduce((s, value) => s + value, 0),
+        order_revenues: normalizedOrderRevenues,
+        new_orders: orderCount,
+        withdrawn_orders: Math.max(0, +x.withdrawn_orders || 0),
+        service_mature: x.service_mature !== false && x.service_mature !== "false",
+      };
+    });
     const t0 = (payload.t0_customers || []).map((x, i) => ({
       label: x.label || `客户${i + 1}`,
       is_new: x.is_new !== false && x.is_new !== "false",
@@ -3412,6 +3714,18 @@ tr:last-child td {
     };
 
     const newIa = ia.filter(x => x.is_new);
+    const deptOrders = ia.flatMap(customer => customer.order_revenues.map((revenue, orderIndex) => ({
+      customer: customer.label,
+      is_new_customer: customer.is_new,
+      order_no: orderIndex + 1,
+      revenue,
+      weighted_count: customer.is_new && revenue > 0 ? 1.5 : 1,
+    })));
+    const detailOrderCount = deptOrders.length;
+    const orderTotalRaw = payload.ia_order_total === "" || payload.ia_order_total === null || payload.ia_order_total === undefined ? "" : payload.ia_order_total;
+    const explicitOrderTotal = orderTotalRaw === "" ? null : Math.max(0, +orderTotalRaw || 0);
+    if (explicitOrderTotal != null && detailOrderCount < explicitOrderTotal) warnings.push(`明细新增订单数少于投顾总新增订单数，仍有 ${explicitOrderTotal - detailOrderCount} 单未分配。`);
+    if (explicitOrderTotal != null && detailOrderCount > explicitOrderTotal) warnings.push(`明细新增订单数超过投顾总新增订单数 ${detailOrderCount - explicitOrderTotal} 单，请检查。`);
     const net = ia.reduce((s, x) => s + x.new_orders - x.withdrawn_orders, 0);
     const threshold = yes(payload.existing_orders_12_plus) || net >= 12;
     const countRate = newIa.length >= 15 ? 150 : newIa.length >= 10 ? 100 : newIa.length >= 1 ? 50 : 0;
@@ -3447,13 +3761,18 @@ tr:last-child td {
       }
     });
 
-    newIa.forEach(x => {
-      add("IA_DEPT_NEW_CUSTOMER_BASE", 50, "department", `${x.label}：营业部新增投顾客户奖励50元`);
-      const code = deptRevenueReason(x.revenue);
-      if (code) add(code, reason(code).default_amount, "department", `${x.label}：新增投顾客户创收${x.revenue}元，按最高档奖励${reason(code).default_amount}元`);
+    deptOrders.forEach(order => {
+      add("IA_DEPT_NEW_CUSTOMER_BASE", 50, "department", `${order.customer}订单${order.order_no}：营业部投顾新增订单基础奖50元`);
     });
 
-    const iaRevenue = ia.reduce((s, x) => s + x.revenue, 0);
+    newIa.forEach(customer => {
+      const code = deptRevenueReason(customer.revenue);
+      if (code) {
+        add(code, reason(code).default_amount, "department", `${customer.label}：新增客户新增订单综合创收${customer.revenue}元，按最高档补充${reason(code).default_amount}元`);
+      }
+    });
+
+    const iaRevenue = newIa.reduce((s, x) => s + x.revenue, 0);
     const revenueBase = deptIaAverageRevenue[employeeName] ?? 0;
     const revenueIncrement = iaRevenue - revenueBase;
     const incrementCode = deptIncrementReason(revenueIncrement);
@@ -3461,8 +3780,8 @@ tr:last-child td {
       add(incrementCode, reason(incrementCode).default_amount, "department", `${employeeName || "当前员工"}：7月投顾创收${iaRevenue.toFixed(2)}元 - 1-6月月均${revenueBase.toFixed(2)}元 = 增量${revenueIncrement.toFixed(2)}元，奖励${reason(incrementCode).default_amount}元`);
     }
 
-    if (yes(payload.no_first_half_effective_ia_order) && ia.some(x => x.new_orders > 0)) {
-      const hasRevenueOrder = ia.some(x => x.new_orders > 0 && x.revenue > 0);
+    if (yes(payload.no_first_half_effective_ia_order) && deptOrders.length > 0) {
+      const hasRevenueOrder = deptOrders.some(x => x.is_new_customer && x.revenue > 0);
       add("IA_BRANCH_ICEBREAK_ORDER", 100, "branch", "上半年未新增有效投顾订单，本月新增任一投顾订单，订单破冰奖100元");
       if (hasRevenueOrder) add("IA_BRANCH_ICEBREAK_REVENUE", 100, "branch", "新增投顾订单产生创收，订单破冰奖追加100元");
     }
@@ -3481,12 +3800,12 @@ tr:last-child td {
       add("T0_DEPT_NEW_EFFECTIVE", 200 * effectiveT0.length, "department", `营业部新增T0有效户${effectiveT0.length}户 × 200元`);
     }
 
-    const revenueCustomers = newIa.filter(x => x.revenue > 0);
-    const weighted = newIa.length + revenueCustomers.length * 0.5;
+    const revenueOrders = deptOrders.filter(x => x.is_new_customer && x.revenue > 0);
+    const weighted = deptOrders.reduce((s, x) => s + x.weighted_count, 0);
     const rawRevenueScore = iaRevenue / 4000 * 5;
     const revenueScore = iaRevenue > 10000 ? rawRevenueScore : Math.min(rawRevenueScore, 8);
     const total = weighted + revenueScore;
-    const reallocation = ia.length && total < 10 ? (10 - Math.floor(total)) * 2 : 0;
+    const reallocation = deptOrders.length && total < 10 ? (10 - Math.floor(total)) * 2 : 0;
     if (reallocation) add("PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION", reallocation, "department", `投顾总分${total.toFixed(2)}，取整数档${Math.floor(total)}分，距10分差${10 - Math.floor(total)}档，每档剥离2户，共剥离${reallocation}户`);
 
     const rewardItems = items.filter(x => x.reason_code !== "PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION");
@@ -3494,15 +3813,23 @@ tr:last-child td {
       items,
       warnings,
       score: {
-        is_calculated: !!ia.length,
+        is_calculated: !!deptOrders.length,
         ia_total_customers: ia.length,
         ia_new_customers: newIa.length,
         ia_old_customers: ia.length - newIa.length,
+        ia_total_orders: detailOrderCount,
+        ia_order_total_input: explicitOrderTotal,
+        ia_order_count_mismatch: explicitOrderTotal != null && explicitOrderTotal !== detailOrderCount,
+        ia_order_count_gap: explicitOrderTotal == null ? 0 : explicitOrderTotal - detailOrderCount,
+        order_revenue_details: deptOrders,
         t0_customers: t0.length,
         t0_new_customers: t0.filter(x => x.is_new).length,
         t0_effective_customers: effectiveT0.length,
         new_customers: newIa.length,
-        revenue_customers: revenueCustomers.length,
+        revenue_customers: newIa.filter(x => x.revenue > 0).length,
+        total_orders: detailOrderCount,
+        revenue_orders: revenueOrders.length,
+        weighted_orders: weighted,
         weighted_customers: weighted,
         ia_revenue: iaRevenue,
         revenue_base: revenueBase,
@@ -3672,9 +3999,8 @@ tr:last-child td {
   };
 })();
 
-  </script>
-  <script>
-(() => {
+</script>
+  <script>(() => {
   const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -3682,160 +4008,244 @@ tr:last-child td {
     "\"": "&quot;",
     "'": "&apos;",
   }[char]));
-  const money = value => Number(value || 0).toLocaleString("zh-CN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const money = value => Number(value || 0).toLocaleString("zh-CN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
   const isHiddenReference = record => record.reason_code?.startsWith("IA_HIDDEN_");
   const isManualRecord = record => record.settlement === "manual" && !isHiddenReference(record);
-  const sourceName = record => isHiddenReference(record) ? "上海分公司" : (isManualRecord(record) ? "手工更正" : (record.record_source === "department" ? "营业部" : (record.record_source === "branch" ? "上海分公司" : "手工更正")));
-  const businessName = record => isHiddenReference(record)
-    ? "投顾参考项"
-    : isManualRecord(record)
-    ? "手工更正"
-    : (record.reason_code?.startsWith("T0_") || record.category?.includes("T0")
-    ? "T0"
-    : (record.reason_code?.startsWith("PENALTY_") || record.amount_type === "customer_count" ? "剥离" : (record.category?.includes("手工") ? "手工更正" : "投顾")));
-  const groupName = record => {
-    if (record.reason_code === "IA_BRANCH_ORDER_NET_INCREASE") return "订单净增";
-    if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_CUSTOMER_BASE"].includes(record.reason_code)) return "新增户数";
-    if (record.reason_code?.startsWith("IA_BRANCH_REVENUE_") || ["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(record.reason_code)) return "创收追加";
-    if (record.reason_code?.startsWith("IA_DEPT_REVENUE_INCREMENT_")) return "创收增量";
-    if (record.reason_code?.startsWith("IA_BRANCH_ICEBREAK_")) return "破冰奖";
-    if (record.reason_code?.startsWith("IA_HIDDEN_WEEKLY_")) return "单周竞赛";
-    if (record.reason_code === "IA_HIDDEN_REVENUE_ICEBREAK_TOP50") return "创收破冰";
-    if (record.reason_code?.startsWith("IA_HIDDEN_LIAISON_")) return "联络员";
-    if (record.reason_code === "T0_BRANCH_OPEN_AND_TRADE") return "T0基础";
-    if (["T0_BRANCH_VOLUME_50_100", "T0_BRANCH_VOLUME_100_200"].includes(record.reason_code)) return "交易补充";
-    if (record.reason_code?.startsWith("T0_BRANCH_EFFECTIVE_COUNT_") || record.reason_code === "T0_DEPT_NEW_EFFECTIVE") return "T0有效户";
-    if (record.reason_code?.startsWith("PENALTY_")) return "剥离";
-    return "手工";
+
+  const sourceName = record => {
+    if (isManualRecord(record)) return "手工更正";
+    if (record.record_source === "department") return "营业部";
+    if (record.record_source === "branch" || isHiddenReference(record)) return "上海分公司";
+    return "手工更正";
   };
+
+  const businessName = record => {
+    if (isHiddenReference(record)) return "投顾参考项";
+    if (isManualRecord(record)) return "手工更正";
+    if (record.reason_code?.startsWith("T0_") || record.category?.includes("T0")) return "T0";
+    if (record.reason_code?.startsWith("PENALTY_") || record.amount_type === "customer_count") return "剥离";
+    return "投顾";
+  };
+
+  const groupName = record => {
+    const code = record.reason_code || "";
+    if (code === "IA_BRANCH_ORDER_NET_INCREASE") return "订单净增";
+    if (code === "IA_DEPT_NEW_CUSTOMER_BASE") return "新增订单";
+    if (["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(code)) return "订单创收";
+    if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS"].includes(code)) return "新增户数";
+    if (code.startsWith("IA_BRANCH_REVENUE_")) return "创收补充";
+    if (code.startsWith("IA_DEPT_REVENUE_INCREMENT_")) return "创收增量";
+    if (code.startsWith("IA_BRANCH_ICEBREAK_")) return "破冰奖励";
+    if (code.startsWith("IA_HIDDEN_WEEKLY_")) return "单周竞赛";
+    if (code === "IA_HIDDEN_REVENUE_ICEBREAK_TOP50") return "创收破冰";
+    if (code.startsWith("IA_HIDDEN_LIAISON_")) return "优秀联络员";
+    if (code === "T0_BRANCH_OPEN_AND_TRADE") return "T0基础";
+    if (["T0_BRANCH_VOLUME_50_100", "T0_BRANCH_VOLUME_100_200"].includes(code)) return "交易补充";
+    if (code.startsWith("T0_BRANCH_EFFECTIVE_COUNT_") || code === "T0_DEPT_NEW_EFFECTIVE") return "T0有效户";
+    if (code.startsWith("PENALTY_")) return "剥离客户";
+    return "手工更正";
+  };
+
   const sourceOrder = record => sourceName(record) === "营业部" ? 1 : (sourceName(record) === "上海分公司" ? 2 : 3);
-  const bizOrder = record => businessName(record) === "投顾" ? 1 : (businessName(record) === "T0" ? 2 : (businessName(record) === "剥离" ? 3 : 4));
-  const groupOrder = record => ({ "订单净增": 1, "新增户数": 2, "创收追加": 3, "创收增量": 4, "破冰奖": 5, "单周竞赛": 6, "创收破冰": 7, "联络员": 8, "T0基础": 9, "交易补充": 10, "T0有效户": 11, "剥离": 12, "手工": 13 }[groupName(record)] || 20);
+  const bizOrder = record => businessName(record) === "投顾" ? 1 : (businessName(record) === "T0" ? 2 : (businessName(record) === "剥离" ? 3 : (businessName(record) === "投顾参考项" ? 4 : 5)));
+  const groupOrder = record => ({
+    "新增订单": 1,
+    "订单创收": 2,
+    "订单净增": 3,
+    "新增户数": 4,
+    "创收补充": 5,
+    "创收增量": 6,
+    "破冰奖励": 7,
+    "T0基础": 8,
+    "交易补充": 9,
+    "T0有效户": 10,
+    "剥离客户": 11,
+    "单周竞赛": 12,
+    "创收破冰": 13,
+    "优秀联络员": 14,
+    "手工更正": 15,
+  }[groupName(record)] || 20);
+
   const sortRecords = rows => [...rows].sort((a, b) =>
     String(a.employee_name || "").localeCompare(String(b.employee_name || ""), "zh-CN") ||
     sourceOrder(a) - sourceOrder(b) ||
     bizOrder(a) - bizOrder(b) ||
     groupOrder(a) - groupOrder(b)
   );
+
   const cell = (value, type = "String", style = "") => `<Cell${style ? ` ss:StyleID="${style}"` : ""}><Data ss:Type="${type}">${esc(value)}</Data></Cell>`;
   const wideCell = (value, mergeAcross = 2, type = "String", style = "") => `<Cell ss:MergeAcross="${mergeAcross}"${style ? ` ss:StyleID="${style}"` : ""}><Data ss:Type="${type}">${esc(value)}</Data></Cell>`;
   const row = cells => `<Row>${cells.join("")}</Row>`;
   const header = labels => row(labels.map(x => cell(x, "String", "Header")));
   const section = title => row([cell(title, "String", "Section"), cell("", "String", "Section"), cell("", "String", "Section"), cell("", "String", "Section"), cell("", "String", "Section"), cell("", "String", "Section"), cell("", "String", "Section")]);
-  const worksheet = (name, rows, widths = [130, 110, 110, 170, 110, 110, 110, 420]) => `
+
+  const worksheet = (name, rows, widths = [95, 95, 170, 92, 92, 82, 620]) => `
     <Worksheet ss:Name="${esc(name.slice(0, 31))}">
       <Table>${widths.map(w => `<Column ss:Width="${w}"/>`).join("")}${rows.join("")}</Table>
     </Worksheet>`;
+
+  const activeRecords = records => records.filter(x => x.status !== "cancelled");
+  const amountText = record => `${money(record.amount)} ${record.amount_type === "customer_count" ? "户" : "元"}`;
+  const payableText = record => record.amount_type === "customer_count" ? "-" : `${money(record.payable_amount ?? record.amount)} 元`;
+  const pendingText = record => Number(record.pending_amount || 0) ? `${money(record.pending_amount)} 元` : "-";
+
   const summarize = records => {
-    const active = records.filter(x => x.status !== "cancelled");
     const byEmployee = {};
-    active.forEach(record => {
+    activeRecords(records).forEach(record => {
       const name = record.employee_name || "未命名员工";
-      byEmployee[name] ||= { name, reward: 0, payable: 0, pending: 0, manualReward: 0, manualDeduction: 0, penaltyMoney: 0, penaltyCustomers: 0, branch: 0, department: 0 };
+      byEmployee[name] ||= {
+        name,
+        reward: 0,
+        payable: 0,
+        pending: 0,
+        department: 0,
+        branch: 0,
+        manualReward: 0,
+        manualDeduction: 0,
+        penaltyMoney: 0,
+        penaltyCustomers: 0,
+      };
+      const target = byEmployee[name];
       if (record.type === "reward") {
-        byEmployee[name].reward += Number(record.amount || 0);
-        byEmployee[name].payable += Number(record.payable_amount ?? record.amount ?? 0);
-        byEmployee[name].pending += Number(record.pending_amount || 0);
-        if (isManualRecord(record)) byEmployee[name].manualReward += Number(record.payable_amount ?? record.amount ?? 0);
-        if (sourceName(record) === "上海分公司") byEmployee[name].branch += Number(record.payable_amount ?? record.amount ?? 0);
-        if (sourceName(record) === "营业部") byEmployee[name].department += Number(record.payable_amount ?? record.amount ?? 0);
+        const gross = Number(record.amount || 0);
+        const payable = Number(record.payable_amount ?? record.amount ?? 0);
+        const pending = Number(record.pending_amount || 0);
+        target.reward += gross;
+        target.payable += payable;
+        target.pending += pending;
+        if (sourceName(record) === "营业部") target.department += payable;
+        if (sourceName(record) === "上海分公司") target.branch += payable;
+        if (isManualRecord(record)) target.manualReward += payable;
       } else if (record.amount_type === "money") {
-        byEmployee[name].penaltyMoney += Number(record.amount || 0);
-        if (isManualRecord(record)) byEmployee[name].manualDeduction += Number(record.amount || 0);
+        target.penaltyMoney += Number(record.amount || 0);
+        if (isManualRecord(record)) target.manualDeduction += Number(record.amount || 0);
       } else {
-        byEmployee[name].penaltyCustomers += Number(record.amount || 0);
+        target.penaltyCustomers += Number(record.amount || 0);
       }
     });
     return Object.values(byEmployee).sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   };
-  const amountText = record => `${money(record.amount)} ${record.amount_type === "customer_count" ? "户" : "元"}`;
-  const payableText = record => record.amount_type === "customer_count" ? "-" : `${money(record.payable_amount ?? record.amount)} 元`;
-  const pendingText = record => Number(record.pending_amount || 0) ? `${money(record.pending_amount)} 元` : "-";
-  const sumRows = (rows, predicate, key) => rows.filter(predicate).reduce((s, x) => s + Number(x[key] ?? x.amount ?? 0), 0);
+
+  const rewardSum = (rows, predicate, field) => rows
+    .filter(predicate)
+    .reduce((sum, record) => sum + Number(record[field] ?? record.amount ?? 0), 0);
+
+  const calcText = rows => rows
+    .map(record => `${groupName(record)}：${record.calculation_detail || record.reason_name}`)
+    .join("；") || "-";
+
   const compositionRows = employeeRows => {
     const rewardRows = employeeRows.filter(x => x.type === "reward");
-    const mk = (label, source, biz) => {
-      const rows = rewardRows.filter(r => sourceName(r) === source && businessName(r) === biz);
+    const make = (label, source, biz) => {
+      const rows = rewardRows.filter(record => sourceName(record) === source && businessName(record) === biz);
       return row([
         cell(label),
-        cell(`${money(rows.reduce((s, x) => s + Number(x.amount || 0), 0))} 元`, "String", "Number"),
-        cell(`${money(rows.reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0))} 元`, "String", "Number"),
-        cell(`${money(rows.reduce((s, x) => s + Number(x.pending_amount || 0), 0))} 元`, "String", "Number"),
-        wideCell(rows.map(r => `${groupName(r)}：${r.calculation_detail || r.reason_name}`).join("；") || "-"),
+        cell(`${money(rewardSum(rows, () => true, "amount"))} 元`, "String", "Number"),
+        cell(`${money(rewardSum(rows, () => true, "payable_amount"))} 元`, "String", "Number"),
+        cell(`${money(rewardSum(rows, () => true, "pending_amount"))} 元`, "String", "Number"),
+        wideCell(calcText(rows)),
       ]);
     };
     return [
       section("奖励组成汇总"),
       row([cell("组成", "String", "Header"), cell("应发", "String", "Header"), cell("本次可发", "String", "Header"), cell("待复核", "String", "Header"), wideCell("简要计算过程", 2, "String", "Header")]),
-      mk("营业部投顾", "营业部", "投顾"),
-      mk("营业部T0", "营业部", "T0"),
-      mk("上海分公司投顾", "上海分公司", "投顾"),
-      mk("上海分公司T0", "上海分公司", "T0"),
-      mk("上海分公司投顾参考项", "上海分公司", "投顾参考项"),
+      make("营业部投顾", "营业部", "投顾"),
+      make("营业部T0", "营业部", "T0"),
+      make("上海分公司投顾", "上海分公司", "投顾"),
+      make("上海分公司T0", "上海分公司", "T0"),
+      make("上海分公司投顾参考项", "上海分公司", "投顾参考项"),
+      make("手工更正", "手工更正", "手工更正"),
     ];
   };
+
+  const detailSection = (title, rows) => {
+    const output = [
+      section(title),
+      header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]),
+    ];
+    rows.forEach(record => output.push(row([
+      cell(businessName(record)),
+      cell(groupName(record)),
+      cell(record.reason_name),
+      cell(amountText(record)),
+      cell(payableText(record)),
+      cell(pendingText(record)),
+      cell(record.calculation_detail || ""),
+    ])));
+    return output;
+  };
+
   const employeeSheetRows = (name, rows) => {
     const employeeRows = sortRecords(rows);
     const rewardRows = employeeRows.filter(x => x.type === "reward");
-    const penalties = employeeRows.filter(x => x.type === "penalty" && x.amount_type === "customer_count");
-    const payable = rewardRows.reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
-    const pending = rewardRows.reduce((s, x) => s + Number(x.pending_amount || 0), 0);
-    const branch = rewardRows.filter(x => sourceName(x) === "上海分公司").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
-    const department = rewardRows.filter(x => sourceName(x) === "营业部").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
-    const branchGross = rewardRows.filter(x => sourceName(x) === "上海分公司").reduce((s, x) => s + Number(x.amount || 0), 0);
-    const departmentGross = rewardRows.filter(x => sourceName(x) === "营业部").reduce((s, x) => s + Number(x.amount || 0), 0);
-    const branchPending = rewardRows.filter(x => sourceName(x) === "上海分公司").reduce((s, x) => s + Number(x.pending_amount || 0), 0);
-    const departmentPending = rewardRows.filter(x => sourceName(x) === "营业部").reduce((s, x) => s + Number(x.pending_amount || 0), 0);
-    const manualRewards = employeeRows.filter(x => isManualRecord(x) && x.type === "reward").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
-    const manualDeductions = employeeRows.filter(x => isManualRecord(x) && x.type === "penalty" && x.amount_type === "money").reduce((s, x) => s + Number(x.amount || 0), 0);
-    const manualNet = manualRewards - manualDeductions;
-    const netPayable = payable - manualDeductions;
-    const penaltyCustomers = penalties.reduce((s, x) => s + Number(x.amount || 0), 0);
-    const rowsOut = [
+    const customerPenalties = employeeRows.filter(x => x.type === "penalty" && x.amount_type === "customer_count");
+    const moneyPenalties = employeeRows.filter(x => x.type === "penalty" && x.amount_type === "money");
+    const departmentRows = rewardRows.filter(x => sourceName(x) === "营业部");
+    const branchRows = rewardRows.filter(x => sourceName(x) === "上海分公司");
+    const manualRewardRows = rewardRows.filter(isManualRecord);
+    const manualDeduction = moneyPenalties.filter(isManualRecord).reduce((sum, x) => sum + Number(x.amount || 0), 0);
+    const gross = rewardRows.reduce((sum, x) => sum + Number(x.amount || 0), 0);
+    const payable = rewardRows.reduce((sum, x) => sum + Number(x.payable_amount ?? x.amount ?? 0), 0);
+    const pending = rewardRows.reduce((sum, x) => sum + Number(x.pending_amount || 0), 0);
+    const penaltyCustomers = customerPenalties.reduce((sum, x) => sum + Number(x.amount || 0), 0);
+    const manualRewards = manualRewardRows.reduce((sum, x) => sum + Number(x.payable_amount ?? x.amount ?? 0), 0);
+    const netPayable = payable - manualDeduction;
+
+    return [
       row([cell(`${name} 奖励核算结果`, "String", "Title")]),
       row([cell("指标", "String", "Header"), cell("应发/数量", "String", "Header"), cell("本次可发", "String", "Header"), cell("待复核", "String", "Header"), wideCell("说明", 2, "String", "Header")]),
-      row([cell("营业部奖励"), cell(`${money(departmentGross)} 元`, "String", "Number"), cell(`${money(department)} 元`, "String", "Number"), cell(`${money(departmentPending)} 元`, "String", "Number"), wideCell("营业部投顾新增客户/创收分档/创收增量奖励 + 营业部T0有效户奖励")]),
-      row([cell("上海分公司奖励"), cell(`${money(branchGross)} 元`, "String", "Number"), cell(`${money(branch)} 元`, "String", "Number"), cell(`${money(branchPending)} 元`, "String", "Number"), wideCell("上海分公司投顾订单/新户/创收/破冰 + 上海分公司T0基础/交易补充/有效户")]),
-      row([cell("合计奖励"), cell(`${money(rewardRows.reduce((s, x) => s + Number(x.amount || 0), 0))} 元`, "String", "Number"), cell(`${money(payable)} 元`, "String", "Number"), cell(`${money(pending)} 元`, "String", "Number"), wideCell(pending ? `待复核来自上海分公司7月投顾新增客户数激励和创收激励` : "无待复核金额")]),
-      row([cell("手工更正"), cell(`${money(manualRewards)} 元`, "String", "Number"), cell(`${money(manualNet)} 元`, "String", "Number"), cell("-"), wideCell(`手工奖励 ${money(manualRewards)} 元；手工扣回 ${money(manualDeductions)} 元`)]),
+      row([cell("营业部奖励"), cell(`${money(rewardSum(departmentRows, () => true, "amount"))} 元`, "String", "Number"), cell(`${money(rewardSum(departmentRows, () => true, "payable_amount"))} 元`, "String", "Number"), cell(`${money(rewardSum(departmentRows, () => true, "pending_amount"))} 元`, "String", "Number"), wideCell("营业部投顾新增订单、创收补充、创收增量奖励 + 营业部T0有效户奖励")]),
+      row([cell("上海分公司奖励"), cell(`${money(rewardSum(branchRows, () => true, "amount"))} 元`, "String", "Number"), cell(`${money(rewardSum(branchRows, () => true, "payable_amount"))} 元`, "String", "Number"), cell(`${money(rewardSum(branchRows, () => true, "pending_amount"))} 元`, "String", "Number"), wideCell("上海分公司投顾订单、新户、创收、破冰与T0基础/交易/有效户奖励")]),
+      row([cell("合计奖励"), cell(`${money(gross)} 元`, "String", "Number"), cell(`${money(payable)} 元`, "String", "Number"), cell(`${money(pending)} 元`, "String", "Number"), wideCell(pending ? "待复核来自上海分公司7月投顾新增客户数激励和创收激励" : "无待复核金额")]),
+      row([cell("手工更正"), cell(`${money(manualRewards)} 元`, "String", "Number"), cell(`${money(manualRewards - manualDeduction)} 元`, "String", "Number"), cell("-"), wideCell(`手工奖励 ${money(manualRewards)} 元；手工扣回 ${money(manualDeduction)} 元`)]),
       row([cell("最终奖金净值"), cell("-"), cell(`${money(netPayable)} 元`, "String", "Number"), cell("-"), wideCell("本次可发奖励 - 手工扣回金额；手工奖励已包含在本次可发奖励中")]),
       row([cell("剥离客户"), cell(`${money(penaltyCustomers)} 户`, "String", "Number"), cell("-"), cell("-"), wideCell("按营业部投顾总分整数档与10分比较，每少1档剥离2户")]),
       ...compositionRows(employeeRows),
-      section("营业部奖励"),
-      header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]),
-      ...["投顾", "T0"].flatMap(biz => employeeRows.filter(r => sourceName(r) === "营业部" && businessName(r) === biz).map(r => row([cell(biz), cell(groupName(r)), cell(r.reason_name), cell(amountText(r)), cell(payableText(r)), cell(pendingText(r)), cell(r.calculation_detail || "")]))),
-      section("上海分公司奖励"),
-      header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]),
-      ...["投顾", "T0", "投顾参考项"].flatMap(biz => employeeRows.filter(r => sourceName(r) === "上海分公司" && businessName(r) === biz).map(r => row([cell(biz), cell(groupName(r)), cell(r.reason_name), cell(amountText(r)), cell(payableText(r)), cell(pendingText(r)), cell(r.calculation_detail || "")]))),
-      section("手工更正"),
-      header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]),
-      ...employeeRows.filter(r => sourceName(r) === "手工更正" || businessName(r) === "手工更正").map(r => row([cell("手工更正"), cell(groupName(r)), cell(r.reason_name), cell(amountText(r)), cell(payableText(r)), cell(pendingText(r)), cell(r.calculation_detail || "")])),
+      ...detailSection("营业部奖励", employeeRows.filter(record => sourceName(record) === "营业部")),
+      ...detailSection("上海分公司奖励", employeeRows.filter(record => sourceName(record) === "上海分公司")),
+      ...detailSection("手工更正", employeeRows.filter(record => sourceName(record) === "手工更正")),
+      ...(customerPenalties.length ? detailSection("剥离处理", customerPenalties) : []),
     ];
-    if (penalties.length) {
-      rowsOut.push(section("剥离处理"));
-      rowsOut.push(header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]));
-      penalties.forEach(r => rowsOut.push(row([cell("投顾"), cell("剥离"), cell(r.reason_name), cell(amountText(r)), cell("-"), cell("-"), cell(r.calculation_detail || "")])));
-    }
-    return rowsOut;
   };
+
   const buildWorkbook = records => {
-    const active = sortRecords(records.filter(x => x.status !== "cancelled"));
-    const employeeSummary = summarize(active);
+    const active = sortRecords(activeRecords(records));
     const summaryRows = [
       row([cell("7月投顾与T0奖励惩罚核算汇总", "String", "Title")]),
       header(["员工", "营业部可发", "上海分公司可发", "合计应发", "本次可发", "待复核", "手工更正", "最终奖金净值", "惩罚金额", "剥离客户"]),
-      ...employeeSummary.map(x => row([cell(x.name), cell(money(x.department), "String", "Number"), cell(money(x.branch), "String", "Number"), cell(money(x.reward), "String", "Number"), cell(money(x.payable), "String", "Number"), cell(money(x.pending), "String", "Number"), cell(money(x.manualReward - x.manualDeduction), "String", "Number"), cell(money(x.payable - x.manualDeduction), "String", "Number"), cell(money(x.penaltyMoney), "String", "Number"), cell(money(x.penaltyCustomers), "String", "Number")])),
+      ...summarize(active).map(item => row([
+        cell(item.name),
+        cell(money(item.department), "String", "Number"),
+        cell(money(item.branch), "String", "Number"),
+        cell(money(item.reward), "String", "Number"),
+        cell(money(item.payable), "String", "Number"),
+        cell(money(item.pending), "String", "Number"),
+        cell(money(item.manualReward - item.manualDeduction), "String", "Number"),
+        cell(money(item.payable - item.manualDeduction), "String", "Number"),
+        cell(money(item.penaltyMoney), "String", "Number"),
+        cell(money(item.penaltyCustomers), "String", "Number"),
+      ])),
     ];
+
     const byEmployee = {};
-    active.forEach(r => {
-      const name = r.employee_name || "未命名员工";
+    active.forEach(record => {
+      const name = record.employee_name || "未命名员工";
       byEmployee[name] ||= [];
-      byEmployee[name].push(r);
+      byEmployee[name].push(record);
     });
+
     const sheets = [
-      worksheet("员工汇总", summaryRows, [120, 110, 110, 110, 120, 110, 110, 110, 110, 110]),
-      ...Object.keys(byEmployee).sort((a, b) => a.localeCompare(b, "zh-CN")).map(name => worksheet(name, employeeSheetRows(name, byEmployee[name]), [88, 95, 170, 92, 92, 82, 620])),
+      worksheet("员工汇总", summaryRows, [120, 110, 120, 110, 120, 100, 100, 120, 100, 100]),
+      ...Object.keys(byEmployee)
+        .sort((a, b) => a.localeCompare(b, "zh-CN"))
+        .map(name => worksheet(name, employeeSheetRows(name, byEmployee[name]))),
     ];
+
     return `<?xml version="1.0" encoding="UTF-8"?>
 <?mso-application progid="Excel.Sheet"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
@@ -3852,9 +4262,11 @@ tr:last-child td {
  ${sheets.join("")}
 </Workbook>`;
   };
+
   window.exportLedgerWorkbook = function exportLedgerWorkbook(records) {
     return buildWorkbook(records || []);
   };
+
   window.downloadFile = async function downloadFile(event, link, filename) {
     event.preventDefault();
     const currentState = typeof state !== "undefined" ? state : null;
@@ -3868,6 +4280,7 @@ tr:last-child td {
     URL.revokeObjectURL(url);
     return false;
   };
+
   document.addEventListener("click", event => {
     const target = event.target?.nodeType === 1 ? event.target : event.target?.parentElement;
     const link = target?.closest?.('a[href*="/api/export.xlsx"]');
@@ -3886,12 +4299,12 @@ tr:last-child td {
     a.click();
     URL.revokeObjectURL(url);
   }, true);
+
   document.documentElement.dataset.exportReady = "true";
 })();
 
-  </script>
-  <script>
-const state = {
+</script>
+  <script>const state = {
   tab: "entry",
   accessCode: localStorage.getItem("rp_access_code") || "",
   accessRequired: false,
@@ -3920,12 +4333,16 @@ const state = {
   advancedMode: "reference",
   theme: localStorage.getItem("rp_theme_2026_07") || "light",
   expandedPanels: [],
+  floatingCollapsed: localStorage.getItem("rp_floating_nav_collapsed_2026_07") === "true",
+  floatingSize: localStorage.getItem("rp_floating_nav_size_2026_07") || "normal",
   filters: { employee_name: "", employee_id: "", type: "", start: "", end: "", project_id: "" },
 };
 
 const EMPLOYEE_DRAFT_KEY = "rp_employee_calculation_draft_2026_07_v1";
 const PENDING_MANUAL_KEY = "rp_pending_manual_entries_2026_07_v1";
 const FLOATING_NAV_POSITION_KEY = "rp_floating_nav_position_2026_07_v1";
+const FLOATING_NAV_COLLAPSED_KEY = "rp_floating_nav_collapsed_2026_07";
+const FLOATING_NAV_SIZE_KEY = "rp_floating_nav_size_2026_07";
 const FLOATING_NAV_LINKS = [
   ["section-top", "顶部"],
   ["section-ia-input", "投顾填写"],
@@ -3996,6 +4413,7 @@ function blankEmployeeCalculationInputs(employeeId = "") {
   return {
     employee_id: employeeId,
     ia_customer_count: 0,
+    ia_order_total: "",
     ia_customers: [],
     t0_customer_count: 0,
     t0_customers: [],
@@ -4168,8 +4586,10 @@ function loadFloatingNavPosition() {
 function floatingNavStyle() {
   const position = loadFloatingNavPosition();
   if (!position) return "";
-  const left = Math.max(8, Math.min(position.left, window.innerWidth - 190));
-  const top = Math.max(8, Math.min(position.top, window.innerHeight - 220));
+  const navWidth = state.floatingSize === "large" ? 230 : 180;
+  const navHeight = state.floatingCollapsed ? 48 : 240;
+  const left = Math.max(8, Math.min(position.left, window.innerWidth - navWidth - 8));
+  const top = Math.max(8, Math.min(position.top, window.innerHeight - navHeight - 8));
   return `style="left:${left}px;top:${top}px;right:auto;bottom:auto;"`;
 }
 
@@ -4212,14 +4632,45 @@ function updateFloatingArea() {
 }
 
 function handleFloatingSummaryClick(event) {
-  if (state.floatingSuppressClick) {
-    event.preventDefault();
-    state.floatingSuppressClick = false;
+  if (state.floatingSuppressClick) state.floatingSuppressClick = false;
+}
+
+function toggleFloatingCollapsed(event) {
+  event?.stopPropagation?.();
+  state.floatingCollapsed = !state.floatingCollapsed;
+  localStorage.setItem(FLOATING_NAV_COLLAPSED_KEY, String(state.floatingCollapsed));
+  const nav = document.querySelector(".floating-navigator");
+  if (nav) nav.classList.toggle("is-collapsed", state.floatingCollapsed);
+  const button = document.querySelector(".floating-nav-controls button[title='收起/展开']");
+  if (button) button.textContent = state.floatingCollapsed ? "+" : "-";
+}
+
+function toggleFloatingSize(event) {
+  event?.stopPropagation?.();
+  state.floatingSize = state.floatingSize === "large" ? "normal" : "large";
+  localStorage.setItem(FLOATING_NAV_SIZE_KEY, state.floatingSize);
+  const nav = document.querySelector(".floating-navigator");
+  if (nav) nav.classList.toggle("is-large", state.floatingSize === "large");
+  const button = document.querySelector(".floating-nav-controls button[title^='快速放大']");
+  if (button) button.textContent = state.floatingSize === "large" ? "小" : "大";
+}
+
+function recalculateEmployeeFromHeader() {
+  const form = document.querySelector("#employeeCalculationForm");
+  if (!form) {
+    jumpToSection("section-entry");
+    return;
+  }
+  scheduleEmployeePreview(0);
+  const output = document.querySelector("#employeeCalculationMessage");
+  if (output) {
+    output.textContent = "正在重新计算";
+    output.className = "";
   }
 }
 
 function startFloatingDrag(event) {
-  if (event.button !== 0 || event.target.closest("button")) return;
+  if (event.button !== 0 || event.target.closest("button") || !event.target.closest(".floating-nav-title")) return;
   const nav = event.currentTarget;
   const rect = nav.getBoundingClientRect();
   const drag = {
@@ -4466,8 +4917,9 @@ function customerRowsFromForm(form, kind) {
     is_new: row.querySelector(`[data-${kind}-new]`)?.value !== "false",
     ...(kind === "ia"
       ? {
-          revenue: Number(row.querySelector("[data-ia-revenue]")?.value || 0),
-          new_orders: Number(row.querySelector("[data-ia-new-orders]")?.value || 0),
+          order_revenues: Array.from(row.querySelectorAll("[data-ia-order-revenue]")).map(input => Number(input.value || 0)),
+          revenue: Array.from(row.querySelectorAll("[data-ia-order-revenue]")).reduce((sum, input) => sum + Number(input.value || 0), 0),
+          new_orders: Number(row.querySelector("[data-ia-new-orders]")?.value || row.querySelectorAll("[data-ia-order-revenue]").length || 0),
           withdrawn_orders: Number(row.querySelector("[data-ia-withdrawn-orders]")?.value || 0),
           service_mature: row.querySelector("[data-ia-mature]")?.checked !== false,
         }
@@ -4480,11 +4932,35 @@ function customerRowsFromForm(form, kind) {
 
 function legacyCustomerRows(values, maturityValues, kind) {
   return (values || []).map((value, index) => kind === "ia"
-    ? { label: `客户${index + 1}`, revenue: Number(value || 0), new_orders: 0, withdrawn_orders: 0, is_new: true, service_mature: maturityValues?.[index] !== false }
+    ? { label: `客户${index + 1}`, revenue: Number(value || 0), order_revenues: [Number(value || 0)], new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: maturityValues?.[index] !== false }
     : { label: `客户${index + 1}`, volume: Number(value || 0), is_new: true, is_effective: false });
 }
 
-function renderCustomerInputs(customers, count, kind) {
+function normalizeIaOrderRevenues(customer) {
+  if (Array.isArray(customer.order_revenues)) return customer.order_revenues.map(value => Number(value || 0));
+  const count = Math.max(0, Number(customer.new_orders || 0));
+  const revenue = Number(customer.revenue || 0);
+  if (!count) return revenue > 0 ? [revenue] : [];
+  return Array.from({ length: count }, (_, index) => index === 0 ? revenue : 0);
+}
+
+function iaOrderSummary(customers, totalRaw = "") {
+  const rows = Array.isArray(customers) ? customers : [];
+  const detail = rows.reduce((sum, customer) => sum + Math.max(0, Number(customer.new_orders ?? normalizeIaOrderRevenues(customer).length ?? 0)), 0);
+  const hasTotal = totalRaw !== "" && totalRaw !== null && totalRaw !== undefined;
+  const total = hasTotal ? Math.max(0, Number(totalRaw || 0)) : detail;
+  const gap = total - detail;
+  const message = !hasTotal
+    ? `明细新增订单数自动统计：${detail} 单`
+    : gap === 0
+    ? `投顾总新增订单数 ${total} 单，已全部分配`
+    : gap > 0
+    ? `明细新增订单数少于投顾总新增订单数，仍有 ${gap} 单未分配`
+    : `明细新增订单数超过投顾总新增订单数 ${Math.abs(gap)} 单，请检查`;
+  return { detail, total, gap, hasTotal, message };
+}
+
+function renderCustomerInputs(customers, count, kind, options = {}) {
   const rows = Array.isArray(customers) ? customers : [];
   const explicitCount = count === "" || count === null || count === undefined ? null : Number(count);
   const total = Math.min(Math.max(Number.isFinite(explicitCount) ? explicitCount : rows.length || 0, 0), 100);
@@ -4493,18 +4969,28 @@ function renderCustomerInputs(customers, count, kind) {
     const customer = rows[index] || {};
     const isNew = customer.is_new !== false;
     const isEffective = customer.is_effective === true;
-    const amount = Number(isIa ? customer.revenue || 0 : customer.volume || 0);
+    const previousIaOrders = rows.slice(0, index).reduce((sum, row) => sum + Math.max(0, Number(row.new_orders ?? normalizeIaOrderRevenues(row).length ?? 0)), 0);
+    const totalOrderTarget = options.iaOrderTotal === "" || options.iaOrderTotal === null || options.iaOrderTotal === undefined ? null : Math.max(0, Number(options.iaOrderTotal || 0));
+    const defaultOrderCount = totalOrderTarget == null ? 1 : Math.max(0, totalOrderTarget - previousIaOrders);
+    const orderRevenues = isIa ? normalizeIaOrderRevenues(customer) : [];
+    const orderCount = isIa ? Math.max(0, Number(customer.new_orders ?? (orderRevenues.length || defaultOrderCount) ?? 0)) : 0;
+    const normalizedOrderRevenues = isIa ? Array.from({ length: orderCount }, (_, orderIndex) => Number(orderRevenues[orderIndex] || 0)) : [];
+    const amount = Number(isIa ? normalizedOrderRevenues.reduce((sum, value) => sum + value, 0) : customer.volume || 0);
     const displayAmount = isIa ? amount : (amount ? amount / 10000 : 0);
     const amountStep = isIa ? 100 : 10;
     const label = customer.label || `客户${index + 1}`;
     const status = `<select data-${kind}-new><option value="true" ${isNew ? "selected" : ""}>新增</option><option value="false" ${!isNew ? "selected" : ""}>原有</option></select>`;
     const maturity = isIa ? `<div class="option-with-note"><label class="mature-check"><input type="checkbox" data-ia-mature ${customer.service_mature !== false ? "checked" : ""} /><span>满1月</span></label><details class="option-note"><summary>说明</summary><p>7月上海分公司投顾新增激励适用：未满 1 个月时，“新增客户数激励”和“创收激励”本次各发 50%，剩余部分 8 月 31 日复核。</p></details></div>` : "";
-    const orderInputs = isIa ? `<label>新增订单<input data-ia-new-orders type="number" min="0" step="1" value="${Number(customer.new_orders || 0)}" /></label><label>撤单<input data-ia-withdrawn-orders type="number" min="0" step="1" value="${Number(customer.withdrawn_orders || 0)}" /></label>` : "";
+    const customerRevenueTotal = normalizedOrderRevenues.reduce((sum, value) => sum + Number(value || 0), 0);
+    const orderRevenueInputs = isIa && orderCount > 0
+      ? `<div class="order-revenue-grid">${normalizedOrderRevenues.map((value, orderIndex) => `<label>订单${orderIndex + 1}创收（元）<input data-ia-order-revenue type="number" min="0" step="100" value="${value}" oninput="updateIaCustomerRevenueTotals(this.closest('[data-ia-customer]'))" onchange="updateIaCustomerRevenueTotals(this.closest('[data-ia-customer]'))" /></label>`).join("")}<div class="customer-revenue-total"><span>客户综合创收</span><strong data-ia-customer-revenue-total>${money(customerRevenueTotal)} 元</strong></div></div>`
+      : "";
+    const orderInputs = isIa ? `<label>新增订单数<input data-ia-new-orders type="number" min="0" step="1" value="${orderCount}" /></label><label>撤单<input data-ia-withdrawn-orders type="number" min="0" step="1" value="${Number(customer.withdrawn_orders || 0)}" /></label>` : "";
     const t0Note = `<details class="option-note t0-inline-note"><summary>说明</summary><p>新增客户有交易量才拿上海分公司基础50；原有客户本月达有效户只算有效户阶梯。</p></details>`;
     const meta = isIa
       ? `<div class="customer-meta"><label>口径${status}</label>${maturity}</div>`
       : `<div class="customer-meta"><label>口径${status}</label><label class="effective-check"><input type="checkbox" data-t0-effective ${isEffective ? "checked" : ""} /><span>新增T0有效户</span></label>${t0Note}</div>`;
-    return `<div class="field compact-money-field customer-row ${isIa ? "ia-customer-row" : "t0-customer-row"}" data-${kind}-customer><label>客户标识<input data-${kind}-label value="${label}" placeholder="客户${index + 1}" /></label><label>客户${index + 1}${isIa ? "创收（元）" : "交易量（万元）"}<input data-${kind}-${isIa ? "revenue" : "volume"} type="number" min="0" step="${amountStep}" value="${isEffective && !isIa ? "" : displayAmount}" ${isEffective && !isIa ? "disabled" : ""} /></label>${isIa ? orderInputs : ""}${meta}</div>`;
+    return `<div class="field compact-money-field customer-row ${isIa ? "ia-customer-row" : "t0-customer-row"}" data-${kind}-customer><label>客户标识<input data-${kind}-label value="${label}" placeholder="客户${index + 1}" /></label>${isIa ? orderInputs : `<label>客户${index + 1}交易量（万元）<input data-t0-volume type="number" min="0" step="${amountStep}" value="${isEffective ? "" : displayAmount}" ${isEffective ? "disabled" : ""} /></label>`}${meta}${orderRevenueInputs}</div>`;
   }).join("");
 }
 
@@ -4514,12 +5000,27 @@ function refreshEmployeeCustomerFields() {
   const iaCustomers = customerRowsFromForm(form, "ia");
   const t0Customers = customerRowsFromForm(form, "t0");
   const iaCount = form.elements.ia_customer_count.value || 0;
+  const iaOrderTotal = form.elements.ia_order_total?.value ?? "";
   const t0Count = form.elements.t0_customer_count.value || 0;
   const iaBox = document.querySelector("#iaCustomerRevenueFields");
   const t0Box = document.querySelector("#t0CustomerVolumeFields");
-  if (iaBox) iaBox.innerHTML = renderCustomerInputs(iaCustomers, iaCount, "ia");
+  if (iaBox) iaBox.innerHTML = renderCustomerInputs(iaCustomers, iaCount, "ia", { iaOrderTotal });
   if (t0Box) t0Box.innerHTML = renderCustomerInputs(t0Customers, t0Count, "t0");
+  const hint = document.querySelector("#iaOrderCountHint");
+  if (hint) {
+    const summary = iaOrderSummary(customerRowsFromForm(form, "ia"), iaOrderTotal);
+    hint.textContent = summary.message;
+    hint.className = `hint order-count-hint ${summary.gap === 0 ? "" : "warning-text"}`;
+  }
   scheduleEmployeePreview();
+}
+
+function updateIaCustomerRevenueTotals(scope = document) {
+  scope.querySelectorAll?.("[data-ia-customer]").forEach(row => {
+    const total = Array.from(row.querySelectorAll("[data-ia-order-revenue]")).reduce((sum, input) => sum + Number(input.value || 0), 0);
+    const target = row.querySelector("[data-ia-customer-revenue-total]");
+    if (target) target.textContent = `${money(total)} 元`;
+  });
 }
 
 let employeePreviewTimer = null;
@@ -4527,6 +5028,7 @@ let employeePreviewTimer = null;
 function setupEmployeeAutoPreview() {
   const form = document.querySelector("#employeeCalculationForm");
   if (!form) return;
+  setupIaRevenueRealtimeTicker();
   const handler = event => {
     if (event.target?.name === "employee_id") {
       const employeeId = event.target.value || "";
@@ -4545,14 +5047,24 @@ function setupEmployeeAutoPreview() {
         if (event.target.checked) volume.value = "";
       }
     }
-    if (event.target?.name === "ia_customer_count" || event.target?.name === "t0_customer_count") {
+    if (event.target?.name === "ia_customer_count" || event.target?.name === "ia_order_total" || event.target?.name === "t0_customer_count" || event.target?.matches?.("[data-ia-new-orders]")) {
       refreshEmployeeCustomerFields();
       return;
     }
+    if (event.target?.matches?.("[data-ia-order-revenue]")) updateIaCustomerRevenueTotals(event.target.closest("[data-ia-customer]") || document);
     scheduleEmployeePreview();
   };
   form.addEventListener("input", handler);
   form.addEventListener("change", handler);
+}
+
+function setupIaRevenueRealtimeTicker() {
+  if (document.documentElement.dataset.iaRevenueTicker === "true") return;
+  document.documentElement.dataset.iaRevenueTicker = "true";
+  window.setInterval(() => {
+    if (!document.querySelector("#employeeCalculationForm [data-ia-order-revenue]")) return;
+    updateIaCustomerRevenueTotals(document);
+  }, 300);
 }
 
 function setupNumberWheelGuard() {
@@ -4629,18 +5141,15 @@ async function previewEmployeeCalculation(event) {
 async function loadCalculationExample(kind) {
   const examples = {
     mixed: {
-      ia_customer_count: 10,
+      ia_customer_count: 6,
+      ia_order_total: 12,
       ia_customers: [
-        { label: "客户1", revenue: 0, new_orders: 2, withdrawn_orders: 1, is_new: false, service_mature: true },
-        { label: "客户2", revenue: 80, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
-        { label: "客户3", revenue: 600, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: false },
-        { label: "客户4", revenue: 1200, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
-        { label: "客户5", revenue: 2500, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
-        { label: "客户6", revenue: 4500, new_orders: 4, withdrawn_orders: 2, is_new: true, service_mature: true },
-        { label: "客户7", revenue: 0, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
-        { label: "客户8", revenue: 0, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
-        { label: "客户9", revenue: 0, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
-        { label: "客户10", revenue: 0, new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
+        { label: "客户1", order_revenues: [0, 300], new_orders: 2, withdrawn_orders: 1, is_new: false, service_mature: true },
+        { label: "客户2", order_revenues: [80], new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
+        { label: "客户3", order_revenues: [600], new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: false },
+        { label: "客户4", order_revenues: [1200], new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
+        { label: "客户5", order_revenues: [2500], new_orders: 1, withdrawn_orders: 0, is_new: true, service_mature: true },
+        { label: "客户6", order_revenues: [4500, 0, 0, 0, 0, 0], new_orders: 6, withdrawn_orders: 2, is_new: true, service_mature: true },
       ],
       t0_customer_count: 5,
       t0_customers: [
@@ -4870,6 +5379,10 @@ async function clearAllRecords() {
     state.pendingManualEntries = [];
     savePendingManualEntries();
     localStorage.removeItem(FLOATING_NAV_POSITION_KEY);
+    localStorage.removeItem(FLOATING_NAV_COLLAPSED_KEY);
+    localStorage.removeItem(FLOATING_NAV_SIZE_KEY);
+    state.floatingCollapsed = false;
+    state.floatingSize = "normal";
     await refreshRecords(false);
     await refreshStats(false);
     resetWorkingCalculations();
@@ -4929,7 +5442,10 @@ function render({ scrollToTop = false } = {}) {
           <button class="btn theme-toggle" type="button" onclick="toggleTheme()">${state.theme === "dark" ? "日间模式" : "夜间模式"}</button>
           <div class="local-badge">自动刷新${state.lastRefreshAt ? " · " + state.lastRefreshAt : ""}</div>
           <a class="btn excel-btn header-export" id="section-export" href="/api/export.xlsx?${qs()}" onclick="return downloadFile(event, this, 'reward_penalty_records_2026_07.xlsx')">以 Excel 形式导出台账</a>
-          <button class="btn header-clear" onclick="clearAllRecords()">清空全部数据</button>
+          <div class="header-danger-group">
+            <button class="btn header-recalc" type="button" onclick="recalculateEmployeeFromHeader()">重新计算结果</button>
+            <button class="btn header-clear" onclick="clearAllRecords()">清空全部数据</button>
+          </div>
         </div>
       </header>
 
@@ -4995,13 +5511,21 @@ function renderEntry() {
 
 function renderFloatingNavigator() {
   return `
-    <details class="floating-navigator" open ${floatingNavStyle()} onpointerdown="startFloatingDrag(event)" onpointermove="moveFloatingDrag(event)" onpointerup="endFloatingDrag(event)" onpointercancel="endFloatingDrag(event)">
-      <summary onclick="handleFloatingSummaryClick(event)">区域</summary>
-      <div class="floating-nav-links">
-        ${FLOATING_NAV_LINKS.map(([id, label], index) => `<button type="button" data-target="${id}" class="${index === 0 ? "active" : ""}" onclick="jumpToSection('${id}')">${label}</button>`).join("")}
+    <div class="floating-navigator ${state.floatingCollapsed ? "is-collapsed" : ""} ${state.floatingSize === "large" ? "is-large" : ""}" ${floatingNavStyle()} onpointerdown="startFloatingDrag(event)" onpointermove="moveFloatingDrag(event)" onpointerup="endFloatingDrag(event)" onpointercancel="endFloatingDrag(event)">
+      <div class="floating-nav-title" onclick="handleFloatingSummaryClick(event)">
+        <strong>区域</strong>
+        <div class="floating-nav-controls">
+          <button type="button" title="快速放大/缩小，也可拖动右下角自定义大小" onclick="toggleFloatingSize(event)">${state.floatingSize === "large" ? "小" : "大"}</button>
+          <button type="button" title="收起/展开" onclick="toggleFloatingCollapsed(event)">${state.floatingCollapsed ? "+" : "-"}</button>
+        </div>
       </div>
-      <button class="floating-write-btn" type="button" onclick="writeLedgerFromNavigator()">写入台账</button>
-    </details>
+      <div class="floating-nav-body">
+        <div class="floating-nav-links">
+          ${FLOATING_NAV_LINKS.map(([id, label], index) => `<button type="button" data-target="${id}" class="${index === 0 ? "active" : ""}" onclick="jumpToSection('${id}')">${label}</button>`).join("")}
+        </div>
+        <button class="floating-write-btn" type="button" onclick="writeLedgerFromNavigator()">写入台账</button>
+      </div>
+    </div>
   `;
 }
 
@@ -5160,13 +5684,15 @@ function renderEmployeeCalculator() {
   const explicitT0Count = Number(value("t0_customer_count", t0Customers.length || 0));
   const iaCustomerCount = Math.min(Math.max(Number.isFinite(explicitIaCount) ? explicitIaCount : iaCustomers.length || 0, 0), 100);
   const t0CustomerCount = Math.min(Math.max(Number.isFinite(explicitT0Count) ? explicitT0Count : t0Customers.length || 0, 0), 100);
+  const iaOrderTotal = value("ia_order_total", "");
+  const iaOrderInfo = iaOrderSummary(iaCustomers, iaOrderTotal);
   const c = state.employeeCalculation;
   return `
     <div class="calculation-workspace" id="section-entry">
     <div class="calculation-input-pane">
     <section class="section calculator-intro">
       <h2>奖励核算</h2>
-      <p class="hint">投顾逐客户填入客户口径、创收、订单与撤单；T0 可录入新增或原有客户，交易量达到 200 万元（含）或确认新增有效户后计入有效户奖励。</p>
+      <p class="hint">投顾按新增订单核算：客户行只是承载信息，营业部基础奖励和得分按每笔新增订单拆分；创收补充只看新增客户名下新增订单的综合创收。T0 可录入新增或原有客户。</p>
       <div class="example-actions"><button class="btn secondary" type="button" onclick="loadCalculationExample('mixed')">填入示例</button></div>
       <form id="employeeCalculationForm" novalidate onsubmit="previewEmployeeCalculation(event)">
         <div class="grid cols-4">
@@ -5175,10 +5701,12 @@ function renderEmployeeCalculator() {
         <div class="calculator-block" id="section-ia-input">
           <h3>投顾资讯</h3>
           <div class="grid cols-4">
-            <div class="field"><label>投顾客户数（含原有）</label><input name="ia_customer_count" type="number" min="0" max="100" step="1" value="${iaCustomerCount}" oninput="refreshEmployeeCustomerFields()" /></div>
+            <div class="field"><label>投顾客户行数</label><input name="ia_customer_count" type="number" min="0" max="100" step="1" value="${iaCustomerCount}" oninput="refreshEmployeeCustomerFields()" /></div>
+            <div class="field"><label>投顾总新增订单数（可选）</label><input name="ia_order_total" type="number" min="0" max="300" step="1" value="${iaOrderTotal}" oninput="refreshEmployeeCustomerFields()" /></div>
           </div>
+          <p id="iaOrderCountHint" class="hint order-count-hint ${iaOrderInfo.gap === 0 ? "" : "warning-text"}">${iaOrderInfo.message}</p>
           <div class="check-row"><div class="option-with-note"><label class="compact-toggle"><input name="existing_orders_12_plus" type="checkbox" ${value("existing_orders_12_plus") !== "false" ? "checked" : ""} /><span>累计订单满12单</span></label><details class="option-note"><summary>说明</summary><p>上海分公司订单激励门槛。已知员工名下存量订单满12单就勾选；即使不勾选，只要本次“新增订单 - 撤单”的总净增达到12单，系统也会自动视为满足门槛。</p></details></div><div class="option-with-note"><label class="compact-toggle"><input name="no_first_half_effective_ia_order" type="checkbox" ${value("no_first_half_effective_ia_order") === "true" ? "checked" : ""} /><span>上半年未新增有效投顾订单</span></label><details class="option-note"><summary>说明</summary><p>7月订单破冰奖：上半年未新增过有效投顾订单的员工，本月新增任一投顾订单奖100元；若新增订单产生创收，再追加100元。</p></details></div></div>
-          <div id="iaCustomerRevenueFields" class="grid cols-4 dynamic-customer-fields">${renderCustomerInputs(iaCustomers, iaCustomerCount, "ia")}</div>
+          <div id="iaCustomerRevenueFields" class="grid cols-4 dynamic-customer-fields">${renderCustomerInputs(iaCustomers, iaCustomerCount, "ia", { iaOrderTotal })}</div>
         </div>
         <div class="calculator-block" id="section-t0-input">
           <h3>T0</h3>
@@ -5188,7 +5716,7 @@ function renderEmployeeCalculator() {
           </div>
           <div id="t0CustomerVolumeFields" class="grid cols-4 dynamic-customer-fields">${renderCustomerInputs(t0Customers, t0CustomerCount, "t0")}</div>
         </div>
-        <div class="quick-footer"><button class="btn quiet-action">重新计算结果</button><span id="employeeCalculationMessage"></span></div>
+        <div class="quick-footer calculation-message-row"><span id="employeeCalculationMessage"></span></div>
       </form>
     </section>
     ${renderLeftAuxiliaryPanels()}
@@ -5286,7 +5814,7 @@ function currentEmployeeManualTotals() {
 
 function renderEmployeeCalculationResult(c) {
   const s = c.score;
-  const hasBusinessInput = Number(s.ia_total_customers || 0) > 0 || Number(s.t0_customers ?? s.t0_new_customers ?? 0) > 0;
+  const hasBusinessInput = Number(s.ia_total_orders || 0) > 0 || Number(s.t0_customers ?? s.t0_new_customers ?? 0) > 0;
   if (!hasBusinessInput) {
     return `
     <section class="section calculation-result">
@@ -5301,8 +5829,10 @@ function renderEmployeeCalculationResult(c) {
   }
   const processGroup = item => {
   if (item.reason_code === "IA_BRANCH_ORDER_NET_INCREASE") return "订单净增";
-  if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_CUSTOMER_BASE"].includes(item.reason_code)) return "新增户数";
-  if (item.reason_code?.startsWith("IA_BRANCH_REVENUE_") || ["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(item.reason_code)) return "创收追加";
+  if (item.reason_code === "IA_DEPT_NEW_CUSTOMER_BASE") return "新增订单";
+  if (["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(item.reason_code)) return "创收补充";
+  if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS"].includes(item.reason_code)) return "新增户数";
+  if (item.reason_code?.startsWith("IA_BRANCH_REVENUE_")) return "创收追加";
   if (item.reason_code?.startsWith("IA_DEPT_REVENUE_INCREMENT_")) return "创收增量";
   if (item.reason_code?.startsWith("IA_BRANCH_ICEBREAK_")) return "破冰奖";
     if (item.reason_code === "T0_BRANCH_OPEN_AND_TRADE") return "T0基础";
@@ -5312,7 +5842,7 @@ function renderEmployeeCalculationResult(c) {
     if (item.reason_code?.startsWith("PENALTY_")) return "剥离";
     return "其他";
   };
-  const groupOrder = { "订单净增": 1, "新增户数": 2, "创收追加": 3, "创收增量": 4, "破冰奖": 5, "T0基础": 6, "交易补充": 7, "T0有效户": 8, "剥离": 9, "其他": 10 };
+  const groupOrder = { "新增订单": 1, "创收补充": 2, "订单净增": 3, "新增户数": 4, "创收追加": 5, "创收增量": 6, "破冰奖": 7, "T0基础": 8, "交易补充": 9, "T0有效户": 10, "剥离": 11, "其他": 12 };
   const sortedItems = items => [...items].sort((a, b) => (groupOrder[processGroup(a)] || 9) - (groupOrder[processGroup(b)] || 9));
   const table = (items, empty, mode = "simple") => {
     const withPending = mode === "pending";
@@ -5346,8 +5876,8 @@ function renderEmployeeCalculationResult(c) {
   const manual = currentEmployeeManualTotals();
   const payableNet = Number(c.summary.payable_amount || 0) + manual.extraReward - manual.deduction;
   const scoreNote = s.is_calculated
-    ? `营业部投顾得分：新增投顾客户 ${s.new_customers} 户 + 有创收新增投顾客户 ${s.revenue_customers} 户 × 0.5 = 折算 ${money(s.weighted_customers)} 户；签约得分 ${money(s.sign_score)} 分，创收 ${money(s.ia_revenue)} 元 / 4000 × 5 = ${money(s.revenue_score)} 分${s.revenue_score_capped ? "（创收未超1万元，按8分封顶）" : ""}，总分 ${money(s.total_score)} 分。`
-    : "本次未录入投顾客户，因此不判断投顾10分目标和客户剥离。";
+    ? `营业部投顾得分：投顾新增订单 ${s.ia_total_orders || 0} 单，其中新增客户有创收订单 ${s.revenue_orders || 0} 单按1.5折算；原有客户订单即使有创收也只按1单，合计折算 ${money(s.weighted_orders || s.weighted_customers)} 单。签约得分 ${money(s.sign_score)} 分，新增客户综合创收 ${money(s.ia_revenue)} 元 / 4000 × 5 = ${money(s.revenue_score)} 分${s.revenue_score_capped ? "（创收未超1万元，按8分封顶）" : ""}，总分 ${money(s.total_score)} 分。`
+    : "本次未录入投顾新增订单，因此不判断投顾10分目标和客户剥离。";
   const penaltyNote = s.is_calculated
     ? (s.reallocation_customers > 0 ? `剥离规则：总分 ${money(s.total_score)} 分，取整数档 ${Math.floor(Number(s.total_score || 0))} 分；距10分差 ${Math.max(0, 10 - Math.floor(Number(s.total_score || 0)))} 档，每档剥离2户，共 ${money(s.reallocation_customers)} 户。` : "剥离规则：总分达到或超过10分，本次不产生客户剥离。")
     : "T0奖励不影响投顾阶段得分。";
@@ -5362,10 +5892,10 @@ function renderEmployeeCalculationResult(c) {
   return `
     <section class="section calculation-result">
       <div class="entry-title-row"><div><h2>核算结果</h2><p class="hint ledger-write-callout">确认写入台账后，顶部导出的 Excel 才会包含本次结果</p></div>${c.items.length ? `<button class="btn excel-btn" type="button" onclick="applyEmployeeCalculation()">写入台账</button>` : ""}</div>
-      <div class="customer-scope">投顾：共 ${s.ia_total_customers || 0} 户，其中新增 ${s.ia_new_customers || 0} 户、原有 ${s.ia_old_customers || 0} 户，订单净增 ${money(s.net_order_increase)} 单${s.order_threshold_met ? `（${s.order_threshold_basis || "已满足12单门槛"}）` : "（未满足12单门槛）"}；T0：本次录入 ${s.t0_customers ?? s.t0_new_customers ?? 0} 户，其中客户口径新增 ${s.t0_new_customers || 0} 户，新增T0有效户 ${s.t0_effective_customers || 0} 户。</div>
+      <div class="customer-scope">投顾：客户行 ${s.ia_total_customers || 0} 行，投顾新增订单 ${s.ia_total_orders || 0} 单，上海分公司客户口径新增 ${s.ia_new_customers || 0} 户、原有 ${s.ia_old_customers || 0} 户，订单净增 ${money(s.net_order_increase)} 单${s.order_threshold_met ? `（${s.order_threshold_basis || "已满足12单门槛"}）` : "（未满足12单门槛）"}；T0：本次录入 ${s.t0_customers ?? s.t0_new_customers ?? 0} 户，其中客户口径新增 ${s.t0_new_customers || 0} 户，新增T0有效户 ${s.t0_effective_customers || 0} 户。</div>
       <div class="result-topline">
         <div>
-          ${s.is_calculated ? `<div class="process-label">营业部投顾得分计算过程（按营业部规则）</div><div class="score-grid"><div><span>签约得分</span><strong>${money(s.sign_score)} <small>${s.new_customers} 户新增投顾客户 + ${s.revenue_customers} 户有创收新增客户 × 0.5 = 折算 ${money(s.weighted_customers)} 户；${money(s.weighted_customers)} / 5 户 × 5 分</small></strong></div><div><span>创收得分</span><strong>${money(s.revenue_score)} <small>${money(s.ia_revenue)} / 4,000 元 × 5 分${s.revenue_score_capped ? "；创收未超1万元，按8分封顶" : "；创收超1万元不封顶"}</small></strong></div><div><span>阶段总分</span><strong>${money(s.total_score)} <small>签约得分 + 创收得分；目标10分</small></strong></div><div><span>需剥离客户</span><strong>${money(s.reallocation_customers)} 户<small>不足10分时按整数档差距，每档2户</small></strong></div></div>` : `<div class="score-not-ready">本次未填写投顾客户，仅核算已录入的 T0 奖励；投顾阶段得分和客户剥离不作判断。</div>`}
+          ${s.is_calculated ? `<div class="process-label">营业部投顾得分计算过程（按营业部规则）</div><div class="score-grid"><div><span>签约得分</span><strong>${money(s.sign_score)} <small>${s.ia_total_orders || 0} 单中，新增客户有创收订单 ${s.revenue_orders || 0} 单按1.5折算；原有客户订单按1单，合计 ${money(s.weighted_orders || s.weighted_customers)} 单；${money(s.weighted_orders || s.weighted_customers)} / 5 单 × 5 分</small></strong></div><div><span>创收得分</span><strong>${money(s.revenue_score)} <small>新增客户综合创收 ${money(s.ia_revenue)} / 4,000 元 × 5 分${s.revenue_score_capped ? "；创收未超1万元，按8分封顶" : "；创收超1万元不封顶"}</small></strong></div><div><span>阶段总分</span><strong>${money(s.total_score)} <small>签约得分 + 创收得分；目标10分</small></strong></div><div><span>需剥离客户</span><strong>${money(s.reallocation_customers)} 户<small>不足10分时按整数档差距，每档2户</small></strong></div></div>` : `<div class="score-not-ready">本次未填写投顾新增订单，仅核算已录入的 T0 奖励；投顾阶段得分和客户剥离不作判断。</div>`}
           <div class="source-summary"><div><span>营业部本次可发</span><strong>${money(departmentPayableTotal)} 元<small>投顾 ${money(departmentIaPayableTotal)} + T0 ${money(departmentT0PayableTotal)}</small></strong></div><div class="branch-payable-card"><span>上海分公司本次可发</span><strong>${money(branchPayableTotal)} 元<small>应发 ${money(branchTotal)}；${branchPendingTotal ? `<b>待复核 ${money(branchPendingTotal)} 元</b>；` : ""}投顾 ${money(branchIaPayableTotal)} + T0 ${money(branchT0PayableTotal)}</small></strong></div><div class="total"><span>营业部与上海分公司可发合计</span><strong>${money(c.summary.payable_amount)} 元<small>应发 ${money(c.summary.gross_amount)} 元${c.summary.pending_amount ? `；<b>待复核 ${money(c.summary.pending_amount)} 元</b>` : ""}</small></strong></div></div>
           <div class="adjustment-summary bonus-summary">${manualCard}<div><span>最终奖金净值</span><strong>${money(payableNet)} 元<small>本次可发 + 手工更正</small></strong></div></div>
         </div>
@@ -5578,7 +6108,7 @@ function ruleDictionaryGroups() {
   return [
     {
       title: "营业部 · 投顾",
-      note: "新增客户、创收分档和创收增量。",
+      note: "按新增订单基础奖、新增客户综合创收补充和员工创收增量核算。",
       codes: ["IA_DEPT_NEW_CUSTOMER_BASE", "IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS", "IA_DEPT_REVENUE_INCREMENT_5000", "IA_DEPT_REVENUE_INCREMENT_10000", "IA_DEPT_REVENUE_INCREMENT_15000"],
     },
     {
@@ -5650,7 +6180,7 @@ function renderRules() {
       <h2>规则与口径说明</h2>
       <p class="hint">先看这几条即可；结构化字典放在后面，主要给财务复核和导出留痕。</p>
       <div class="rule-coverage clean-rules">
-        <div><strong>营业部 · 投顾</strong><span>新增投顾客户50元/户。新增客户创收按最高档追加：0-500元奖50元，超500至1000元奖100元，超1000元奖150元。得分目标为新增投顾客户5户、创收4000元；创收未超1万元时创收得分8分封顶，超1万元不封顶。</span></div>
+        <div><strong>营业部 · 投顾</strong><span>按投顾新增订单核算基础奖和签约得分，不按客户数。每新增订单基础奖50元；创收补充只看“新增客户”的新增订单综合创收，0-500元补50元，超500至1000元补100元，超1000元补150元，原有客户不参与该项补充。签约得分按订单折算：无创收订单1单；只有新增客户的有创收订单按1.5单，原有客户订单即使有创收也只按1单。创收目标4000元，创收未超1万元时创收得分8分封顶，超1万元不封顶。</span></div>
         <div><strong>营业部 · T0</strong><span>只看新增T0有效户。交易量达到200万元（含）或确认有效户，200元/户；未达到时不发营业部T0奖。</span></div>
         <div><strong>营业部 · 剥离</strong><span>投顾阶段总分不足10分时，先取总分整数档与10分比较；每少1档剥离2户。例：9.5分按9分计，剥离2户；8.2分按8分计，剥离4户。</span></div>
         <div><strong>上海分公司 · 投顾</strong><span>7月三块自动核算：订单净增50元/单；新增客户按50/100/150元分层；新增客户创收按50/100/150/200/250元分层。新增客户数激励和创收激励未满一月均先发50%，同一客户上海分公司投顾奖励封顶500元。</span></div>
@@ -5692,16 +6222,18 @@ function recordSortKey(record) {
   const sourceRank = recordSourceName(record) === "营业部" ? 1 : recordSourceName(record) === "上海分公司" ? 2 : 3;
   const biz = recordBusinessName(record);
   const bizRank = biz === "投顾" ? 1 : biz === "T0" ? 2 : biz === "剥离" ? 3 : 4;
-  const groupRank = record.reason_code === "IA_BRANCH_ORDER_NET_INCREASE" ? 1
-    : ["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_CUSTOMER_BASE"].includes(record.reason_code) ? 2
-    : record.reason_code?.startsWith("IA_BRANCH_REVENUE_") || ["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(record.reason_code) ? 3
-    : record.reason_code?.startsWith("IA_DEPT_REVENUE_INCREMENT_") ? 4
-    : record.reason_code?.startsWith("IA_BRANCH_ICEBREAK_") ? 5
-    : record.reason_code?.startsWith("IA_HIDDEN_WEEKLY_") ? 6
-    : record.reason_code === "IA_HIDDEN_REVENUE_ICEBREAK_TOP50" ? 7
-    : record.reason_code?.startsWith("IA_HIDDEN_LIAISON_") ? 8
-    : record.reason_code?.startsWith("T0_") ? 9
-    : record.reason_code?.startsWith("PENALTY_") ? 10
+  const groupRank = record.reason_code === "IA_DEPT_NEW_CUSTOMER_BASE" ? 1
+    : ["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(record.reason_code) ? 2
+    : record.reason_code === "IA_BRANCH_ORDER_NET_INCREASE" ? 3
+    : ["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS"].includes(record.reason_code) ? 4
+    : record.reason_code?.startsWith("IA_BRANCH_REVENUE_") ? 5
+    : record.reason_code?.startsWith("IA_DEPT_REVENUE_INCREMENT_") ? 6
+    : record.reason_code?.startsWith("IA_BRANCH_ICEBREAK_") ? 7
+    : record.reason_code?.startsWith("IA_HIDDEN_WEEKLY_") ? 8
+    : record.reason_code === "IA_HIDDEN_REVENUE_ICEBREAK_TOP50" ? 9
+    : record.reason_code?.startsWith("IA_HIDDEN_LIAISON_") ? 10
+    : record.reason_code?.startsWith("T0_") ? 11
+    : record.reason_code?.startsWith("PENALTY_") ? 12
     : 10;
   return [sourceRank, bizRank, groupRank, record.reason_name || ""];
 }
@@ -5789,7 +6321,11 @@ window.submitAccess = submitAccess;
 window.jumpToSection = jumpToSection;
 window.writeLedgerFromNavigator = writeLedgerFromNavigator;
 window.toggleTheme = toggleTheme;
+window.recalculateEmployeeFromHeader = recalculateEmployeeFromHeader;
+window.updateIaCustomerRevenueTotals = updateIaCustomerRevenueTotals;
 window.handleFloatingSummaryClick = handleFloatingSummaryClick;
+window.toggleFloatingCollapsed = toggleFloatingCollapsed;
+window.toggleFloatingSize = toggleFloatingSize;
 window.startFloatingDrag = startFloatingDrag;
 window.moveFloatingDrag = moveFloatingDrag;
 window.endFloatingDrag = endFloatingDrag;
@@ -5801,6 +6337,6 @@ bootstrap().catch(err => {
   document.querySelector("#app").innerHTML = `<div class="section"><h1>加载失败</h1><p>${err.message}</p></div>`;
 });
 
-  </script>
+</script>
 </body>
 </html>
