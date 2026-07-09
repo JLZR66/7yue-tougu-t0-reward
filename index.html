@@ -1,22 +1,43 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7月投顾与T0营业部及上海分公司奖励惩罚核算</title>
-  <style>:root {
+  <title>7月投顾与T0奖励惩罚核算台账</title>
+  <style>
+:root {
   --bg: #f6f7f9;
   --panel: #ffffff;
   --panel-soft: #f1f5f7;
+  --panel-tint: #f8fbfc;
   --text: #20252b;
   --muted: #66707b;
   --line: #dfe5ea;
   --brand: #a01922;
   --brand-2: #0b6b78;
+  --brand-soft: rgba(11, 107, 120, 0.1);
   --ok: #13795b;
   --warn: #b56b00;
   --danger: #b42318;
   --shadow: 0 12px 28px rgba(31, 42, 55, 0.08);
+}
+
+:root[data-theme="dark"] {
+  --bg: #121a20;
+  --panel: #1b2830;
+  --panel-soft: #23323b;
+  --panel-tint: #203039;
+  --text: #e8f0f3;
+  --muted: #b2c1c8;
+  --line: #40515a;
+  --brand: #d65e67;
+  --brand-2: #64b7c0;
+  --brand-soft: rgba(100, 183, 192, 0.16);
+  --ok: #5cc89e;
+  --warn: #f0b45b;
+  --danger: #ff776e;
+  --shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
+  color-scheme: dark;
 }
 
 * {
@@ -29,6 +50,10 @@ body {
   color: var(--text);
   font-family: Arial, "Microsoft YaHei", sans-serif;
   letter-spacing: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 a {
@@ -130,7 +155,7 @@ button {
 }
 
 label {
-  color: #3a434c;
+  color: color-mix(in srgb, var(--text) 82%, var(--muted));
   font-weight: 700;
   font-size: 13px;
 }
@@ -140,7 +165,7 @@ input, select, textarea {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 11px 12px;
-  background: #fff;
+  background: var(--panel);
   color: var(--text);
   outline: none;
 }
@@ -284,7 +309,7 @@ input:focus, select:focus, textarea:focus {
 .section:hover,
 .metric-card:hover,
 .source-summary > div:hover {
-  border-color: #bfd0d6;
+  border-color: color-mix(in srgb, var(--brand-2) 35%, var(--line));
 }
 
 .section h2 {
@@ -297,6 +322,7 @@ input:focus, select:focus, textarea:focus {
   grid-template-columns: minmax(470px, .9fr) minmax(760px, 1.55fr);
   gap: 18px;
   align-items: start;
+  margin-top: 18px;
 }
 
 .calculation-input-pane {
@@ -631,6 +657,12 @@ tr:last-child td {
   box-shadow: var(--shadow);
 }
 
+:root[data-theme="dark"] .local-header {
+  background:
+    linear-gradient(100deg, rgba(77, 31, 38, 0.96), rgba(18, 68, 76, 0.94)),
+    radial-gradient(circle at 78% 18%, rgba(72, 168, 180, 0.18), transparent 34%);
+}
+
 .local-header h1 {
   margin: 0 0 8px;
   font-size: 31px;
@@ -669,6 +701,17 @@ tr:last-child td {
   border-color: #fff;
   color: #a01922;
   white-space: nowrap;
+}
+
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #fff;
+  min-height: 42px;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.24);
 }
 
 .mode-switch {
@@ -1200,6 +1243,10 @@ tr:last-child td {
   overflow-wrap: anywhere;
 }
 
+.calculation-input-pane .t0-customer-row .customer-meta .t0-inline-note {
+  margin-left: 0;
+}
+
 .customer-row > label {
   display: grid;
   gap: 6px;
@@ -1285,6 +1332,14 @@ tr:last-child td {
   align-items: center;
   min-height: 30px;
   line-height: 1;
+}
+
+.customer-meta .t0-inline-note summary {
+  font-size: 12px;
+}
+
+.customer-meta .t0-inline-note p {
+  max-width: 280px;
 }
 
 .customer-meta .effective-check,
@@ -1731,6 +1786,27 @@ tr:last-child td {
 .calculation-input-pane .manual-entry-grid input[type="number"] {
   min-height: 40px;
   font-size: 14px;
+}
+
+.manual-fixed-award {
+  min-width: 0;
+}
+
+.fixed-award-box {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 11px;
+  border: 1px solid #d7e3e8;
+  border-radius: 8px;
+  background: #f4f8fa;
+  color: #405862;
+  font-size: 13px;
+}
+
+.fixed-award-box strong {
+  color: #006878;
 }
 
 .inline-rules {
@@ -2305,11 +2381,111 @@ tr:last-child td {
 
 .rule-table {
   margin-bottom: 12px;
+  overflow: visible;
+}
+
+.rule-table table {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.rule-table th:nth-child(1),
+.rule-table td:nth-child(1) {
+  width: 58%;
+}
+
+.rule-table th:nth-child(2),
+.rule-table td:nth-child(2) {
+  width: 18%;
+}
+
+.rule-table th:nth-child(3),
+.rule-table td:nth-child(3) {
+  width: 24%;
+}
+
+.rule-table td {
+  vertical-align: middle;
+}
+
+.rule-table td strong {
+  display: block;
+  color: #253b44;
+  line-height: 1.35;
+}
+
+.rule-type {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rule-type.reward {
+  color: #00716f;
+  background: #e5f7f3;
+}
+
+.rule-type.penalty {
+  color: #a01823;
+  background: #fde9e8;
+}
+
+.rule-card-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.rule-mini-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #dbe7eb;
+  border-left: 4px solid #9db9c2;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.rule-mini-card.reward {
+  border-left-color: #0b7b75;
+  background: linear-gradient(90deg, rgba(229, 247, 243, 0.8), #fff 44%);
+}
+
+.rule-mini-card.penalty {
+  border-left-color: #b4212b;
+  background: linear-gradient(90deg, rgba(253, 233, 232, 0.82), #fff 44%);
+}
+
+.rule-mini-card > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.rule-mini-card strong {
+  font-size: 13px;
+  line-height: 1.35;
+  min-width: 0;
+}
+
+.rule-mini-card b {
+  color: #18343c;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 .inline-dictionary,
 .rule-dictionary-group {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .inline-dictionary > summary,
@@ -2336,8 +2512,28 @@ tr:last-child td {
 }
 
 .rule-dictionary-group {
-  border-top: 1px solid var(--line);
-  padding-top: 8px;
+  border: 1px solid #dce8ec;
+  padding: 0;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.rule-dictionary-group[open] {
+  padding: 0 12px 12px;
+  border: 1px solid #bed5dc;
+  background: linear-gradient(180deg, #f7fbfc, #fff);
+}
+
+.rule-dictionary-group > summary {
+  padding: 10px 12px;
+  background: #f7fafb;
+}
+
+.rule-dictionary-group[open] > summary {
+  margin: 0 -12px 10px;
+  border-bottom: 1px solid #dce8ec;
+  background: #eef6f8;
 }
 
 .mini-bars {
@@ -2363,6 +2559,445 @@ tr:last-child td {
   display: block;
   height: 100%;
   background: var(--brand-2);
+}
+
+[id^="section-"] {
+  scroll-margin-top: 18px;
+}
+
+.section-focus-pulse {
+  animation: focusPulse 900ms ease-out;
+}
+
+@keyframes focusPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(11, 107, 120, 0.34), var(--shadow);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(11, 107, 120, 0), var(--shadow);
+  }
+}
+
+.floating-navigator {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 50;
+  width: 180px;
+  border: 1px solid color-mix(in srgb, var(--brand-2) 38%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  box-shadow: 0 18px 36px rgba(21, 41, 52, 0.18);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  touch-action: none;
+  user-select: none;
+}
+
+.floating-navigator > summary {
+  min-height: 38px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+  color: var(--text);
+  font-weight: 800;
+  cursor: grab;
+}
+
+.floating-navigator.is-dragging,
+.floating-navigator.is-dragging > summary {
+  cursor: grabbing;
+}
+
+.floating-navigator > summary::-webkit-details-marker {
+  display: none;
+}
+
+.floating-navigator > summary::after {
+  content: "＋";
+  color: var(--brand-2);
+  font-weight: 900;
+}
+
+.floating-navigator[open] > summary::after {
+  content: "－";
+}
+
+.floating-nav-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 0 10px 8px;
+}
+
+.floating-nav-links button {
+  min-height: 30px;
+  border-radius: 7px;
+  background: var(--panel-soft);
+  color: var(--text);
+  text-align: center;
+  padding: 0 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.floating-nav-links button:hover {
+  background: var(--brand-soft);
+  color: var(--brand-2);
+}
+
+.floating-nav-links button.active {
+  border-color: color-mix(in srgb, var(--brand-2) 42%, var(--line));
+  background: color-mix(in srgb, var(--brand-soft) 80%, var(--panel));
+  color: var(--brand-2);
+  box-shadow: inset 3px 0 0 var(--brand-2);
+}
+
+.floating-write-btn {
+  width: calc(100% - 20px);
+  min-height: 34px;
+  margin: 0 10px 10px;
+  border: 1px solid color-mix(in srgb, var(--brand-2) 48%, var(--line));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--brand-2) 15%, var(--panel-soft));
+  color: color-mix(in srgb, var(--brand-2) 80%, var(--text));
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.floating-write-btn:hover {
+  background: color-mix(in srgb, var(--brand-2) 24%, var(--panel-soft));
+}
+
+:root[data-theme="dark"] .section,
+:root[data-theme="dark"] .metric-card,
+:root[data-theme="dark"] .access-box,
+:root[data-theme="dark"] .manual-correction,
+:root[data-theme="dark"] .inline-rules,
+:root[data-theme="dark"] .rule-preview,
+:root[data-theme="dark"] .employee-record-panel,
+:root[data-theme="dark"] .employee-record-group,
+:root[data-theme="dark"] .floating-navigator,
+:root[data-theme="dark"] .manual-correction > .section,
+:root[data-theme="dark"] .rule-dictionary-group,
+:root[data-theme="dark"] .rule-mini-card,
+:root[data-theme="dark"] .rule-item {
+  background: var(--panel);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .calculator-block,
+:root[data-theme="dark"] .customer-row,
+:root[data-theme="dark"] .customer-meta,
+:root[data-theme="dark"] .empty-result-grid > div,
+:root[data-theme="dark"] .inline-ledger-cards > div,
+:root[data-theme="dark"] .source-summary > div,
+:root[data-theme="dark"] .score-grid > div,
+:root[data-theme="dark"] .adjustment-summary > div,
+:root[data-theme="dark"] .manual-card,
+:root[data-theme="dark"] .fixed-award-box,
+:root[data-theme="dark"] .calculation-detail span,
+:root[data-theme="dark"] .warning-box,
+:root[data-theme="dark"] .customer-scope,
+:root[data-theme="dark"] .notice {
+  background: var(--panel-soft);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+:root[data-theme="dark"] label,
+:root[data-theme="dark"] .compact-money-field label,
+:root[data-theme="dark"] .customer-row > label:nth-child(3),
+:root[data-theme="dark"] .customer-row > label:nth-child(4) {
+  color: #d9e7eb;
+}
+
+:root[data-theme="dark"] .manual-correction > summary,
+:root[data-theme="dark"] .inline-rules > summary,
+:root[data-theme="dark"] .calculation-process > summary,
+:root[data-theme="dark"] .process-label,
+:root[data-theme="dark"] .employee-record-name,
+:root[data-theme="dark"] .reference-bonus summary,
+:root[data-theme="dark"] .fixed-award-box strong {
+  color: #dceef1;
+}
+
+:root[data-theme="dark"] .score-grid > div {
+  background: linear-gradient(180deg, #24343d 0%, #1f2f37 100%);
+}
+
+:root[data-theme="dark"] .score-grid strong,
+:root[data-theme="dark"] .source-summary strong,
+:root[data-theme="dark"] .adjustment-summary strong,
+:root[data-theme="dark"] .bonus-summary > div:first-child strong,
+:root[data-theme="dark"] .bonus-summary > div:nth-child(2) strong,
+:root[data-theme="dark"] .manual-adjustment-result strong {
+  color: #eef7f8;
+}
+
+:root[data-theme="dark"] .score-grid small,
+:root[data-theme="dark"] .source-summary strong small,
+:root[data-theme="dark"] .adjustment-summary strong small,
+:root[data-theme="dark"] .employee-record-metrics,
+:root[data-theme="dark"] .reference-bonus,
+:root[data-theme="dark"] .calculation-detail {
+  color: #b8c9d0;
+}
+
+:root[data-theme="dark"] .ledger-write-callout {
+  background: rgba(240, 180, 91, 0.13);
+  border-color: rgba(240, 180, 91, 0.46);
+  border-left-color: #d99a35;
+  color: #f5d28f;
+}
+
+:root[data-theme="dark"] .warning-box,
+:root[data-theme="dark"] .score-not-ready,
+:root[data-theme="dark"] .record-write-note,
+:root[data-theme="dark"] .branch-eligibility {
+  background: #25353d;
+  border-color: #4d6872;
+  color: #d6e8ed;
+}
+
+:root[data-theme="dark"] .manual-correction > .section,
+:root[data-theme="dark"] .manual-adjustment-result,
+:root[data-theme="dark"] .record-write-note,
+:root[data-theme="dark"] .calculation-input-pane .rule-preview,
+:root[data-theme="dark"] .branch-eligibility,
+:root[data-theme="dark"] .source-summary > div,
+:root[data-theme="dark"] .adjustment-summary > div,
+:root[data-theme="dark"] .bonus-summary > div:first-child,
+:root[data-theme="dark"] .bonus-summary > div:nth-child(2),
+:root[data-theme="dark"] .adjustment-summary .net {
+  background: #22323a;
+  border-color: #435761;
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea {
+  background: #17242c;
+  border-color: #4a5d67;
+  color: #f0f6f7;
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: #859ba5;
+}
+
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus,
+:root[data-theme="dark"] textarea:focus {
+  border-color: var(--brand-2);
+  box-shadow: 0 0 0 3px rgba(100, 183, 192, 0.2);
+}
+
+:root[data-theme="dark"] .customer-meta select,
+:root[data-theme="dark"] .effective-check,
+:root[data-theme="dark"] .mature-check,
+:root[data-theme="dark"] .compact-toggle {
+  background: #1b2a32;
+  border-color: #56707a;
+  color: #d9f4f6;
+}
+
+:root[data-theme="dark"] .calculation-input-pane .t0-customer-row .customer-meta small,
+:root[data-theme="dark"] .customer-meta small {
+  color: #bfd0d6;
+}
+
+:root[data-theme="dark"] .branch-payable-card b,
+:root[data-theme="dark"] .source-summary b,
+:root[data-theme="dark"] .calculation-subtotal b,
+:root[data-theme="dark"] .pending-cell strong {
+  color: #ffd0d0;
+  background: rgba(214, 94, 103, 0.16);
+}
+
+:root[data-theme="dark"] .option-note p {
+  background: #203039;
+  border-color: #4d6a73;
+  color: #d8e7eb;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+:root[data-theme="dark"] .process-新增户数 .process-chip {
+  background: rgba(240, 180, 91, 0.18);
+  color: #ffd28a;
+}
+
+:root[data-theme="dark"] .process-创收追加 .process-chip,
+:root[data-theme="dark"] .process-交易补充 .process-chip {
+  background: rgba(95, 143, 205, 0.2);
+  color: #b9d8ff;
+}
+
+:root[data-theme="dark"] .process-T0 .process-chip,
+:root[data-theme="dark"] .process-T0基础 .process-chip,
+:root[data-theme="dark"] .process-T0有效户 .process-chip,
+:root[data-theme="dark"] .process-订单净增 .process-chip {
+  background: rgba(100, 183, 192, 0.18);
+  color: #a9eff1;
+}
+
+:root[data-theme="dark"] table,
+:root[data-theme="dark"] tbody,
+:root[data-theme="dark"] tr,
+:root[data-theme="dark"] td {
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] th {
+  background: #24343d;
+  color: #edf4f6;
+}
+
+:root[data-theme="dark"] .local-badge,
+:root[data-theme="dark"] .header-clear,
+:root[data-theme="dark"] .btn.secondary,
+:root[data-theme="dark"] .compact-toggle,
+:root[data-theme="dark"] .option-note > summary,
+:root[data-theme="dark"] .process-chip,
+:root[data-theme="dark"] .rule-type,
+:root[data-theme="dark"] .floating-nav-links button {
+  background: var(--panel-soft);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .floating-nav-links button.active {
+  background: rgba(100, 183, 192, 0.2);
+  border-color: rgba(100, 183, 192, 0.62);
+  color: #b7f4f5;
+  box-shadow: inset 3px 0 0 #64b7c0;
+}
+
+:root[data-theme="dark"] .floating-write-btn {
+  background: rgba(100, 183, 192, 0.14);
+  border-color: rgba(100, 183, 192, 0.48);
+  color: #d7f3f5;
+}
+
+:root[data-theme="dark"] .header-clear {
+  color: #ffd9dc;
+}
+
+:root[data-theme="dark"] .hint,
+:root[data-theme="dark"] small,
+:root[data-theme="dark"] .field-help,
+:root[data-theme="dark"] .inline-dictionary > summary small,
+:root[data-theme="dark"] .rule-dictionary-group > summary small {
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .rule-dictionary-group > summary,
+:root[data-theme="dark"] .rule-dictionary-group[open] > summary,
+:root[data-theme="dark"] .employee-record-group > summary,
+:root[data-theme="dark"] .employee-record-panel > summary {
+  background: var(--panel-soft);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .rule-mini-card.reward {
+  background: linear-gradient(90deg, rgba(27, 92, 83, 0.38), var(--panel) 52%);
+}
+
+:root[data-theme="dark"] .rule-mini-card.penalty {
+  background: linear-gradient(90deg, rgba(119, 42, 45, 0.38), var(--panel) 52%);
+}
+
+:root[data-theme="dark"] .rule-type.reward {
+  background: rgba(72, 168, 180, 0.18);
+  color: #76d6d6;
+}
+
+:root[data-theme="dark"] .rule-type.penalty {
+  background: rgba(255, 119, 110, 0.16);
+  color: #ffaaa4;
+}
+
+:root[data-theme="dark"] .branch-payable-card,
+:root[data-theme="dark"] .source-summary .total {
+  background: linear-gradient(180deg, rgba(72, 168, 180, 0.14), var(--panel-soft));
+}
+
+:root[data-theme="dark"] .ledger-write-callout,
+:root[data-theme="dark"] .hint.ledger-write-callout {
+  color: #f5d28f;
+  background: rgba(240, 180, 91, 0.13);
+  border-color: rgba(240, 180, 91, 0.46);
+  border-left-color: #d99a35;
+}
+
+:root[data-theme="dark"] .detail-table td,
+:root[data-theme="dark"] .detail-table td:nth-child(2),
+:root[data-theme="dark"] .employee-record-section .records-table td,
+:root[data-theme="dark"] .records-table td,
+:root[data-theme="dark"] .rule-table td {
+  color: #d9e7eb;
+}
+
+:root[data-theme="dark"] .detail-table .calculation-detail span,
+:root[data-theme="dark"] .employee-record-section .records-table .calculation-detail span {
+  color: #c7d9de;
+  background: #1d2c34;
+  border-left-color: #58727b;
+}
+
+:root[data-theme="dark"] .process-label {
+  background: #21333b;
+  border-color: #4b626c;
+}
+
+:root[data-theme="dark"] .rule-coverage > div {
+  background: #23343d;
+  border-left-color: #6ab5bf;
+  color: #d3e2e6;
+  box-shadow: inset 0 0 0 1px rgba(106, 181, 191, 0.12);
+}
+
+:root[data-theme="dark"] .rule-coverage strong {
+  color: #c8f3f5;
+}
+
+:root[data-theme="dark"] .inline-dictionary > summary {
+  color: #89dce2;
+}
+
+:root[data-theme="dark"] .calculation-subtotal {
+  color: #a9c8d0;
+  border-color: #4a6069;
+}
+
+:root[data-theme="dark"] .calculation-subtotal strong {
+  color: #82e5ef;
+}
+
+:root[data-theme="dark"] .major-subtotal {
+  border-top-color: #526a74;
+}
+
+:root[data-theme="dark"] .result-subheading {
+  color: #b6d6de;
+}
+
+:root[data-theme="dark"] .employee-record-group {
+  background: #1f3038;
+  border-color: #425860;
+}
+
+:root[data-theme="dark"] .employee-record-group > summary {
+  color: #d7eef1;
+  background: #243740;
+}
+
+:root[data-theme="dark"] .employee-record-group > summary small {
+  color: #9fc1c9;
 }
 
 @media (max-width: 1360px) {
@@ -2459,9 +3094,30 @@ tr:last-child td {
     justify-content: space-between;
   }
 
+  .theme-toggle,
+  .header-export,
+  .header-clear {
+    flex: 1 1 160px;
+  }
+
   .export-panel {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .floating-navigator {
+    right: 12px;
+    bottom: 12px;
+    width: min(180px, calc(100vw - 24px));
+  }
+
+  .floating-nav-links {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .floating-nav-links button {
+    font-size: 12px;
+    padding: 0 6px;
   }
 }
 
@@ -2539,10 +3195,14 @@ tr:last-child td {
 
   .inline-dictionary,
   .rule-dictionary-group,
-  .rule-table,
   .table-wrap {
     max-width: 100%;
     overflow-x: auto;
+  }
+
+  .rule-table {
+    max-width: 100%;
+    overflow-x: visible;
   }
 
   .t0-section-note,
@@ -2555,17 +3215,51 @@ tr:last-child td {
   .rule-table table,
   .inline-dictionary table,
   .rule-dictionary-group table {
-    width: max-content;
-    min-width: 640px;
+    width: 100%;
+    min-width: 0;
   }
 }
-</style>
+
+  </style>
 </head>
 <body>
   <div id="app"></div>
-  <script>(() => {
+  <script>
+(() => {
   const KEY = "rp_full_standalone_2026_07_v1";
-  const initial = { employees: ["唐安伦", "王双豹", "奚琴华", "肖俊寅", "李刚", "朱顺军", "蔡晓清", "张莉丽", "石闽", "纪明", "叶洋", "王茜", "袁正萍", "李艳", "洪晨", "冀有光", "李昂"].map((name, index) => ({ id: index + 1, name, employee_no: `LOCAL-${String(index + 1).padStart(3, "0")}`, department: "水清南路营业部" })), records: [], nextId: 18 };
+  const EMPLOYEE_NAMES = [
+    "唐安伦", "王双豹", "奚琴华", "肖俊寅", "李刚", "朱顺军", "蔡晓清", "张莉丽", "石闽",
+    "纪明", "叶洋", "王茜", "袁正萍", "李艳", "洪晨", "冀有光", "李昂", "吴艳龙", "文豪",
+  ];
+  const initial = {
+    employees: EMPLOYEE_NAMES.map((name, index) => ({
+      id: index + 1,
+      name,
+      employee_no: `LOCAL-${String(index + 1).padStart(3, "0")}`,
+      department: "水清南路营业部",
+    })),
+    records: [],
+    nextId: EMPLOYEE_NAMES.length + 1,
+  };
+  const deptIaAverageRevenue = {
+    唐安伦: 3443.01,
+    冀有光: 2516.37,
+    纪明: 2197.11,
+    蔡晓清: 2425.94,
+    李艳: 1748.86,
+    王双豹: 1874.30,
+    石闽: 1156.48,
+    洪晨: 1867.53,
+    张莉丽: 986.64,
+    李昂: 816.21,
+    奚琴华: 946.71,
+    朱顺军: 737.49,
+    叶洋: 502.66,
+    袁正萍: 305.36,
+    肖俊寅: 407.34,
+    李刚: 30.34,
+    王茜: 41.49,
+  };
   const db = () => JSON.parse(localStorage.getItem(KEY) || JSON.stringify(initial));
   const save = value => localStorage.setItem(KEY, JSON.stringify(value));
   const json = value => new Response(JSON.stringify(value), { headers: { "Content-Type": "application/json" } });
@@ -2581,9 +3275,13 @@ tr:last-child td {
     ["IA_BRANCH_REVENUE_4000_PLUS", "上海分公司创收激励4000以上", "投顾创收", 250],
     ["IA_BRANCH_ICEBREAK_ORDER", "上海分公司订单破冰奖", "投顾破冰", 100],
     ["IA_BRANCH_ICEBREAK_REVENUE", "上海分公司订单破冰创收追加", "投顾破冰", 100],
-    ["IA_DEPT_NEW_EFFECTIVE_BASE", "营业部新增投顾有效户基础奖", "投顾有效户", 30],
-    ["IA_DEPT_STAGE_TARGET_EXTRA", "营业部投顾阶段达标追加", "投顾有效户", 20],
-    ["IA_DEPT_REVENUE_EXTRA", "营业部创收客户追加奖", "投顾创收", 50],
+    ["IA_DEPT_NEW_CUSTOMER_BASE", "营业部新增投顾客户奖", "投顾客户", 50],
+    ["IA_DEPT_REVENUE_0_500", "营业部新增投顾客户创收0-500", "投顾创收", 50],
+    ["IA_DEPT_REVENUE_500_1000", "营业部新增投顾客户创收500-1000", "投顾创收", 100],
+    ["IA_DEPT_REVENUE_1000_PLUS", "营业部新增投顾客户创收1000以上", "投顾创收", 150],
+    ["IA_DEPT_REVENUE_INCREMENT_5000", "营业部投顾创收增量超5000", "投顾创收增量", 500],
+    ["IA_DEPT_REVENUE_INCREMENT_10000", "营业部投顾创收增量超10000", "投顾创收增量", 1000],
+    ["IA_DEPT_REVENUE_INCREMENT_15000", "营业部投顾创收增量超15000", "投顾创收增量", 2000],
     ["T0_BRANCH_OPEN_AND_TRADE", "上海分公司T0开通交易奖励", "T0交易量", 50],
     ["T0_BRANCH_VOLUME_50_100", "上海分公司T0交易量50-100万", "T0交易量", 50],
     ["T0_BRANCH_VOLUME_100_200", "上海分公司T0交易量100-200万", "T0交易量", 100],
@@ -2592,7 +3290,7 @@ tr:last-child td {
     ["T0_BRANCH_EFFECTIVE_COUNT_3", "上海分公司T0有效户3户", "T0有效户", 400],
     ["T0_BRANCH_EFFECTIVE_COUNT_4_PLUS", "上海分公司T0有效户4户及以上", "T0有效户", 500],
     ["T0_DEPT_NEW_EFFECTIVE", "营业部新增T0有效户奖", "T0有效户", 200],
-    ["PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION", "营业部投顾得分剥离客户", "客户剥离", 1],
+    ["PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION", "营业部投顾得分剥离客户", "客户剥离", 2],
     ["IA_HIDDEN_WEEKLY_EXCELLENCE_1", "上海分公司投顾单周新增订单竞赛卓越奖第1名", "上海分公司投顾隐性奖金", 1000],
     ["IA_HIDDEN_WEEKLY_EXCELLENCE_2", "上海分公司投顾单周新增订单竞赛卓越奖第2名", "上海分公司投顾隐性奖金", 900],
     ["IA_HIDDEN_WEEKLY_EXCELLENCE_3", "上海分公司投顾单周新增订单竞赛卓越奖第3名", "上海分公司投顾隐性奖金", 800],
@@ -2621,47 +3319,223 @@ tr:last-child td {
       ? "上海分公司投顾隐性奖金，仅在正式排名或统计表确认后手工补录"
       : "依据已确认的营业部与上海分公司规则核算",
   }));
-  const reason = code => reasons.find(item => item.code === code) || { name: code, category: "其他" };
+  const reason = code => reasons.find(item => item.code === code) || { code, name: code, category: "其他", default_amount: 0, type: "reward", amount_type: "money", rule_basis: "" };
+  const yes = value => value === true || value === "true" || value === 1 || value === "1";
+
   function normalizeStore(store) {
     let changed = false;
+    if (!Array.isArray(store.employees)) store.employees = [...initial.employees];
+    EMPLOYEE_NAMES.forEach((name, index) => {
+      if (!store.employees.some(employee => employee.name === name)) {
+        store.employees.push({ id: store.nextId++, name, employee_no: `LOCAL-${String(index + 1).padStart(3, "0")}`, department: "水清南路营业部" });
+        changed = true;
+      }
+    });
     (store.records || []).forEach(record => {
       const r = reason(record.reason_code);
       if (r?.name && record.reason_name !== r.name) { record.reason_name = r.name; changed = true; }
       if (r?.category && record.category !== r.category) { record.category = r.category; changed = true; }
       if (r?.rule_basis && record.rule_basis !== r.rule_basis) { record.rule_basis = r.rule_basis; changed = true; }
-      if (record.employee_name === "??") { record.employee_name = "员工"; changed = true; }
       if (record.calculation_detail?.includes(String.fromCharCode(63, 63, 63)) && r?.name) {
         record.calculation_detail = `${r.name}：按正式统计表确认 ${record.amount || 0} 元`;
         changed = true;
       }
     });
-    (store.employees || []).forEach(employee => {
-      if (employee.department?.includes(String.fromCharCode(63, 63, 63))) { employee.department = "水清南路营业部"; changed = true; }
-    });
     if (changed) save(store);
     return store;
   }
-  const yes = value => value === true || value === "true" || value === 1 || value === "1";
-  function employeeCalc(payload) {
-    const ia = (payload.ia_customers || []).map((x, i) => ({ label: x.label || `客户${i + 1}`, is_new: x.is_new !== false && x.is_new !== "false", is_effective: x.is_effective !== false && x.is_effective !== "false", revenue: Math.max(0, +x.revenue || 0), new_orders: Math.max(0, +x.new_orders || 0), withdrawn_orders: Math.max(0, +x.withdrawn_orders || 0), service_mature: x.service_mature !== false && x.service_mature !== "false" }));
-    const t0 = (payload.t0_customers || []).map((x, i) => ({ label: x.label || `客户${i + 1}`, is_new: x.is_new !== false && x.is_new !== "false", volume: Math.max(0, +x.volume || 0), is_effective: yes(x.is_effective) }));
-    const items = [], warnings = [], branchIaTotals = {}, add = (code, amount, source, detail, payable = amount, pending = 0, capLabel = "") => { if (!amount) return; if (capLabel) { const used = branchIaTotals[capLabel] || 0, allowed = Math.max(0, 500 - used); if (amount > allowed) { if (!allowed) { warnings.push(`${capLabel} 的上海分公司投顾激励已达到500元上限，本项不再计发。`); return; } const ratio = allowed / amount; detail += `；同一客户上海分公司投顾激励上限500元，本项按剩余额度核减至${allowed}元`; amount = allowed; payable *= ratio; pending *= ratio; } branchIaTotals[capLabel] = used + amount; } const r = reason(code); items.push({ reason_code: code, reason_name: r.name, category: r.category, amount: Math.round(amount * 100) / 100, payable_amount: Math.round(payable * 100) / 100, pending_amount: Math.round(pending * 100) / 100, review_due_date: pending ? "2026-08-31" : null, record_source: source, calculation_detail: detail }); };
-    const newIa = ia.filter(x => x.is_new), effectiveIa = ia.filter(x => x.is_effective), net = ia.reduce((s, x) => s + x.new_orders - x.withdrawn_orders, 0), threshold = yes(payload.existing_orders_12_plus) || net >= 12, countRate = newIa.length >= 15 ? 150 : newIa.length >= 10 ? 100 : newIa.length >= 1 ? 50 : 0;
-    ia.forEach(x => { const amount = x.new_orders - x.withdrawn_orders; if (amount > 0 && threshold) add("IA_BRANCH_ORDER_NET_INCREASE", amount * 50, "branch", `${x.label}：订单净增 ${amount} 单 × 50元`, amount * 50, 0, x.label); });
-    newIa.forEach(x => { if (countRate) { const pending = x.service_mature ? 0 : countRate / 2; add(newIa.length >= 15 ? "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS" : newIa.length >= 10 ? "IA_BRANCH_NEW_CUSTOMER_TIER_10_14" : "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", countRate, "branch", `${x.label}：7月新增客户 ${newIa.length} 户，按${countRate}元/户${pending ? `；未满1月本次发50%，待复核${pending}元` : ""}`, countRate - pending, pending, x.label); } const code = x.revenue >= 4000 ? "IA_BRANCH_REVENUE_4000_PLUS" : x.revenue >= 2000 ? "IA_BRANCH_REVENUE_2000_4000" : x.revenue >= 1000 ? "IA_BRANCH_REVENUE_1000_2000" : x.revenue >= 500 ? "IA_BRANCH_REVENUE_500_1000" : x.revenue >= 50 ? "IA_BRANCH_REVENUE_50_500" : null; if (code) { const amount = reason(code).default_amount, pending = x.service_mature ? 0 : amount / 2; add(code, amount, "branch", `${x.label}：7月创收${x.revenue}元，激励${amount}元${pending ? `；未满1月本次发50%，待复核${pending}元` : ""}`, amount - pending, pending, x.label); } });
-    effectiveIa.forEach(x => { add("IA_DEPT_NEW_EFFECTIVE_BASE", 30, "department", `${x.label}：营业部新增投顾有效户30元`); if (effectiveIa.length >= 5) add("IA_DEPT_STAGE_TARGET_EXTRA", 20, "department", `${x.label}：新增投顾有效户达到${effectiveIa.length}户，追加20元`); if (x.revenue > 0) add("IA_DEPT_REVENUE_EXTRA", 50, "department", `${x.label}：新增投顾有效户产生创收，追加50元`); });
-    if (yes(payload.no_first_half_effective_ia_order) && ia.some(x => x.new_orders > 0)) { const hasRevenueOrder = ia.some(x => x.new_orders > 0 && x.revenue > 0); add("IA_BRANCH_ICEBREAK_ORDER", 100, "branch", `上半年未新增有效投顾订单，本月新增任一投顾订单，订单破冰奖100元`); if (hasRevenueOrder) add("IA_BRANCH_ICEBREAK_REVENUE", 100, "branch", `新增投顾订单产生创收，订单破冰奖追加100元`); }
-    const effectiveT0 = t0.filter(x => x.is_effective || x.volume >= 2000000); t0.forEach(x => { if (x.is_new && (x.volume > 0 || x.is_effective)) add("T0_BRANCH_OPEN_AND_TRADE", 50, "branch", `${x.label}：新增T0客户产生交易量，基础50元`); if (x.is_new && !effectiveT0.includes(x)) { if (x.volume >= 500000 && x.volume < 1000000) add("T0_BRANCH_VOLUME_50_100", 50, "branch", `${x.label}：新增T0客户交易量50-100万，补充50元`); else if (x.volume >= 1000000 && x.volume < 2000000) add("T0_BRANCH_VOLUME_100_200", 100, "branch", `${x.label}：新增T0客户交易量100-200万，补充100元`); } }); if (effectiveT0.length) { const rate = effectiveT0.length >= 4 ? 500 : effectiveT0.length === 3 ? 400 : effectiveT0.length === 2 ? 300 : 200; add(`T0_BRANCH_EFFECTIVE_COUNT_${effectiveT0.length >= 4 ? "4_PLUS" : effectiveT0.length}`, rate * effectiveT0.length, "branch", `新增T0有效户${effectiveT0.length}户 × ${rate}元`); add("T0_DEPT_NEW_EFFECTIVE", 200 * effectiveT0.length, "department", `营业部新增T0有效户${effectiveT0.length}户 × 200元`); }
-    const sign = effectiveIa.length + effectiveIa.filter(x => x.revenue > 0).length * .5, revenue = effectiveIa.reduce((s, x) => s + x.revenue, 0), revenueScore = revenue / 2000 * 5, total = sign + revenueScore, reallocation = ia.length ? Math.ceil(Math.max(0, 10 - total)) : 0; if (reallocation) add("PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION", reallocation, "department", `投顾总分${total.toFixed(2)}，不足10分，剥离${reallocation}户`);
-    const rewardItems = items.filter(x => x.reason_code !== "PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION"); return { items, warnings, score: { is_calculated: !!ia.length, ia_total_customers: ia.length, ia_new_customers: newIa.length, ia_old_customers: ia.length - newIa.length, t0_customers: t0.length, t0_new_customers: t0.filter(x => x.is_new).length, t0_effective_customers: effectiveT0.length, new_customers: effectiveIa.length, revenue_customers: effectiveIa.filter(x => x.revenue > 0).length, weighted_customers: sign, ia_revenue: revenue, sign_score: sign, revenue_score: revenueScore, total_score: total, reallocation_customers: reallocation, net_order_increase: net, order_threshold_met: threshold, order_threshold_basis: threshold ? "已满足12单门槛" : "未满足12单门槛", stage_completed: effectiveIa.length >= 5 }, summary: { gross_amount: rewardItems.reduce((s, x) => s + x.amount, 0), payable_amount: rewardItems.reduce((s, x) => s + x.payable_amount, 0), pending_amount: rewardItems.reduce((s, x) => s + x.pending_amount, 0) } };
+
+  function deptRevenueReason(revenue) {
+    if (revenue > 1000) return "IA_DEPT_REVENUE_1000_PLUS";
+    if (revenue > 500) return "IA_DEPT_REVENUE_500_1000";
+    if (revenue > 0) return "IA_DEPT_REVENUE_0_500";
+    return null;
   }
+
+  function deptIncrementReason(increment) {
+    if (increment > 15000) return "IA_DEPT_REVENUE_INCREMENT_15000";
+    if (increment > 10000) return "IA_DEPT_REVENUE_INCREMENT_10000";
+    if (increment > 5000) return "IA_DEPT_REVENUE_INCREMENT_5000";
+    return null;
+  }
+
+  function employeeCalc(payload, store = db()) {
+    const employee = store.employees?.find(item => String(item.id) === String(payload.employee_id));
+    const employeeName = employee?.name || payload.employee_name || "";
+    const ia = (payload.ia_customers || []).map((x, i) => ({
+      label: x.label || `客户${i + 1}`,
+      is_new: x.is_new !== false && x.is_new !== "false",
+      revenue: Math.max(0, +x.revenue || 0),
+      new_orders: Math.max(0, +x.new_orders || 0),
+      withdrawn_orders: Math.max(0, +x.withdrawn_orders || 0),
+      service_mature: x.service_mature !== false && x.service_mature !== "false",
+    }));
+    const t0 = (payload.t0_customers || []).map((x, i) => ({
+      label: x.label || `客户${i + 1}`,
+      is_new: x.is_new !== false && x.is_new !== "false",
+      volume: Math.max(0, +x.volume || 0),
+      is_effective: yes(x.is_effective),
+    }));
+    const items = [];
+    const warnings = [];
+    const branchIaTotals = {};
+    const add = (code, amount, source, detail, payable = amount, pending = 0, capLabel = "") => {
+      if (!amount) return;
+      if (capLabel) {
+        const used = branchIaTotals[capLabel] || 0;
+        const allowed = Math.max(0, 500 - used);
+        if (amount > allowed) {
+          if (!allowed) {
+            warnings.push(`${capLabel} 的上海分公司投顾激励已达到500元上限，本项不再计发。`);
+            return;
+          }
+          const ratio = allowed / amount;
+          detail += `；同一客户上海分公司投顾激励上限500元，本项按剩余额度核减至${allowed}元`;
+          amount = allowed;
+          payable *= ratio;
+          pending *= ratio;
+        }
+        branchIaTotals[capLabel] = used + amount;
+      }
+      const r = reason(code);
+      items.push({
+        reason_code: code,
+        reason_name: r.name,
+        category: r.category,
+        amount: Math.round(amount * 100) / 100,
+        payable_amount: Math.round(payable * 100) / 100,
+        pending_amount: Math.round(pending * 100) / 100,
+        review_due_date: pending ? "2026-08-31" : null,
+        record_source: source,
+        calculation_detail: detail,
+      });
+    };
+
+    const newIa = ia.filter(x => x.is_new);
+    const net = ia.reduce((s, x) => s + x.new_orders - x.withdrawn_orders, 0);
+    const threshold = yes(payload.existing_orders_12_plus) || net >= 12;
+    const countRate = newIa.length >= 15 ? 150 : newIa.length >= 10 ? 100 : newIa.length >= 1 ? 50 : 0;
+
+    ia.forEach(x => {
+      const amount = x.new_orders - x.withdrawn_orders;
+      if (amount > 0 && threshold) add("IA_BRANCH_ORDER_NET_INCREASE", amount * 50, "branch", `${x.label}：订单净增 ${amount} 单 × 50元`, amount * 50, 0, x.label);
+    });
+
+    newIa.forEach(x => {
+      if (countRate) {
+        const pending = x.service_mature ? 0 : countRate / 2;
+        add(
+          newIa.length >= 15 ? "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS" : newIa.length >= 10 ? "IA_BRANCH_NEW_CUSTOMER_TIER_10_14" : "IA_BRANCH_NEW_CUSTOMER_TIER_1_9",
+          countRate,
+          "branch",
+          `${x.label}：7月新增客户 ${newIa.length} 户，按${countRate}元/户${pending ? `；未满1月本次发50%，待复核${pending}元` : ""}`,
+          countRate - pending,
+          pending,
+          x.label,
+        );
+      }
+      const code = x.revenue >= 4000 ? "IA_BRANCH_REVENUE_4000_PLUS"
+        : x.revenue >= 2000 ? "IA_BRANCH_REVENUE_2000_4000"
+        : x.revenue >= 1000 ? "IA_BRANCH_REVENUE_1000_2000"
+        : x.revenue >= 500 ? "IA_BRANCH_REVENUE_500_1000"
+        : x.revenue >= 50 ? "IA_BRANCH_REVENUE_50_500"
+        : null;
+      if (code) {
+        const amount = reason(code).default_amount;
+        const pending = x.service_mature ? 0 : amount / 2;
+        add(code, amount, "branch", `${x.label}：7月创收${x.revenue}元，激励${amount}元${pending ? `；未满1月本次发50%，待复核${pending}元` : ""}`, amount - pending, pending, x.label);
+      }
+    });
+
+    newIa.forEach(x => {
+      add("IA_DEPT_NEW_CUSTOMER_BASE", 50, "department", `${x.label}：营业部新增投顾客户奖励50元`);
+      const code = deptRevenueReason(x.revenue);
+      if (code) add(code, reason(code).default_amount, "department", `${x.label}：新增投顾客户创收${x.revenue}元，按最高档奖励${reason(code).default_amount}元`);
+    });
+
+    const iaRevenue = ia.reduce((s, x) => s + x.revenue, 0);
+    const revenueBase = deptIaAverageRevenue[employeeName] ?? 0;
+    const revenueIncrement = iaRevenue - revenueBase;
+    const incrementCode = deptIncrementReason(revenueIncrement);
+    if (incrementCode) {
+      add(incrementCode, reason(incrementCode).default_amount, "department", `${employeeName || "当前员工"}：7月投顾创收${iaRevenue.toFixed(2)}元 - 1-6月月均${revenueBase.toFixed(2)}元 = 增量${revenueIncrement.toFixed(2)}元，奖励${reason(incrementCode).default_amount}元`);
+    }
+
+    if (yes(payload.no_first_half_effective_ia_order) && ia.some(x => x.new_orders > 0)) {
+      const hasRevenueOrder = ia.some(x => x.new_orders > 0 && x.revenue > 0);
+      add("IA_BRANCH_ICEBREAK_ORDER", 100, "branch", "上半年未新增有效投顾订单，本月新增任一投顾订单，订单破冰奖100元");
+      if (hasRevenueOrder) add("IA_BRANCH_ICEBREAK_REVENUE", 100, "branch", "新增投顾订单产生创收，订单破冰奖追加100元");
+    }
+
+    const effectiveT0 = t0.filter(x => x.is_effective || x.volume >= 2000000);
+    t0.forEach(x => {
+      if (x.is_new && (x.volume > 0 || x.is_effective)) add("T0_BRANCH_OPEN_AND_TRADE", 50, "branch", `${x.label}：新增T0客户产生交易量，基础50元`);
+      if (x.is_new && !effectiveT0.includes(x)) {
+        if (x.volume >= 500000 && x.volume < 1000000) add("T0_BRANCH_VOLUME_50_100", 50, "branch", `${x.label}：新增T0客户交易量50-100万，补充50元`);
+        else if (x.volume >= 1000000 && x.volume < 2000000) add("T0_BRANCH_VOLUME_100_200", 100, "branch", `${x.label}：新增T0客户交易量100-200万，补充100元`);
+      }
+    });
+    if (effectiveT0.length) {
+      const rate = effectiveT0.length >= 4 ? 500 : effectiveT0.length === 3 ? 400 : effectiveT0.length === 2 ? 300 : 200;
+      add(`T0_BRANCH_EFFECTIVE_COUNT_${effectiveT0.length >= 4 ? "4_PLUS" : effectiveT0.length}`, rate * effectiveT0.length, "branch", `新增T0有效户${effectiveT0.length}户 × ${rate}元`);
+      add("T0_DEPT_NEW_EFFECTIVE", 200 * effectiveT0.length, "department", `营业部新增T0有效户${effectiveT0.length}户 × 200元`);
+    }
+
+    const revenueCustomers = newIa.filter(x => x.revenue > 0);
+    const weighted = newIa.length + revenueCustomers.length * 0.5;
+    const rawRevenueScore = iaRevenue / 4000 * 5;
+    const revenueScore = iaRevenue > 10000 ? rawRevenueScore : Math.min(rawRevenueScore, 8);
+    const total = weighted + revenueScore;
+    const reallocation = ia.length && total < 10 ? (10 - Math.floor(total)) * 2 : 0;
+    if (reallocation) add("PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION", reallocation, "department", `投顾总分${total.toFixed(2)}，取整数档${Math.floor(total)}分，距10分差${10 - Math.floor(total)}档，每档剥离2户，共剥离${reallocation}户`);
+
+    const rewardItems = items.filter(x => x.reason_code !== "PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION");
+    return {
+      items,
+      warnings,
+      score: {
+        is_calculated: !!ia.length,
+        ia_total_customers: ia.length,
+        ia_new_customers: newIa.length,
+        ia_old_customers: ia.length - newIa.length,
+        t0_customers: t0.length,
+        t0_new_customers: t0.filter(x => x.is_new).length,
+        t0_effective_customers: effectiveT0.length,
+        new_customers: newIa.length,
+        revenue_customers: revenueCustomers.length,
+        weighted_customers: weighted,
+        ia_revenue: iaRevenue,
+        revenue_base: revenueBase,
+        revenue_increment: revenueIncrement,
+        sign_score: weighted,
+        revenue_score_raw: rawRevenueScore,
+        revenue_score: revenueScore,
+        revenue_score_capped: iaRevenue <= 10000 && rawRevenueScore > 8,
+        total_score: total,
+        reallocation_customers: reallocation,
+        net_order_increase: net,
+        order_threshold_met: threshold,
+        order_threshold_basis: threshold ? "已满足12单门槛" : "未满足12单门槛",
+        stage_completed: newIa.length >= 5,
+      },
+      summary: {
+        gross_amount: rewardItems.reduce((s, x) => s + x.amount, 0),
+        payable_amount: rewardItems.reduce((s, x) => s + x.payable_amount, 0),
+        pending_amount: rewardItems.reduce((s, x) => s + x.pending_amount, 0),
+      },
+    };
+  }
+
   const stats = records => {
     const active = records.filter(x => x.status !== "cancelled");
     const rewards = active.filter(x => x.type === "reward");
     const penalties = active.filter(x => x.type === "penalty");
-    const manualRewards = rewards.filter(x => x.settlement === "manual");
+    const isHiddenReference = x => x.reason_code?.startsWith("IA_HIDDEN_");
+    const isManualAdjustment = x => x.settlement === "manual" && !isHiddenReference(x);
+    const isBranchReward = x => x.record_source === "branch" || isHiddenReference(x);
+    const manualRewards = rewards.filter(isManualAdjustment);
     const moneyPenalties = penalties.filter(x => x.amount_type === "money");
-    const manualDeductions = moneyPenalties.filter(x => x.settlement === "manual");
+    const manualDeductions = moneyPenalties.filter(isManualAdjustment);
     const customerPenalties = penalties.filter(x => x.amount_type === "customer_count");
     const sum = (xs, key = "amount") => xs.reduce((s, x) => s + (+x[key] || 0), 0);
     const groups = {};
@@ -2681,7 +3555,7 @@ tr:last-child td {
         reward_money: sum(rewards),
         payable_reward_money: payable,
         pending_reward_money: sum(rewards, "pending_amount"),
-        auto_reward_money: sum(rewards.filter(x => x.settlement !== "manual")),
+        auto_reward_money: sum(rewards.filter(x => !isManualAdjustment(x))),
         manual_reward_money: manualRewardMoney,
         manual_deduction_money: manualDeductionMoney,
         manual_net_money: manualRewardMoney - manualDeductionMoney,
@@ -2689,20 +3563,118 @@ tr:last-child td {
         penalty_customers: sum(customerPenalties),
         net_money: payable - manualDeductionMoney,
         payable_net_money: payable - manualDeductionMoney,
-        branch_reward_money: sum(rewards.filter(x => x.settlement !== "manual" && x.record_source === "branch")),
-        department_reward_money: sum(rewards.filter(x => x.settlement !== "manual" && x.record_source === "department")),
-        branch_payable_reward_money: sum(rewards.filter(x => x.settlement !== "manual" && x.record_source === "branch"), "payable_amount"),
-        department_payable_reward_money: sum(rewards.filter(x => x.settlement !== "manual" && x.record_source === "department"), "payable_amount")
+        branch_reward_money: sum(rewards.filter(isBranchReward)),
+        department_reward_money: sum(rewards.filter(x => x.record_source === "department")),
+        branch_payable_reward_money: sum(rewards.filter(isBranchReward), "payable_amount"),
+        department_payable_reward_money: sum(rewards.filter(x => x.record_source === "department"), "payable_amount"),
       },
       by_employee: Object.values(groups),
-      by_category: []
+      by_category: [],
     };
   };
-  async function route(path, options = {}) { const method = (options.method || "GET").toUpperCase(), body = options.body ? JSON.parse(options.body) : {}, store = normalizeStore(db()); const [pathname] = path.split("?"); if (pathname === "/api/access-required") return json({ required: false }); if (pathname === "/api/employees" && method === "GET") return json({ items: store.employees }); if (pathname === "/api/projects") return json({ items: [] }); if (pathname === "/api/reason-codes") return json({ items: reasons }); if (pathname === "/api/records" && method === "GET") return json({ items: store.records }); if (pathname === "/api/records" && method === "POST") { const r = reason(body.reason_code); const e = store.employees.find(x => +x.id === +body.employee_id); const amount = Math.max(0, +body.amount || 0); const isPenalty = r.type === "penalty"; const source = "manual"; const item = { id: store.nextId++, employee_id: +body.employee_id, employee_name: e?.name || "员工", reason_code: body.reason_code, reason_name: r.name, category: r.category, type: isPenalty ? "penalty" : "reward", amount_type: r.amount_type || "money", amount, payable_amount: amount, pending_amount: 0, record_source: source, status: "active", settlement: "manual", calculation_detail: `${r.name}：按正式统计表确认 ${amount} 元`, rule_basis: r.rule_basis, occurred_at: body.occurred_at || "" }; store.records.push(item); save(store); return json({ item }); } if (pathname === "/api/stats") return json(stats(store.records)); if (pathname === "/api/calculations/employee-preview") return json(employeeCalc(body)); if (pathname === "/api/calculations/employee-apply") { const c = employeeCalc(body), e = store.employees.find(x => +x.id === +body.employee_id); store.records = store.records.filter(x => !(x.employee_id === +body.employee_id && x.settlement === "auto")); c.items.forEach(x => store.records.push({ ...x, id: store.nextId++, employee_id: +body.employee_id, employee_name: e?.name || "员工", type: x.reason_code.includes("PENALTY") ? "penalty" : "reward", amount_type: x.reason_code.includes("PENALTY") ? "customer_count" : "money", status: "active", settlement: "auto" })); save(store); return json({ calculation: c, ids: c.items.map(x => x.id) }); } if (pathname === "/api/employees" && method === "POST") { const names = body.names || []; const created = [], skipped = []; names.map(name => String(name || "").trim()).filter(Boolean).forEach(name => { const existing = store.employees.find(e => e.name === name); if (existing) { skipped.push(existing); return; } const item = { id: store.nextId++, name, employee_no: `LOCAL-${String(store.nextId - 1).padStart(3, "0")}`, department: "水清南路营业部" }; store.employees.push(item); created.push(item); }); save(store); return json({ items: created, skipped, item: created[0] || skipped[0] }); } if (pathname === "/api/records" && method === "DELETE") { store.records = []; store.employees = initial.employees; store.nextId = initial.nextId; save(store); return json({ ok: true }); } if (pathname.startsWith("/api/records/") && method === "DELETE") { const id = +pathname.split("/").pop(); store.records = store.records.filter(x => x.id !== id); save(store); return json({ ok: true }); } if (pathname.startsWith("/api/reviews")) return json({ items: [] }); return json({ items: [] }); }
-  const nativeFetch = window.fetch.bind(window); window.fetch = (input, options) => { const path = typeof input === "string" ? input : input.url; if (path.startsWith("/api/")) return route(path, options); return nativeFetch(input, options); };
+
+  async function route(path, options = {}) {
+    const method = (options.method || "GET").toUpperCase();
+    const body = options.body ? JSON.parse(options.body) : {};
+    const store = normalizeStore(db());
+    const [pathname] = path.split("?");
+    if (pathname === "/api/access-required") return json({ required: false });
+    if (pathname === "/api/employees" && method === "GET") return json({ items: store.employees });
+    if (pathname === "/api/projects") return json({ items: [] });
+    if (pathname === "/api/reason-codes") return json({ items: reasons });
+    if (pathname === "/api/records" && method === "GET") return json({ items: store.records });
+    if (pathname === "/api/records" && method === "POST") {
+      const r = reason(body.reason_code);
+      const e = store.employees.find(x => +x.id === +body.employee_id);
+      const amount = Math.max(0, +body.amount || 0);
+      const isPenalty = r.type === "penalty";
+      const item = {
+        id: store.nextId++,
+        employee_id: +body.employee_id,
+        employee_name: e?.name || "员工",
+        reason_code: body.reason_code,
+        reason_name: r.name,
+        category: r.category,
+        type: isPenalty ? "penalty" : "reward",
+        amount_type: r.amount_type || "money",
+        amount,
+        payable_amount: amount,
+        pending_amount: 0,
+        record_source: "manual",
+        status: "active",
+        settlement: "manual",
+        calculation_detail: `${r.name}：按正式统计表确认 ${amount} 元`,
+        rule_basis: r.rule_basis,
+        occurred_at: body.occurred_at || "",
+      };
+      store.records.push(item);
+      save(store);
+      return json({ item });
+    }
+    if (pathname === "/api/stats") return json(stats(store.records));
+    if (pathname === "/api/calculations/employee-preview") return json(employeeCalc(body, store));
+    if (pathname === "/api/calculations/employee-apply") {
+      const c = employeeCalc(body, store);
+      const e = store.employees.find(x => +x.id === +body.employee_id);
+      store.records = store.records.filter(x => !(x.employee_id === +body.employee_id && x.settlement === "auto"));
+      c.items.forEach(x => store.records.push({
+        ...x,
+        id: store.nextId++,
+        employee_id: +body.employee_id,
+        employee_name: e?.name || "员工",
+        type: x.reason_code.includes("PENALTY") ? "penalty" : "reward",
+        amount_type: x.reason_code.includes("PENALTY") ? "customer_count" : "money",
+        status: "active",
+        settlement: "auto",
+      }));
+      save(store);
+      return json({ calculation: c, ids: c.items.map(x => x.id) });
+    }
+    if (pathname === "/api/employees" && method === "POST") {
+      const names = body.names || [];
+      const created = [];
+      const skipped = [];
+      names.map(name => String(name || "").trim()).filter(Boolean).forEach(name => {
+        const existing = store.employees.find(e => e.name === name);
+        if (existing) {
+          skipped.push(existing);
+          return;
+        }
+        const item = { id: store.nextId++, name, employee_no: `LOCAL-${String(store.nextId - 1).padStart(3, "0")}`, department: "水清南路营业部" };
+        store.employees.push(item);
+        created.push(item);
+      });
+      save(store);
+      return json({ items: created, skipped, item: created[0] || skipped[0] });
+    }
+    if (pathname === "/api/records" && method === "DELETE") {
+      store.records = [];
+      store.employees = initial.employees;
+      store.nextId = initial.nextId;
+      save(store);
+      return json({ ok: true });
+    }
+    if (pathname.startsWith("/api/records/") && method === "DELETE") {
+      const id = +pathname.split("/").pop();
+      store.records = store.records.filter(x => x.id !== id);
+      save(store);
+      return json({ ok: true });
+    }
+    if (pathname.startsWith("/api/reviews")) return json({ items: [] });
+    return json({ items: [] });
+  }
+
+  const nativeFetch = window.fetch.bind(window);
+  window.fetch = (input, options) => {
+    const path = typeof input === "string" ? input : input.url;
+    if (path.startsWith("/api/")) return route(path, options);
+    return nativeFetch(input, options);
+  };
 })();
-</script>
-  <script>(() => {
+
+  </script>
+  <script>
+(() => {
   const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -2711,17 +3683,21 @@ tr:last-child td {
     "'": "&apos;",
   }[char]));
   const money = value => Number(value || 0).toLocaleString("zh-CN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const isManualRecord = record => record.settlement === "manual" || record.reason_code?.startsWith("IA_HIDDEN_");
-  const sourceName = record => isManualRecord(record) ? "手工更正" : (record.record_source === "department" ? "营业部" : (record.record_source === "branch" ? "上海分公司" : "手工更正"));
-  const businessName = record => isManualRecord(record)
+  const isHiddenReference = record => record.reason_code?.startsWith("IA_HIDDEN_");
+  const isManualRecord = record => record.settlement === "manual" && !isHiddenReference(record);
+  const sourceName = record => isHiddenReference(record) ? "上海分公司" : (isManualRecord(record) ? "手工更正" : (record.record_source === "department" ? "营业部" : (record.record_source === "branch" ? "上海分公司" : "手工更正")));
+  const businessName = record => isHiddenReference(record)
+    ? "投顾参考项"
+    : isManualRecord(record)
     ? "手工更正"
     : (record.reason_code?.startsWith("T0_") || record.category?.includes("T0")
     ? "T0"
     : (record.reason_code?.startsWith("PENALTY_") || record.amount_type === "customer_count" ? "剥离" : (record.category?.includes("手工") ? "手工更正" : "投顾")));
   const groupName = record => {
     if (record.reason_code === "IA_BRANCH_ORDER_NET_INCREASE") return "订单净增";
-    if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_EFFECTIVE_BASE", "IA_DEPT_STAGE_TARGET_EXTRA"].includes(record.reason_code)) return "新增户数";
-    if (record.reason_code?.startsWith("IA_BRANCH_REVENUE_") || record.reason_code === "IA_DEPT_REVENUE_EXTRA") return "创收追加";
+    if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_CUSTOMER_BASE"].includes(record.reason_code)) return "新增户数";
+    if (record.reason_code?.startsWith("IA_BRANCH_REVENUE_") || ["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(record.reason_code)) return "创收追加";
+    if (record.reason_code?.startsWith("IA_DEPT_REVENUE_INCREMENT_")) return "创收增量";
     if (record.reason_code?.startsWith("IA_BRANCH_ICEBREAK_")) return "破冰奖";
     if (record.reason_code?.startsWith("IA_HIDDEN_WEEKLY_")) return "单周竞赛";
     if (record.reason_code === "IA_HIDDEN_REVENUE_ICEBREAK_TOP50") return "创收破冰";
@@ -2734,7 +3710,7 @@ tr:last-child td {
   };
   const sourceOrder = record => sourceName(record) === "营业部" ? 1 : (sourceName(record) === "上海分公司" ? 2 : 3);
   const bizOrder = record => businessName(record) === "投顾" ? 1 : (businessName(record) === "T0" ? 2 : (businessName(record) === "剥离" ? 3 : 4));
-  const groupOrder = record => ({ "订单净增": 1, "新增户数": 2, "创收追加": 3, "破冰奖": 4, "单周竞赛": 5, "创收破冰": 6, "联络员": 7, "T0基础": 8, "交易补充": 9, "T0有效户": 10, "剥离": 11, "手工": 12 }[groupName(record)] || 20);
+  const groupOrder = record => ({ "订单净增": 1, "新增户数": 2, "创收追加": 3, "创收增量": 4, "破冰奖": 5, "单周竞赛": 6, "创收破冰": 7, "联络员": 8, "T0基础": 9, "交易补充": 10, "T0有效户": 11, "剥离": 12, "手工": 13 }[groupName(record)] || 20);
   const sortRecords = rows => [...rows].sort((a, b) =>
     String(a.employee_name || "").localeCompare(String(b.employee_name || ""), "zh-CN") ||
     sourceOrder(a) - sourceOrder(b) ||
@@ -2760,12 +3736,12 @@ tr:last-child td {
         byEmployee[name].reward += Number(record.amount || 0);
         byEmployee[name].payable += Number(record.payable_amount ?? record.amount ?? 0);
         byEmployee[name].pending += Number(record.pending_amount || 0);
-        if (record.settlement === "manual") byEmployee[name].manualReward += Number(record.payable_amount ?? record.amount ?? 0);
-        if (!isManualRecord(record) && record.record_source === "branch") byEmployee[name].branch += Number(record.payable_amount ?? record.amount ?? 0);
-        if (!isManualRecord(record) && record.record_source === "department") byEmployee[name].department += Number(record.payable_amount ?? record.amount ?? 0);
+        if (isManualRecord(record)) byEmployee[name].manualReward += Number(record.payable_amount ?? record.amount ?? 0);
+        if (sourceName(record) === "上海分公司") byEmployee[name].branch += Number(record.payable_amount ?? record.amount ?? 0);
+        if (sourceName(record) === "营业部") byEmployee[name].department += Number(record.payable_amount ?? record.amount ?? 0);
       } else if (record.amount_type === "money") {
         byEmployee[name].penaltyMoney += Number(record.amount || 0);
-        if (record.settlement === "manual") byEmployee[name].manualDeduction += Number(record.amount || 0);
+        if (isManualRecord(record)) byEmployee[name].manualDeduction += Number(record.amount || 0);
       } else {
         byEmployee[name].penaltyCustomers += Number(record.amount || 0);
       }
@@ -2795,6 +3771,7 @@ tr:last-child td {
       mk("营业部T0", "营业部", "T0"),
       mk("上海分公司投顾", "上海分公司", "投顾"),
       mk("上海分公司T0", "上海分公司", "T0"),
+      mk("上海分公司投顾参考项", "上海分公司", "投顾参考项"),
     ];
   };
   const employeeSheetRows = (name, rows) => {
@@ -2803,33 +3780,33 @@ tr:last-child td {
     const penalties = employeeRows.filter(x => x.type === "penalty" && x.amount_type === "customer_count");
     const payable = rewardRows.reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
     const pending = rewardRows.reduce((s, x) => s + Number(x.pending_amount || 0), 0);
-    const branch = rewardRows.filter(x => !isManualRecord(x) && x.record_source === "branch").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
-    const department = rewardRows.filter(x => !isManualRecord(x) && x.record_source === "department").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
-    const branchGross = rewardRows.filter(x => !isManualRecord(x) && x.record_source === "branch").reduce((s, x) => s + Number(x.amount || 0), 0);
-    const departmentGross = rewardRows.filter(x => !isManualRecord(x) && x.record_source === "department").reduce((s, x) => s + Number(x.amount || 0), 0);
-    const branchPending = rewardRows.filter(x => !isManualRecord(x) && x.record_source === "branch").reduce((s, x) => s + Number(x.pending_amount || 0), 0);
-    const departmentPending = rewardRows.filter(x => !isManualRecord(x) && x.record_source === "department").reduce((s, x) => s + Number(x.pending_amount || 0), 0);
-    const manualRewards = employeeRows.filter(x => x.settlement === "manual" && x.type === "reward").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
-    const manualDeductions = employeeRows.filter(x => x.settlement === "manual" && x.type === "penalty" && x.amount_type === "money").reduce((s, x) => s + Number(x.amount || 0), 0);
+    const branch = rewardRows.filter(x => sourceName(x) === "上海分公司").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
+    const department = rewardRows.filter(x => sourceName(x) === "营业部").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
+    const branchGross = rewardRows.filter(x => sourceName(x) === "上海分公司").reduce((s, x) => s + Number(x.amount || 0), 0);
+    const departmentGross = rewardRows.filter(x => sourceName(x) === "营业部").reduce((s, x) => s + Number(x.amount || 0), 0);
+    const branchPending = rewardRows.filter(x => sourceName(x) === "上海分公司").reduce((s, x) => s + Number(x.pending_amount || 0), 0);
+    const departmentPending = rewardRows.filter(x => sourceName(x) === "营业部").reduce((s, x) => s + Number(x.pending_amount || 0), 0);
+    const manualRewards = employeeRows.filter(x => isManualRecord(x) && x.type === "reward").reduce((s, x) => s + Number(x.payable_amount ?? x.amount ?? 0), 0);
+    const manualDeductions = employeeRows.filter(x => isManualRecord(x) && x.type === "penalty" && x.amount_type === "money").reduce((s, x) => s + Number(x.amount || 0), 0);
     const manualNet = manualRewards - manualDeductions;
     const netPayable = payable - manualDeductions;
     const penaltyCustomers = penalties.reduce((s, x) => s + Number(x.amount || 0), 0);
     const rowsOut = [
       row([cell(`${name} 奖励核算结果`, "String", "Title")]),
       row([cell("指标", "String", "Header"), cell("应发/数量", "String", "Header"), cell("本次可发", "String", "Header"), cell("待复核", "String", "Header"), wideCell("说明", 2, "String", "Header")]),
-      row([cell("营业部奖励"), cell(`${money(departmentGross)} 元`, "String", "Number"), cell(`${money(department)} 元`, "String", "Number"), cell(`${money(departmentPending)} 元`, "String", "Number"), wideCell("营业部投顾奖励 + 营业部T0有效户奖励")]),
+      row([cell("营业部奖励"), cell(`${money(departmentGross)} 元`, "String", "Number"), cell(`${money(department)} 元`, "String", "Number"), cell(`${money(departmentPending)} 元`, "String", "Number"), wideCell("营业部投顾新增客户/创收分档/创收增量奖励 + 营业部T0有效户奖励")]),
       row([cell("上海分公司奖励"), cell(`${money(branchGross)} 元`, "String", "Number"), cell(`${money(branch)} 元`, "String", "Number"), cell(`${money(branchPending)} 元`, "String", "Number"), wideCell("上海分公司投顾订单/新户/创收/破冰 + 上海分公司T0基础/交易补充/有效户")]),
       row([cell("合计奖励"), cell(`${money(rewardRows.reduce((s, x) => s + Number(x.amount || 0), 0))} 元`, "String", "Number"), cell(`${money(payable)} 元`, "String", "Number"), cell(`${money(pending)} 元`, "String", "Number"), wideCell(pending ? `待复核来自上海分公司7月投顾新增客户数激励和创收激励` : "无待复核金额")]),
       row([cell("手工更正"), cell(`${money(manualRewards)} 元`, "String", "Number"), cell(`${money(manualNet)} 元`, "String", "Number"), cell("-"), wideCell(`手工奖励 ${money(manualRewards)} 元；手工扣回 ${money(manualDeductions)} 元`)]),
       row([cell("最终奖金净值"), cell("-"), cell(`${money(netPayable)} 元`, "String", "Number"), cell("-"), wideCell("本次可发奖励 - 手工扣回金额；手工奖励已包含在本次可发奖励中")]),
-      row([cell("剥离客户"), cell(`${money(penaltyCustomers)} 户`, "String", "Number"), cell("-"), cell("-"), wideCell("按营业部投顾得分不足10分的差值向上取整")]),
+      row([cell("剥离客户"), cell(`${money(penaltyCustomers)} 户`, "String", "Number"), cell("-"), cell("-"), wideCell("按营业部投顾总分整数档与10分比较，每少1档剥离2户")]),
       ...compositionRows(employeeRows),
       section("营业部奖励"),
       header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]),
       ...["投顾", "T0"].flatMap(biz => employeeRows.filter(r => sourceName(r) === "营业部" && businessName(r) === biz).map(r => row([cell(biz), cell(groupName(r)), cell(r.reason_name), cell(amountText(r)), cell(payableText(r)), cell(pendingText(r)), cell(r.calculation_detail || "")]))),
       section("上海分公司奖励"),
       header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]),
-      ...["投顾", "T0"].flatMap(biz => employeeRows.filter(r => sourceName(r) === "上海分公司" && businessName(r) === biz).map(r => row([cell(biz), cell(groupName(r)), cell(r.reason_name), cell(amountText(r)), cell(payableText(r)), cell(pendingText(r)), cell(r.calculation_detail || "")]))),
+      ...["投顾", "T0", "投顾参考项"].flatMap(biz => employeeRows.filter(r => sourceName(r) === "上海分公司" && businessName(r) === biz).map(r => row([cell(biz), cell(groupName(r)), cell(r.reason_name), cell(amountText(r)), cell(payableText(r)), cell(pendingText(r)), cell(r.calculation_detail || "")]))),
       section("手工更正"),
       header(["业务", "分组", "规则", "应发/数量", "本次可发", "待复核", "计算过程"]),
       ...employeeRows.filter(r => sourceName(r) === "手工更正" || businessName(r) === "手工更正").map(r => row([cell("手工更正"), cell(groupName(r)), cell(r.reason_name), cell(amountText(r)), cell(payableText(r)), cell(pendingText(r)), cell(r.calculation_detail || "")])),
@@ -2911,8 +3888,10 @@ tr:last-child td {
   }, true);
   document.documentElement.dataset.exportReady = "true";
 })();
-</script>
-  <script>const state = {
+
+  </script>
+  <script>
+const state = {
   tab: "entry",
   accessCode: localStorage.getItem("rp_access_code") || "",
   accessRequired: false,
@@ -2921,6 +3900,7 @@ tr:last-child td {
   flashMessage: "",
   employees: [],
   manualEmployeeId: "",
+  pendingManualEntries: [],
   projects: [],
   reasons: [],
   records: [],
@@ -2938,11 +3918,22 @@ tr:last-child td {
   liaisonCalculationInputs: null,
   workMode: "employee",
   advancedMode: "reference",
+  theme: localStorage.getItem("rp_theme_2026_07") || "light",
   expandedPanels: [],
   filters: { employee_name: "", employee_id: "", type: "", start: "", end: "", project_id: "" },
 };
 
 const EMPLOYEE_DRAFT_KEY = "rp_employee_calculation_draft_2026_07_v1";
+const PENDING_MANUAL_KEY = "rp_pending_manual_entries_2026_07_v1";
+const FLOATING_NAV_POSITION_KEY = "rp_floating_nav_position_2026_07_v1";
+const FLOATING_NAV_LINKS = [
+  ["section-top", "顶部"],
+  ["section-ia-input", "投顾填写"],
+  ["section-t0-input", "T0填写"],
+  ["section-manual", "手工更正"],
+  ["section-result", "核算结果"],
+  ["section-process", "计算过程"],
+];
 
 function loadEmployeeDraftStore() {
   try {
@@ -2973,6 +3964,32 @@ function saveEmployeeDraft(payload) {
 
 function clearEmployeeDraft() {
   localStorage.removeItem(EMPLOYEE_DRAFT_KEY);
+}
+
+function loadPendingManualEntries() {
+  try {
+    const value = JSON.parse(localStorage.getItem(PENDING_MANUAL_KEY) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
+
+function savePendingManualEntries() {
+  localStorage.setItem(PENDING_MANUAL_KEY, JSON.stringify(state.pendingManualEntries || []));
+}
+
+function currentCalculationEmployeeId() {
+  return String(
+    state.employeeCalculationInputs?.employee_id ||
+    document.querySelector("#employeeCalculationForm")?.elements?.employee_id?.value ||
+    loadEmployeeDraftStore().currentEmployeeId ||
+    ""
+  );
+}
+
+function defaultManualEmployeeId() {
+  return String(state.manualEmployeeId || currentCalculationEmployeeId() || state.employees[0]?.id || "");
 }
 
 function blankEmployeeCalculationInputs(employeeId = "") {
@@ -3017,6 +4034,7 @@ function qs(filters = state.filters) {
 }
 
 async function bootstrap() {
+  applyTheme();
   const access = await fetch("/api/access-required").then(r => r.json());
   state.accessRequired = access.required;
   if (state.accessRequired && !state.accessCode) {
@@ -3032,7 +4050,9 @@ async function bootstrap() {
   state.projects = projects.items;
   state.reasons = reasons.items;
   state.selectedReason = state.reasons[0];
+  state.pendingManualEntries = loadPendingManualEntries();
   state.employeeCalculationInputs = loadEmployeeDraft();
+  state.manualEmployeeId = currentCalculationEmployeeId() || state.employees[0]?.id || "";
   await refreshRecords(false);
   await refreshStats(false);
   if (state.employeeCalculationInputs) {
@@ -3070,6 +4090,7 @@ async function submitAccess(event) {
 }
 
 function renderAccess() {
+  applyTheme();
   document.querySelector("#app").innerHTML = `
     <div class="access-shell">
       <form class="access-box" onsubmit="submitAccess(event)">
@@ -3121,6 +4142,145 @@ function startAutoRefresh() {
 function updateRefreshBadge() {
   const badge = document.querySelector(".local-badge");
   if (badge) badge.textContent = `自动刷新${state.lastRefreshAt ? " · " + state.lastRefreshAt : ""}`;
+}
+
+function applyTheme() {
+  document.documentElement.dataset.theme = state.theme === "dark" ? "dark" : "light";
+}
+
+function toggleTheme() {
+  state.theme = state.theme === "dark" ? "light" : "dark";
+  localStorage.setItem("rp_theme_2026_07", state.theme);
+  applyTheme();
+  render();
+}
+
+function loadFloatingNavPosition() {
+  try {
+    const value = JSON.parse(localStorage.getItem(FLOATING_NAV_POSITION_KEY) || "null");
+    if (!value || !Number.isFinite(value.left) || !Number.isFinite(value.top)) return null;
+    return value;
+  } catch {
+    return null;
+  }
+}
+
+function floatingNavStyle() {
+  const position = loadFloatingNavPosition();
+  if (!position) return "";
+  const left = Math.max(8, Math.min(position.left, window.innerWidth - 190));
+  const top = Math.max(8, Math.min(position.top, window.innerHeight - 220));
+  return `style="left:${left}px;top:${top}px;right:auto;bottom:auto;"`;
+}
+
+function setFloatingActive(ids = []) {
+  const active = new Set(ids);
+  document.querySelectorAll(".floating-nav-links button[data-target]").forEach(button => {
+    button.classList.toggle("active", active.has(button.dataset.target));
+  });
+}
+
+function jumpToSection(id) {
+  const target = document.querySelector(`#${id}`);
+  if (!target) return;
+  setFloatingActive([id]);
+  state.floatingManualUntil = Date.now() + 900;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  target.classList.add("section-focus-pulse");
+  setTimeout(() => target.classList.remove("section-focus-pulse"), 950);
+}
+
+function updateFloatingArea() {
+  if (!document.querySelector(".floating-navigator")) return;
+  if (state.floatingManualUntil && Date.now() < state.floatingManualUntil) return;
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 800;
+  const visible = FLOATING_NAV_LINKS
+    .map(([id]) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      const visibleHeight = Math.max(0, Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0));
+      const topDistance = rect.top >= 0 ? Math.abs(rect.top - 72) : Math.abs(rect.bottom - 72);
+      return { id, visibleHeight, topDistance, top: rect.top, bottom: rect.bottom };
+    })
+    .filter(Boolean)
+    .filter(item => item.visibleHeight > 48 || (item.top <= 120 && item.bottom > 72))
+    .sort((a, b) => a.topDistance - b.topDistance || b.visibleHeight - a.visibleHeight)
+    .slice(0, window.innerWidth >= 980 ? 2 : 1)
+    .map(item => item.id);
+  setFloatingActive(visible.length ? visible : ["section-top"]);
+}
+
+function handleFloatingSummaryClick(event) {
+  if (state.floatingSuppressClick) {
+    event.preventDefault();
+    state.floatingSuppressClick = false;
+  }
+}
+
+function startFloatingDrag(event) {
+  if (event.button !== 0 || event.target.closest("button")) return;
+  const nav = event.currentTarget;
+  const rect = nav.getBoundingClientRect();
+  const drag = {
+    pointerId: event.pointerId,
+    startX: event.clientX,
+    startY: event.clientY,
+    startLeft: rect.left,
+    startTop: rect.top,
+    moved: false,
+  };
+  state.floatingDrag = drag;
+  nav.classList.add("is-dragging");
+  nav.setPointerCapture?.(event.pointerId);
+}
+
+function moveFloatingDrag(event) {
+  const drag = state.floatingDrag;
+  if (!drag || drag.pointerId !== event.pointerId) return;
+  const nav = document.querySelector(".floating-navigator");
+  if (!nav) return;
+  const dx = event.clientX - drag.startX;
+  const dy = event.clientY - drag.startY;
+  if (Math.abs(dx) + Math.abs(dy) > 4) {
+    drag.moved = true;
+    state.floatingSuppressClick = true;
+  }
+  if (!drag.moved) return;
+  event.preventDefault();
+  const rect = nav.getBoundingClientRect();
+  const left = Math.max(8, Math.min(drag.startLeft + dx, window.innerWidth - rect.width - 8));
+  const top = Math.max(8, Math.min(drag.startTop + dy, window.innerHeight - rect.height - 8));
+  nav.style.left = `${left}px`;
+  nav.style.top = `${top}px`;
+  nav.style.right = "auto";
+  nav.style.bottom = "auto";
+}
+
+function endFloatingDrag(event) {
+  const drag = state.floatingDrag;
+  if (!drag || drag.pointerId !== event.pointerId) return;
+  const nav = document.querySelector(".floating-navigator");
+  if (nav) {
+    nav.classList.remove("is-dragging");
+    nav.releasePointerCapture?.(event.pointerId);
+    if (drag.moved) {
+      const rect = nav.getBoundingClientRect();
+      localStorage.setItem(FLOATING_NAV_POSITION_KEY, JSON.stringify({ left: Math.round(rect.left), top: Math.round(rect.top) }));
+    }
+  }
+  state.floatingDrag = null;
+}
+
+function writeLedgerFromNavigator() {
+  const button = document.querySelector(".floating-write-btn");
+  if (button) button.blur();
+  if (!state.employeeCalculation?.items?.length) {
+    alert("当前没有可写入的核算结果。请先填写投顾或 T0 信息。");
+    jumpToSection("section-result");
+    return;
+  }
+  applyEmployeeCalculation();
 }
 
 function resetWorkingCalculations() {
@@ -3310,7 +4470,6 @@ function customerRowsFromForm(form, kind) {
           new_orders: Number(row.querySelector("[data-ia-new-orders]")?.value || 0),
           withdrawn_orders: Number(row.querySelector("[data-ia-withdrawn-orders]")?.value || 0),
           service_mature: row.querySelector("[data-ia-mature]")?.checked !== false,
-          is_effective: row.querySelector("[data-ia-effective]")?.checked !== false,
         }
       : {
           is_effective: row.querySelector("[data-t0-effective]")?.checked === true,
@@ -3321,7 +4480,7 @@ function customerRowsFromForm(form, kind) {
 
 function legacyCustomerRows(values, maturityValues, kind) {
   return (values || []).map((value, index) => kind === "ia"
-    ? { label: `客户${index + 1}`, revenue: Number(value || 0), new_orders: 0, withdrawn_orders: 0, is_new: true, is_effective: true, service_mature: maturityValues?.[index] !== false }
+    ? { label: `客户${index + 1}`, revenue: Number(value || 0), new_orders: 0, withdrawn_orders: 0, is_new: true, service_mature: maturityValues?.[index] !== false }
     : { label: `客户${index + 1}`, volume: Number(value || 0), is_new: true, is_effective: false });
 }
 
@@ -3341,9 +4500,10 @@ function renderCustomerInputs(customers, count, kind) {
     const status = `<select data-${kind}-new><option value="true" ${isNew ? "selected" : ""}>新增</option><option value="false" ${!isNew ? "selected" : ""}>原有</option></select>`;
     const maturity = isIa ? `<div class="option-with-note"><label class="mature-check"><input type="checkbox" data-ia-mature ${customer.service_mature !== false ? "checked" : ""} /><span>满1月</span></label><details class="option-note"><summary>说明</summary><p>7月上海分公司投顾新增激励适用：未满 1 个月时，“新增客户数激励”和“创收激励”本次各发 50%，剩余部分 8 月 31 日复核。</p></details></div>` : "";
     const orderInputs = isIa ? `<label>新增订单<input data-ia-new-orders type="number" min="0" step="1" value="${Number(customer.new_orders || 0)}" /></label><label>撤单<input data-ia-withdrawn-orders type="number" min="0" step="1" value="${Number(customer.withdrawn_orders || 0)}" /></label>` : "";
+    const t0Note = `<details class="option-note t0-inline-note"><summary>说明</summary><p>新增客户有交易量才拿上海分公司基础50；原有客户本月达有效户只算有效户阶梯。</p></details>`;
     const meta = isIa
-      ? `<div class="customer-meta"><label>口径${status}</label>${maturity}<label class="effective-check"><input type="checkbox" data-ia-effective ${customer.is_effective !== false ? "checked" : ""} /><span>新增投顾有效户</span></label></div>`
-      : `<div class="customer-meta"><label>口径${status}</label><label class="effective-check"><input type="checkbox" data-t0-effective ${isEffective ? "checked" : ""} /><span>新增T0有效户</span></label><small>新增客户有交易量才拿上海分公司基础50；原有客户本月达有效户只算有效户阶梯。</small></div>`;
+      ? `<div class="customer-meta"><label>口径${status}</label>${maturity}</div>`
+      : `<div class="customer-meta"><label>口径${status}</label><label class="effective-check"><input type="checkbox" data-t0-effective ${isEffective ? "checked" : ""} /><span>新增T0有效户</span></label>${t0Note}</div>`;
     return `<div class="field compact-money-field customer-row ${isIa ? "ia-customer-row" : "t0-customer-row"}" data-${kind}-customer><label>客户标识<input data-${kind}-label value="${label}" placeholder="客户${index + 1}" /></label><label>客户${index + 1}${isIa ? "创收（元）" : "交易量（万元）"}<input data-${kind}-${isIa ? "revenue" : "volume"} type="number" min="0" step="${amountStep}" value="${isEffective && !isIa ? "" : displayAmount}" ${isEffective && !isIa ? "disabled" : ""} /></label>${isIa ? orderInputs : ""}${meta}</div>`;
   }).join("");
 }
@@ -3371,6 +4531,7 @@ function setupEmployeeAutoPreview() {
     if (event.target?.name === "employee_id") {
       const employeeId = event.target.value || "";
       state.employeeCalculationInputs = loadEmployeeDraft(employeeId) || blankEmployeeCalculationInputs(employeeId);
+      state.manualEmployeeId = employeeId;
       state.employeeCalculation = null;
       render();
       setTimeout(() => scheduleEmployeePreview(0), 0);
@@ -3518,13 +4679,23 @@ async function ensureEmployeeByName(name) {
 async function applyEmployeeCalculation() {
   const form = document.querySelector("#employeeCalculationForm");
   if (!form || !state.employeeCalculation?.items?.length) return;
-  if (!confirm("写入后会覆盖该员工上一版自动核算结果，手工更正不受影响。确认写入台账吗？")) return;
+  const payload = state.employeeCalculationInputs || employeeCalculationPayload(form);
+  const employeeId = String(payload.employee_id || "");
+  const pendingForEmployee = (state.pendingManualEntries || []).filter(item => String(item.employee_id) === employeeId);
+  if (!confirm(`写入后会覆盖该员工上一版自动核算结果${pendingForEmployee.length ? `，并一并写入 ${pendingForEmployee.length} 条暂存手工更正` : ""}。确认写入台账吗？`)) return;
   try {
     const result = await api("/api/calculations/employee-apply", {
-      method: "POST", body: JSON.stringify(state.employeeCalculationInputs || employeeCalculationPayload(form)),
+      method: "POST", body: JSON.stringify(payload),
     });
+    for (const manual of pendingForEmployee) {
+      await api("/api/records", { method: "POST", body: JSON.stringify(manual) });
+    }
+    if (pendingForEmployee.length) {
+      state.pendingManualEntries = state.pendingManualEntries.filter(item => String(item.employee_id) !== employeeId);
+      savePendingManualEntries();
+    }
     state.employeeCalculation = result.calculation;
-    state.flashMessage = result.message || `已覆盖旧自动核算，并写入 ${result.ids.length} 条新版记录。`;
+    state.flashMessage = result.message || `已覆盖旧自动核算，并写入 ${result.ids.length} 条新版记录${pendingForEmployee.length ? `；同时写入 ${pendingForEmployee.length} 条手工更正` : ""}。`;
     await refreshRecords(false);
     await refreshStats(false);
     render();
@@ -3589,13 +4760,17 @@ function selectReason(code) {
   render();
 }
 
+function setManualEmployee(value) {
+  state.manualEmployeeId = value || "";
+}
+
 function calculationInputLabel(reason) {
-  if (reason?.code?.startsWith("IA_HIDDEN_")) return "获奖人数/次数";
+  if (reason?.code?.startsWith("IA_HIDDEN_")) return "";
   return ["MANUAL_CONFIRMED_REWARD", "MANUAL_CONFIRMED_DEDUCTION"].includes(reason?.code) ? "已核定金额" : "计奖数量";
 }
 
 function manualEntryHelp(reason) {
-  if (reason?.code?.startsWith("IA_HIDDEN_")) return "上海分公司投顾隐性奖金；仅在正式排名或统计表确认后录入，数量通常填 1。";
+  if (reason?.code?.startsWith("IA_HIDDEN_")) return "上海分公司投顾参考项；按一次获奖暂存，写入台账后归入上海分公司投顾参考项。";
   if (reason?.code === "MANUAL_CONFIRMED_REWARD") return "填正式统计表已确认的金额，例如排名、下午茶、联络员或后续发文奖励。";
   if (reason?.code === "MANUAL_CONFIRMED_DEDUCTION") return "填财务已确认需要扣回或冲减的金额，不要用于重复扣自动规则。";
   return "日常投顾/T0/剥离请使用上方自动核算，不建议手工补录。";
@@ -3616,11 +4791,15 @@ function previewCalculation() {
   const output = document.querySelector("#calculationPreview");
   if (!form || !output || !state.selectedReason) return;
   const r = state.selectedReason;
-  const value = Number(form.calculation_input.value || 0);
+  const value = r.code?.startsWith("IA_HIDDEN_") ? 1 : Number(form.calculation_input?.value || 0);
   if (["MANUAL_CONFIRMED_REWARD", "MANUAL_CONFIRMED_DEDUCTION"].includes(r.code)) {
     const amount = Math.max(0, value);
     form.amount.value = amount;
     output.textContent = `按已核定金额入账：${amount} 元`;
+  } else if (r.code?.startsWith("IA_HIDDEN_")) {
+    const amount = Number(r.default_amount || 0);
+    form.amount.value = amount;
+    output.textContent = `按一次获奖暂存：${money(amount)} 元`;
   } else if (Number(r.default_amount) > 0) {
     const amount = Number(r.default_amount) * Math.max(0, value);
     form.amount.value = amount;
@@ -3635,21 +4814,32 @@ async function saveRecord(event) {
   const form = new FormData(event.target);
   const payload = Object.fromEntries(form.entries());
   state.manualEmployeeId = payload.employee_id || state.manualEmployeeId;
-  payload.reason_code = state.selectedReason.code;
+  const r = state.selectedReason;
+  payload.reason_code = r.code;
   payload.occurred_at = payload.occurred_at ? new Date(payload.occurred_at).toISOString().slice(0, 19) : "";
+  const inputValue = r.code?.startsWith("IA_HIDDEN_") ? 1 : Math.max(0, Number(payload.calculation_input || 0));
+  payload.amount = r.code?.startsWith("IA_HIDDEN_")
+    ? Number(r.default_amount || 0)
+    : ["MANUAL_CONFIRMED_REWARD", "MANUAL_CONFIRMED_DEDUCTION"].includes(r.code)
+      ? inputValue
+      : Number(r.default_amount || 0) * inputValue;
+  delete payload.calculation_input;
   const msg = document.querySelector("#saveMessage");
   msg.textContent = "";
   msg.className = "";
   try {
-    await api("/api/records", { method: "POST", body: JSON.stringify(payload) });
-    state.flashMessage = "已保存，列表和统计已自动刷新。";
+    if (!Number(payload.amount || 0)) throw new Error("金额为0，未暂存。请填写有效金额或次数。");
+    state.pendingManualEntries.push({
+      ...payload,
+      pending_id: `manual-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    });
+    savePendingManualEntries();
+    state.flashMessage = "已暂存；点击右侧“写入台账”后，才会进入员工记录和 Excel。";
     const customerInput = event.target.querySelector("[name='customer_no']");
     const orderInput = event.target.querySelector("[name='order_no']");
     if (customerInput) customerInput.value = "";
     if (orderInput) orderInput.value = "";
     event.target.querySelector("[name='remark']").value = "";
-    await refreshRecords(false);
-    await refreshStats(false);
     render();
     setTimeout(() => scheduleEmployeePreview(0), 0);
   } catch (e) {
@@ -3677,6 +4867,9 @@ async function clearAllRecords() {
     const employees = await api("/api/employees");
     state.employees = employees.items;
     state.manualEmployeeId = "";
+    state.pendingManualEntries = [];
+    savePendingManualEntries();
+    localStorage.removeItem(FLOATING_NAV_POSITION_KEY);
     await refreshRecords(false);
     await refreshStats(false);
     resetWorkingCalculations();
@@ -3722,23 +4915,26 @@ async function applyFilters(event) {
 }
 
 function render({ scrollToTop = false } = {}) {
+  applyTheme();
   const scrollTop = window.scrollY;
   rememberExpandedPanels();
   document.querySelector("#app").innerHTML = `
     <div class="local-shell">
-      <header class="local-header">
+      <header class="local-header" id="section-top">
         <div>
           <h1>7月投顾与T0奖励惩罚核算台账</h1>
-          <p>水清南路营业部内部财务辅助工具：上海分公司投顾已按2026年7月新规则核算，T0与营业部规则暂沿用现有口径。</p>
+          <p>水清南路营业部内部财务辅助工具：营业部投顾、营业部T0、上海分公司投顾与T0均按当前7月口径核算。</p>
         </div>
         <div class="header-actions">
+          <button class="btn theme-toggle" type="button" onclick="toggleTheme()">${state.theme === "dark" ? "日间模式" : "夜间模式"}</button>
           <div class="local-badge">自动刷新${state.lastRefreshAt ? " · " + state.lastRefreshAt : ""}</div>
-          <a class="btn excel-btn header-export" href="/api/export.xlsx?${qs()}" onclick="return downloadFile(event, this, 'reward_penalty_records_2026_07.xlsx')">以 Excel 形式导出台账</a>
+          <a class="btn excel-btn header-export" id="section-export" href="/api/export.xlsx?${qs()}" onclick="return downloadFile(event, this, 'reward_penalty_records_2026_07.xlsx')">以 Excel 形式导出台账</a>
           <button class="btn header-clear" onclick="clearAllRecords()">清空全部数据</button>
         </div>
       </header>
 
       ${renderEntry()}
+      ${renderFloatingNavigator()}
     </div>
   `;
   requestAnimationFrame(() => {
@@ -3746,6 +4942,7 @@ function render({ scrollToTop = false } = {}) {
     setupNumberWheelGuard();
     setupOptionNoteGuard();
     window.scrollTo({ top: scrollToTop ? 0 : scrollTop, left: 0 });
+    updateFloatingArea();
   });
 }
 
@@ -3796,23 +4993,27 @@ function renderEntry() {
   return renderEmployeeCalculator();
 }
 
+function renderFloatingNavigator() {
+  return `
+    <details class="floating-navigator" open ${floatingNavStyle()} onpointerdown="startFloatingDrag(event)" onpointermove="moveFloatingDrag(event)" onpointerup="endFloatingDrag(event)" onpointercancel="endFloatingDrag(event)">
+      <summary onclick="handleFloatingSummaryClick(event)">区域</summary>
+      <div class="floating-nav-links">
+        ${FLOATING_NAV_LINKS.map(([id, label], index) => `<button type="button" data-target="${id}" class="${index === 0 ? "active" : ""}" onclick="jumpToSection('${id}')">${label}</button>`).join("")}
+      </div>
+      <button class="floating-write-btn" type="button" onclick="writeLedgerFromNavigator()">写入台账</button>
+    </details>
+  `;
+}
+
 function renderLeftAuxiliaryPanels() {
   return `
-    <details class="manual-correction" data-panel="manual-correction" ${panelOpen("manual-correction")}><summary><span>手工更正</span><small>非日常使用</small></summary><p class="hint">自动能算的投顾、T0、剥离都不要在这里补录；这里只用于正式统计表确认的额外奖励或扣回金额。</p>${renderManualEntry()}</details>
+    <details class="manual-correction" id="section-manual" data-panel="manual-correction" ${panelOpen("manual-correction")}><summary><span>手工更正</span><small>非日常使用</small></summary><p class="hint">自动能算的投顾、T0、剥离都不要在这里补录；这里只用于正式统计表确认的额外奖励或扣回金额。</p>${renderManualEntry()}</details>
     ${renderInlineRules()}
-    ${renderRankingReference()}
   `;
 }
 
 function renderInlineRules() {
-  return `<details class="inline-rules" data-panel="inline-rules" ${panelOpen("inline-rules")}><summary><span>规则与口径说明</span><small>按正式文件核对</small></summary>${renderRules()}</details>`;
-}
-
-function renderRankingReference() {
-  return `<details class="reference-bonus"><summary>隐性/排名奖励参考</summary><div>
-    <p><strong>投顾单周订单竞赛：</strong>7月分为卓越奖和优胜奖。卓越奖门槛为每周至少新增5个客户编号并取前4名；优胜奖门槛为每周至少新增3个客户编号并取前15名。该项依赖上海分公司同周完整排名，本工具不自动计入正式合计。</p>
-    <p><strong>下午茶、优秀联络员：</strong>属于团队、排名或后续发文口径，营业部侧无法仅凭个人录入数据准确判断。正式统计表确认后，再用“手工更正”补录。</p>
-  </div></details>`;
+  return `<details class="inline-rules" id="section-rules" data-panel="inline-rules" ${panelOpen("inline-rules")}><summary><span>规则与口径说明</span><small>按正式文件核对</small></summary>${renderRules()}</details>`;
 }
 
 function renderAdvancedTools() {
@@ -3836,6 +5037,7 @@ function renderManualEntry() {
   const quickRules = groups.flatMap(group => group.items);
   const r = quickRules.find(x => x.code === state.selectedReason?.code) || quickRules[0] || {};
   if (r.code && state.selectedReason?.code !== r.code) state.selectedReason = r;
+  const isHiddenManual = r.code?.startsWith("IA_HIDDEN_");
   const defaultInputValue = r.code?.startsWith("IA_HIDDEN_") ? 1 : 0;
   const defaultAmountValue = r.code?.startsWith("IA_HIDDEN_") ? Number(r.default_amount || 0) : 0;
   const options = groups.map(group => `
@@ -3853,16 +5055,15 @@ function renderManualEntry() {
           <div class="grid manual-entry-grid">
             <div class="field">
               <label>员工</label>
-              <select name="employee_id" required>${employeeOptions(state.manualEmployeeId || state.employees[0]?.id, false)}</select>
+              <select name="employee_id" required onchange="setManualEmployee(this.value)">${employeeOptions(defaultManualEmployeeId(), false)}</select>
             </div>
             <div class="field">
               <label>规则</label>
               <select onchange="selectReason(this.value)">${options}</select>
             </div>
-            <div class="field">
-              <label>${calculationInputLabel(r)} <small class="field-help">${manualEntryHelp(r)}</small></label>
-              <input name="calculation_input" type="number" min="0" step="1" value="${defaultInputValue}" oninput="previewCalculation()" required />
-            </div>
+            ${isHiddenManual
+              ? `<div class="field manual-fixed-award"><label>入账方式 <small class="field-help">${manualEntryHelp(r)}</small></label><div class="fixed-award-box">按 1 次获奖暂存：<strong>${money(defaultAmountValue)} 元</strong></div><input name="calculation_input" type="hidden" value="1" /></div>`
+              : `<div class="field"><label>${calculationInputLabel(r)} <small class="field-help">${manualEntryHelp(r)}</small></label><input name="calculation_input" type="number" min="0" step="1" value="${defaultInputValue}" oninput="previewCalculation()" required /></div>`}
             <input name="amount" type="hidden" value="${defaultAmountValue}" />
             <input name="occurred_at" type="hidden" value="${new Date().toISOString().slice(0, 16)}" />
           </div>
@@ -3870,7 +5071,7 @@ function renderManualEntry() {
           <input name="order_no" type="hidden" />
           <input name="remark" type="hidden" value="" />
           <div class="quick-footer">
-            <button class="btn" type="submit">保存更正</button>
+            <button class="btn" type="submit">暂存更正</button>
             <span id="saveMessage" class="${state.flashMessage ? "success" : ""}">${state.flashMessage}</span>
           </div>
         </form>
@@ -3879,7 +5080,7 @@ function renderManualEntry() {
         <span class="tag ${r.type}">${r.type === "penalty" ? "惩罚" : "奖励"}</span>
         <strong>${r.category || "-"}</strong>
         <p>${r.rule_basis || ""}</p>
-        <small id="calculationPreview">${r.code?.startsWith("IA_HIDDEN_") ? `${money(r.default_amount)} × 1 = ${money(r.default_amount)} 元` : "按已核定金额入账：0 元"}</small>
+        <small id="calculationPreview">${r.code?.startsWith("IA_HIDDEN_") ? `上海分公司投顾参考项：按一次获奖暂存 ${money(r.default_amount)} 元` : "按已核定金额入账：0 元"}</small>
       </aside>
     </section>
 
@@ -3888,7 +5089,7 @@ function renderManualEntry() {
 
 function renderEmployeeRecordSection() {
   return `
-    <section class="section employee-record-section">
+    <section class="section employee-record-section" id="section-records">
       <div class="employee-record-heading">
         <div>
           <h2>查看员工记录</h2>
@@ -3961,17 +5162,17 @@ function renderEmployeeCalculator() {
   const t0CustomerCount = Math.min(Math.max(Number.isFinite(explicitT0Count) ? explicitT0Count : t0Customers.length || 0, 0), 100);
   const c = state.employeeCalculation;
   return `
-    <div class="calculation-workspace">
+    <div class="calculation-workspace" id="section-entry">
     <div class="calculation-input-pane">
     <section class="section calculator-intro">
       <h2>奖励核算</h2>
-      <p class="hint">投顾逐客户填入客户口径、新增有效户、创收、订单与撤单；T0 可录入新增或原有客户，交易量达到 200 万元（含）或确认新增有效户后计入有效户奖励。</p>
+      <p class="hint">投顾逐客户填入客户口径、创收、订单与撤单；T0 可录入新增或原有客户，交易量达到 200 万元（含）或确认新增有效户后计入有效户奖励。</p>
       <div class="example-actions"><button class="btn secondary" type="button" onclick="loadCalculationExample('mixed')">填入示例</button></div>
       <form id="employeeCalculationForm" novalidate onsubmit="previewEmployeeCalculation(event)">
         <div class="grid cols-4">
           <div class="field"><label>员工</label>${employeePicker("employee_id", value("employee_id"), "employeeCalculationForm")}</div>
         </div>
-        <div class="calculator-block">
+        <div class="calculator-block" id="section-ia-input">
           <h3>投顾资讯</h3>
           <div class="grid cols-4">
             <div class="field"><label>投顾客户数（含原有）</label><input name="ia_customer_count" type="number" min="0" max="100" step="1" value="${iaCustomerCount}" oninput="refreshEmployeeCustomerFields()" /></div>
@@ -3979,7 +5180,7 @@ function renderEmployeeCalculator() {
           <div class="check-row"><div class="option-with-note"><label class="compact-toggle"><input name="existing_orders_12_plus" type="checkbox" ${value("existing_orders_12_plus") !== "false" ? "checked" : ""} /><span>累计订单满12单</span></label><details class="option-note"><summary>说明</summary><p>上海分公司订单激励门槛。已知员工名下存量订单满12单就勾选；即使不勾选，只要本次“新增订单 - 撤单”的总净增达到12单，系统也会自动视为满足门槛。</p></details></div><div class="option-with-note"><label class="compact-toggle"><input name="no_first_half_effective_ia_order" type="checkbox" ${value("no_first_half_effective_ia_order") === "true" ? "checked" : ""} /><span>上半年未新增有效投顾订单</span></label><details class="option-note"><summary>说明</summary><p>7月订单破冰奖：上半年未新增过有效投顾订单的员工，本月新增任一投顾订单奖100元；若新增订单产生创收，再追加100元。</p></details></div></div>
           <div id="iaCustomerRevenueFields" class="grid cols-4 dynamic-customer-fields">${renderCustomerInputs(iaCustomers, iaCustomerCount, "ia")}</div>
         </div>
-        <div class="calculator-block">
+        <div class="calculator-block" id="section-t0-input">
           <h3>T0</h3>
           <div class="grid cols-4">
             <div class="field"><label>T0 客户数</label><input name="t0_customer_count" type="number" min="0" max="100" step="1" value="${t0CustomerCount}" oninput="refreshEmployeeCustomerFields()" /></div>
@@ -3992,7 +5193,7 @@ function renderEmployeeCalculator() {
     </section>
     ${renderLeftAuxiliaryPanels()}
     </div>
-    <aside class="calculation-output-pane">
+    <aside class="calculation-output-pane" id="section-result">
       ${c ? renderEmployeeCalculationResult(c) : renderCalculationEmptyState()}
     </aside>
     </div>
@@ -4016,7 +5217,7 @@ function renderCalculationEmptyState() {
 function renderInlineLedgerExport() {
   const s = state.stats?.summary || {};
   return `
-    <section class="section inline-ledger-export">
+    <section class="section inline-ledger-export" id="section-export">
       <div>
         <h2>台账导出</h2>
         <p class="hint">导出 Excel。第一张表是员工汇总，后续按员工分别生成核算结果与计算过程。</p>
@@ -4039,17 +5240,47 @@ function currentEmployeeManualTotals() {
     !["cancelled", "clawed_back"].includes(item.status) &&
     item.settlement === "manual"
   );
+  const staged = (state.pendingManualEntries || [])
+    .filter(item => String(item.employee_id || "") === employeeId)
+    .map(item => {
+      const reason = state.reasons.find(r => r.code === item.reason_code) || {};
+      return {
+        ...item,
+        type: reason.type || "reward",
+        amount_type: reason.amount_type || "money",
+        payable_amount: Number(item.amount || 0),
+      };
+    });
+  const allManual = [...active, ...staged];
+  const isHiddenReference = item => item.reason_code?.startsWith("IA_HIDDEN_");
   const extraReward = active
+    .filter(item => item.type === "reward")
+    .reduce((sum, item) => sum + Number(item.payable_amount ?? item.amount ?? 0), 0);
+  const stagedReward = staged
     .filter(item => item.type === "reward")
     .reduce((sum, item) => sum + Number(item.payable_amount ?? item.amount ?? 0), 0);
   const deduction = active
     .filter(item => item.type === "penalty" && item.amount_type === "money")
     .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+  const stagedDeduction = staged
+    .filter(item => item.type === "penalty" && item.amount_type === "money")
+    .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+  const referenceReward = allManual
+    .filter(item => isHiddenReference(item) && item.type === "reward")
+    .reduce((sum, item) => sum + Number(item.payable_amount ?? item.amount ?? 0), 0);
+  const confirmedReward = allManual
+    .filter(item => !isHiddenReference(item) && item.type === "reward")
+    .reduce((sum, item) => sum + Number(item.payable_amount ?? item.amount ?? 0), 0);
   return {
-    extraReward,
-    deduction,
-    netAdjustment: extraReward - deduction,
-    hasAdjustment: extraReward > 0 || deduction > 0,
+    extraReward: extraReward + stagedReward,
+    deduction: deduction + stagedDeduction,
+    referenceReward,
+    confirmedReward,
+    stagedReward,
+    stagedDeduction,
+    stagedCount: staged.length,
+    netAdjustment: extraReward + stagedReward - deduction - stagedDeduction,
+    hasAdjustment: allManual.length > 0,
   };
 }
 
@@ -4070,8 +5301,9 @@ function renderEmployeeCalculationResult(c) {
   }
   const processGroup = item => {
   if (item.reason_code === "IA_BRANCH_ORDER_NET_INCREASE") return "订单净增";
-  if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_EFFECTIVE_BASE", "IA_DEPT_STAGE_TARGET_EXTRA"].includes(item.reason_code)) return "新增户数";
-  if (item.reason_code?.startsWith("IA_BRANCH_REVENUE_") || item.reason_code === "IA_DEPT_REVENUE_EXTRA") return "创收追加";
+  if (["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_CUSTOMER_BASE"].includes(item.reason_code)) return "新增户数";
+  if (item.reason_code?.startsWith("IA_BRANCH_REVENUE_") || ["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(item.reason_code)) return "创收追加";
+  if (item.reason_code?.startsWith("IA_DEPT_REVENUE_INCREMENT_")) return "创收增量";
   if (item.reason_code?.startsWith("IA_BRANCH_ICEBREAK_")) return "破冰奖";
     if (item.reason_code === "T0_BRANCH_OPEN_AND_TRADE") return "T0基础";
     if (["T0_BRANCH_VOLUME_50_100", "T0_BRANCH_VOLUME_100_200"].includes(item.reason_code)) return "交易补充";
@@ -4080,11 +5312,11 @@ function renderEmployeeCalculationResult(c) {
     if (item.reason_code?.startsWith("PENALTY_")) return "剥离";
     return "其他";
   };
-  const groupOrder = { "订单净增": 1, "新增户数": 2, "创收追加": 3, "破冰奖": 4, "T0基础": 5, "交易补充": 6, "T0有效户": 7, "剥离": 8, "其他": 9 };
+  const groupOrder = { "订单净增": 1, "新增户数": 2, "创收追加": 3, "创收增量": 4, "破冰奖": 5, "T0基础": 6, "交易补充": 7, "T0有效户": 8, "剥离": 9, "其他": 10 };
   const sortedItems = items => [...items].sort((a, b) => (groupOrder[processGroup(a)] || 9) - (groupOrder[processGroup(b)] || 9));
   const table = (items, empty, mode = "simple") => {
     const withPending = mode === "pending";
-    return `<div class="table-wrap detail-table ${withPending ? "has-pending" : "simple-detail"}"><table><thead><tr><th>分组</th><th>规则</th><th>应发</th>${withPending ? "<th>本次<br>可发</th><th>待复核</th>" : ""}<th>计算过程（按规则）</th></tr></thead><tbody>${sortedItems(items).map(item => `<tr class="process-row process-${processGroup(item)}"><td><span class="process-chip">${processGroup(item)}</span></td><td>${item.reason_name}</td><td><strong>${money(item.amount)} ${item.reason_code === "PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION" ? "户" : "元"}</strong></td>${withPending ? `<td><strong>${money(item.payable_amount ?? item.amount)} 元</strong></td><td class="pending-cell">${Number(item.pending_amount || 0) ? `<strong><span>待复核</span><span>${money(item.pending_amount)} 元</span></strong>` : "-"}</td>` : ""}<td class="calculation-detail"><span>${item.calculation_detail}</span></td></tr>`).join("") || `<tr><td colspan="${withPending ? 6 : 4}">${empty}</td></tr>`}</tbody></table></div>`;
+    return `<div class="table-wrap detail-table ${withPending ? "has-pending" : "simple-detail"}"><table><thead><tr><th>分组</th><th>规则</th><th>应发</th>${withPending ? "<th>本次<br>可发</th><th>待复核</th>" : ""}<th>计算过程（按规则）</th></tr></thead><tbody>${sortedItems(items).map(item => `<tr class="process-row process-${processGroup(item)}"><td><span class="process-chip">${processGroup(item)}</span></td><td>${item.reason_name}</td><td><strong>${money(item.amount)} ${item.reason_code === "PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION" ? "户" : "元"}</strong></td>${withPending ? `<td><strong>${money(item.payable_amount ?? item.amount)} 元</strong></td><td class="pending-cell">${Number(item.pending_amount || 0) ? `<strong>待复核 ${money(item.pending_amount)} 元</strong>` : "-"}</td>` : ""}<td class="calculation-detail"><span>${item.calculation_detail}</span></td></tr>`).join("") || `<tr><td colspan="${withPending ? 6 : 4}">${empty}</td></tr>`}</tbody></table></div>`;
   };
   const branch = c.items.filter(item => item.record_source === "branch");
   const department = c.items.filter(item => item.record_source === "department" && item.reason_code !== "PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION");
@@ -4114,33 +5346,33 @@ function renderEmployeeCalculationResult(c) {
   const manual = currentEmployeeManualTotals();
   const payableNet = Number(c.summary.payable_amount || 0) + manual.extraReward - manual.deduction;
   const scoreNote = s.is_calculated
-    ? `营业部投顾得分：新增投顾有效户 ${s.new_customers} 户 + 有创收新增投顾有效户 ${s.revenue_customers} 户 × 0.5 = 折算 ${money(s.weighted_customers)} 户；签约得分 ${money(s.sign_score)} 分，创收 ${money(s.ia_revenue)} 元 / 2000 × 5 = ${money(s.revenue_score)} 分，总分 ${money(s.total_score)} 分。`
+    ? `营业部投顾得分：新增投顾客户 ${s.new_customers} 户 + 有创收新增投顾客户 ${s.revenue_customers} 户 × 0.5 = 折算 ${money(s.weighted_customers)} 户；签约得分 ${money(s.sign_score)} 分，创收 ${money(s.ia_revenue)} 元 / 4000 × 5 = ${money(s.revenue_score)} 分${s.revenue_score_capped ? "（创收未超1万元，按8分封顶）" : ""}，总分 ${money(s.total_score)} 分。`
     : "本次未录入投顾客户，因此不判断投顾10分目标和客户剥离。";
   const penaltyNote = s.is_calculated
-    ? (s.reallocation_customers > 0 ? `剥离规则：先算差值 10 - ${money(s.total_score)} = ${money(Math.max(0, 10 - Number(s.total_score || 0)))}，再对差值向上取整为 ${money(s.reallocation_customers)} 户；例如9.5分差0.5，剥离1户。` : "剥离规则：总分达到或超过10分，本次不产生客户剥离。")
+    ? (s.reallocation_customers > 0 ? `剥离规则：总分 ${money(s.total_score)} 分，取整数档 ${Math.floor(Number(s.total_score || 0))} 分；距10分差 ${Math.max(0, 10 - Math.floor(Number(s.total_score || 0)))} 档，每档剥离2户，共 ${money(s.reallocation_customers)} 户。` : "剥离规则：总分达到或超过10分，本次不产生客户剥离。")
     : "T0奖励不影响投顾阶段得分。";
   const sideNotes = [
     ["营业部得分", scoreNote],
     ["剥离口径", penaltyNote]
   ];
   const manualCard = manual.hasAdjustment
-    ? `<div class="manual-card"><span>手工更正</span><strong>${manual.netAdjustment >= 0 ? "+" : ""}${money(manual.netAdjustment)} 元<small>额外奖励 +${money(manual.extraReward)}；扣回 -${money(manual.deduction)}</small></strong></div>`
-    : `<div class="manual-card muted"><span>手工更正</span><strong>暂无<small>左侧保存后进入 Excel 和净值</small></strong></div>`;
+    ? `<div class="manual-card"><span>补录项目</span><strong>${manual.netAdjustment >= 0 ? "+" : ""}${money(manual.netAdjustment)} 元<small>上海分公司参考项 +${money(manual.referenceReward)}；手工额外 +${money(manual.confirmedReward)}；扣回 -${money(manual.deduction)}${manual.stagedCount ? `；暂存 ${manual.stagedCount} 条，写入台账后进 Excel` : ""}</small></strong></div>`
+    : `<div class="manual-card muted"><span>手工更正</span><strong>暂无<small>左侧暂存后会先进入当前净值，写入台账后进入 Excel</small></strong></div>`;
   const penaltyBlock = "";
   return `
     <section class="section calculation-result">
       <div class="entry-title-row"><div><h2>核算结果</h2><p class="hint ledger-write-callout">确认写入台账后，顶部导出的 Excel 才会包含本次结果</p></div>${c.items.length ? `<button class="btn excel-btn" type="button" onclick="applyEmployeeCalculation()">写入台账</button>` : ""}</div>
-      <div class="customer-scope">投顾：共 ${s.ia_total_customers || 0} 户，其中客户口径新增 ${s.ia_new_customers || 0} 户、原有 ${s.ia_old_customers || 0} 户，新增投顾有效户 ${s.new_customers || 0} 户，订单净增 ${money(s.net_order_increase)} 单${s.order_threshold_met ? `（${s.order_threshold_basis || "已满足12单门槛"}）` : "（未满足12单门槛）"}；T0：本次录入 ${s.t0_customers ?? s.t0_new_customers ?? 0} 户，其中客户口径新增 ${s.t0_new_customers || 0} 户，新增T0有效户 ${s.t0_effective_customers || 0} 户。</div>
+      <div class="customer-scope">投顾：共 ${s.ia_total_customers || 0} 户，其中新增 ${s.ia_new_customers || 0} 户、原有 ${s.ia_old_customers || 0} 户，订单净增 ${money(s.net_order_increase)} 单${s.order_threshold_met ? `（${s.order_threshold_basis || "已满足12单门槛"}）` : "（未满足12单门槛）"}；T0：本次录入 ${s.t0_customers ?? s.t0_new_customers ?? 0} 户，其中客户口径新增 ${s.t0_new_customers || 0} 户，新增T0有效户 ${s.t0_effective_customers || 0} 户。</div>
       <div class="result-topline">
         <div>
-          ${s.is_calculated ? `<div class="process-label">营业部投顾得分计算过程（按营业部规则）</div><div class="score-grid"><div><span>签约得分</span><strong>${money(s.sign_score)} <small>${s.new_customers} 户新增投顾有效户 + ${s.revenue_customers} 户有创收新增投顾有效户 × 0.5 = 折算 ${money(s.weighted_customers)} 户；${money(s.weighted_customers)} / 5 户 × 5 分</small></strong></div><div><span>创收得分</span><strong>${money(s.revenue_score)} <small>${money(s.ia_revenue)} / 2,000 元 × 5 分</small></strong></div><div><span>阶段总分</span><strong>${money(s.total_score)} <small>签约得分 + 创收得分；目标10分，不封顶</small></strong></div><div><span>需剥离客户</span><strong>${money(s.reallocation_customers)} 户</strong></div></div>` : `<div class="score-not-ready">本次未填写投顾客户，仅核算已录入的 T0 奖励；投顾阶段得分和客户剥离不作判断。</div>`}
+          ${s.is_calculated ? `<div class="process-label">营业部投顾得分计算过程（按营业部规则）</div><div class="score-grid"><div><span>签约得分</span><strong>${money(s.sign_score)} <small>${s.new_customers} 户新增投顾客户 + ${s.revenue_customers} 户有创收新增客户 × 0.5 = 折算 ${money(s.weighted_customers)} 户；${money(s.weighted_customers)} / 5 户 × 5 分</small></strong></div><div><span>创收得分</span><strong>${money(s.revenue_score)} <small>${money(s.ia_revenue)} / 4,000 元 × 5 分${s.revenue_score_capped ? "；创收未超1万元，按8分封顶" : "；创收超1万元不封顶"}</small></strong></div><div><span>阶段总分</span><strong>${money(s.total_score)} <small>签约得分 + 创收得分；目标10分</small></strong></div><div><span>需剥离客户</span><strong>${money(s.reallocation_customers)} 户<small>不足10分时按整数档差距，每档2户</small></strong></div></div>` : `<div class="score-not-ready">本次未填写投顾客户，仅核算已录入的 T0 奖励；投顾阶段得分和客户剥离不作判断。</div>`}
           <div class="source-summary"><div><span>营业部本次可发</span><strong>${money(departmentPayableTotal)} 元<small>投顾 ${money(departmentIaPayableTotal)} + T0 ${money(departmentT0PayableTotal)}</small></strong></div><div class="branch-payable-card"><span>上海分公司本次可发</span><strong>${money(branchPayableTotal)} 元<small>应发 ${money(branchTotal)}；${branchPendingTotal ? `<b>待复核 ${money(branchPendingTotal)} 元</b>；` : ""}投顾 ${money(branchIaPayableTotal)} + T0 ${money(branchT0PayableTotal)}</small></strong></div><div class="total"><span>营业部与上海分公司可发合计</span><strong>${money(c.summary.payable_amount)} 元<small>应发 ${money(c.summary.gross_amount)} 元${c.summary.pending_amount ? `；<b>待复核 ${money(c.summary.pending_amount)} 元</b>` : ""}</small></strong></div></div>
           <div class="adjustment-summary bonus-summary">${manualCard}<div><span>最终奖金净值</span><strong>${money(payableNet)} 元<small>本次可发 + 手工更正</small></strong></div></div>
         </div>
       </div>
       ${c.warnings?.length ? `<div class="warning-box">${c.warnings.map(x => `<p>${x}</p>`).join("")}</div>` : ""}
       ${penaltyBlock}
-      <details class="calculation-process" open><summary>计算过程（可收起）</summary>
+      <details class="calculation-process" id="section-process" open><summary>计算过程（可收起）</summary>
       <h3>营业部奖励</h3>
       <h4 class="result-subheading">投顾</h4>${table(departmentIa, "本次没有营业部投顾奖励。")}<div class="calculation-subtotal"><span>营业部投顾小计</span><strong>${money(departmentIaTotal)} 元</strong></div>
       <h4 class="result-subheading">T0</h4>${table(departmentT0, "本次没有营业部T0奖励。")}<div class="calculation-subtotal"><span>营业部T0小计</span><strong>${money(departmentT0Total)} 元</strong></div>
@@ -4315,6 +5547,7 @@ function employeeRecordPanels(employees, records) {
       { title: "营业部T0", filter: r => recordSourceName(r) === "营业部" && recordBusinessName(r) === "T0" },
       { title: "上海分公司投顾", filter: r => recordSourceName(r) === "上海分公司" && recordBusinessName(r) === "投顾" },
       { title: "上海分公司T0", filter: r => recordSourceName(r) === "上海分公司" && recordBusinessName(r) === "T0" },
+      { title: "上海分公司投顾参考项", filter: r => recordSourceName(r) === "上海分公司" && recordBusinessName(r) === "投顾参考项" },
       { title: "手工更正", filter: r => recordSourceName(r) === "手工更正" || recordBusinessName(r) === "手工更正" },
     ];
     return `<div class="employee-record-groups">${groups.map(group => {
@@ -4345,13 +5578,18 @@ function ruleDictionaryGroups() {
   return [
     {
       title: "营业部 · 投顾",
-      note: "员工奖励、得分和剥离放在同一组看。",
-      codes: ["IA_DEPT_NEW_EFFECTIVE_BASE", "IA_DEPT_STAGE_TARGET_EXTRA", "IA_DEPT_REVENUE_EXTRA", "PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION"],
+      note: "新增客户、创收分档和创收增量。",
+      codes: ["IA_DEPT_NEW_CUSTOMER_BASE", "IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS", "IA_DEPT_REVENUE_INCREMENT_5000", "IA_DEPT_REVENUE_INCREMENT_10000", "IA_DEPT_REVENUE_INCREMENT_15000"],
     },
     {
       title: "营业部 · T0",
       note: "只看新增T0有效户，交易量达到200万元（含）或确认有效户才算有效。",
       codes: ["T0_DEPT_NEW_EFFECTIVE"],
+    },
+    {
+      title: "营业部 · 剥离",
+      note: "投顾得分不足10分时按整数档剥离。",
+      codes: ["PENALTY_SCORE_BELOW_TARGET_CUSTOMER_REALLOCATION"],
     },
     {
       title: "上海分公司 · 投顾",
@@ -4364,20 +5602,30 @@ function ruleDictionaryGroups() {
       codes: ["T0_BRANCH_OPEN_AND_TRADE", "T0_BRANCH_VOLUME_50_100", "T0_BRANCH_VOLUME_100_200", "T0_BRANCH_EFFECTIVE_COUNT_1", "T0_BRANCH_EFFECTIVE_COUNT_2", "T0_BRANCH_EFFECTIVE_COUNT_3", "T0_BRANCH_EFFECTIVE_COUNT_4_PLUS"],
     },
     {
-      title: "手工/参考项",
-      note: "排名、联络员、下午茶和创收破冰前50等奖励，只在正式统计表确认金额后补录。",
-      codes: ["IA_HIDDEN_WEEKLY_EXCELLENCE_1", "IA_HIDDEN_WEEKLY_EXCELLENCE_2", "IA_HIDDEN_WEEKLY_EXCELLENCE_3", "IA_HIDDEN_WEEKLY_EXCELLENCE_4", "IA_HIDDEN_WEEKLY_WIN_1", "IA_HIDDEN_WEEKLY_WIN_2", "IA_HIDDEN_WEEKLY_WIN_3_6", "IA_HIDDEN_WEEKLY_WIN_7_15", "IA_HIDDEN_REVENUE_ICEBREAK_TOP50", "IA_HIDDEN_LIAISON_1", "IA_HIDDEN_LIAISON_2", "IA_HIDDEN_LIAISON_3", "IA_HIDDEN_LIAISON_4", "IA_HIDDEN_LIAISON_5", "MANUAL_CONFIRMED_REWARD", "MANUAL_CONFIRMED_DEDUCTION"],
+      title: "上海分公司 · 投顾参考项",
+      note: "排名、创收破冰前50和联络员等，正式统计表确认后通过补录入口暂存。",
+      codes: ["IA_HIDDEN_WEEKLY_EXCELLENCE_1", "IA_HIDDEN_WEEKLY_EXCELLENCE_2", "IA_HIDDEN_WEEKLY_EXCELLENCE_3", "IA_HIDDEN_WEEKLY_EXCELLENCE_4", "IA_HIDDEN_WEEKLY_WIN_1", "IA_HIDDEN_WEEKLY_WIN_2", "IA_HIDDEN_WEEKLY_WIN_3_6", "IA_HIDDEN_WEEKLY_WIN_7_15", "IA_HIDDEN_REVENUE_ICEBREAK_TOP50", "IA_HIDDEN_LIAISON_1", "IA_HIDDEN_LIAISON_2", "IA_HIDDEN_LIAISON_3", "IA_HIDDEN_LIAISON_4", "IA_HIDDEN_LIAISON_5"],
+    },
+    {
+      title: "手工更正",
+      note: "仅用于正式确认的额外奖励或扣回。",
+      codes: ["MANUAL_CONFIRMED_REWARD", "MANUAL_CONFIRMED_DEDUCTION"],
     },
   ];
 }
 
 function renderRuleDictionaryTable(items) {
   return `
-    <div class="table-wrap rule-table">
-      <table>
-        <thead><tr><th>规则</th><th>类型</th><th>默认值</th><th>依据</th></tr></thead>
-        <tbody>${items.map(r => `<tr><td>${r.name}<br><small>${r.code}</small></td><td>${r.type === "reward" ? "奖励" : "惩罚"}</td><td>${money(r.default_amount)} ${unit(r.amount_type)}</td><td>${r.rule_basis}</td></tr>`).join("") || `<tr><td colspan="4">暂无启用规则</td></tr>`}</tbody>
-      </table>
+    <div class="rule-card-list">
+      ${items.map(r => `
+        <article class="rule-mini-card ${r.type}">
+          <div>
+            <strong>${r.name}</strong>
+            <span class="rule-type ${r.type}">${r.type === "reward" ? "奖励" : "惩罚"}</span>
+          </div>
+          <b>${money(r.default_amount)} ${unit(r.amount_type)}</b>
+        </article>
+      `).join("") || `<div class="empty-note">暂无启用规则</div>`}
     </div>
   `;
 }
@@ -4402,41 +5650,14 @@ function renderRules() {
       <h2>规则与口径说明</h2>
       <p class="hint">先看这几条即可；结构化字典放在后面，主要给财务复核和导出留痕。</p>
       <div class="rule-coverage clean-rules">
-        <div><strong>营业部 · 投顾</strong><span>新增投顾有效户30元/户；达到5户后按50元/户；新增投顾有效户有创收再加50元/户。得分只用于剥离判断：新增投顾有效户 + 有创收新增投顾有效户×0.5，再加创收/2000×5；不足10分时，对“10分-实际得分”的差值向上取整剥离。</span></div>
+        <div><strong>营业部 · 投顾</strong><span>新增投顾客户50元/户。新增客户创收按最高档追加：0-500元奖50元，超500至1000元奖100元，超1000元奖150元。得分目标为新增投顾客户5户、创收4000元；创收未超1万元时创收得分8分封顶，超1万元不封顶。</span></div>
         <div><strong>营业部 · T0</strong><span>只看新增T0有效户。交易量达到200万元（含）或确认有效户，200元/户；未达到时不发营业部T0奖。</span></div>
+        <div><strong>营业部 · 剥离</strong><span>投顾阶段总分不足10分时，先取总分整数档与10分比较；每少1档剥离2户。例：9.5分按9分计，剥离2户；8.2分按8分计，剥离4户。</span></div>
         <div><strong>上海分公司 · 投顾</strong><span>7月三块自动核算：订单净增50元/单；新增客户按50/100/150元分层；新增客户创收按50/100/150/200/250元分层。新增客户数激励和创收激励未满一月均先发50%，同一客户上海分公司投顾奖励封顶500元。</span></div>
         <div><strong>上海分公司 · T0</strong><span>新增T0客户有交易量先给基础50元；50-100万补充50元，100-200万补充100元。原有T0客户本月达到200万元（含）或确认有效户时，只计入有效户阶梯，不拿基础50。</span></div>
-        <div><strong>参考项</strong><span>投顾周排名、创收破冰前50、优秀联络员、下午茶等不自动结算；正式金额确认后用“手工更正”补录。</span></div>
+        <div><strong>上海分公司 · 投顾参考项</strong><span>单周新增订单竞赛、创收破冰前50和优秀联络员等奖励依赖上海分公司排名或正式统计表；本工具提供补录入口，暂存后随“写入台账”进入员工记录和 Excel，并归入上海分公司投顾参考项。</span></div>
       </div>
       <details class="inline-dictionary"><summary>查看结构化规则字典</summary>${dictionary}${otherDictionary}</details>
-    </section>
-  `;
-  return `
-    <section class="section">
-      <h2>规则与口径说明</h2>
-      <p class="hint">以下按营业部DOCX、上海分公司PDF及两张图片口径归纳。系统只把可结构化、可核验的规则自动计入合计；排名、下午茶和联络员等不透明奖励只作为参考。</p>
-      <div class="rule-coverage">
-        <div><strong>营业部投顾</strong><span>个人月度目标为新增投顾有效户5户、投顾创收2000元。签约得分 = 新增投顾有效户数 + 有创收新增投顾有效户数 × 0.5；创收得分 = 新增投顾有效户创收 / 2000 × 5；两项合计目标10分，不封顶。奖励按实际新增投顾有效户数计，不把“有创收按1.5户折算”用于奖金户数。</span></div>
-        <div><strong>营业部投顾奖励/剥离</strong><span>新增投顾有效户先按30元/户；新增投顾有效户达到5户后，每户再追加20元，合计50元/户；新增投顾有效户产生创收再追加50元/户。阶段总分不足10分时，按 10 - 实际得分 向上取整剥离客户，9.5分也剥离1户。</span></div>
-        <div><strong>营业部T0</strong><span>只核算新增T0有效户。交易量达到200万元（含）或确认有效户，每有效户奖励200元，不设上限；未达到时不发营业部T0奖金。</span></div>
-        <div><strong>上海分公司T0</strong><span>新增T0客户有交易量先给基础50元；50-100万补充50元，100-200万补充100元；达到200万元（含）或确认有效户后，基础50仍保留并进入有效户阶梯。原有T0客户本月成为有效户时，只按新增T0有效户阶梯计算，不拿基础50。</span></div>
-        <div><strong>上海分公司投顾订单</strong><span>员工名下存量订单数达到12单（含）后，活动期内单客户编号名下订单净增量按50元/单奖励。净增量 = 新增订单 - 撤单；如果新增2单但撤2单，净增为0，不计订单净增奖励。</span></div>
-        <div><strong>上海分公司投顾新户/创收</strong><span>2026年1-6月未有投顾资讯业务订单、7月新增投顾订单的客户按新增投顾客户处理。新增1-9户按50元/户；10-14户按100元/户；15户及以上按150元/户。新增客户综合创收50/500/1000/2000/4000元对应50/100/150/200/250元。</span></div>
-        <div><strong>上海分公司服务期与上限</strong><span>7月新增激励均需服务满1个月；未满时“新增客户数激励”和“创收激励”本次均先发50%，8月31日复核后补发剩余50%。同一客户上海分公司投顾激励累计以500元为上限；本工具在本次核算内按客户标识封顶，跨批次需结合导出台账复核。</span></div>
-        <div><strong>上海分公司破冰奖</strong><span>上半年未新增过有效投顾订单的员工，7月新增任一投顾订单可额外奖励100元；若新增订单产生创收，再追加100元。创收率先突破1000元的前50人300元破冰奖属于排名统计，本工具仅作参考。</span></div>
-        <div><strong>上海分公司T0</strong><span>新增T0客户只要有交易量先给基础50元/户；50万至100万补充50元/户，100万至200万补充100元/户。交易量达到200万元（含）或确认有效户后，基础50元仍保留，并按有效户数阶梯追加：1户200元/户、2户300元/户、3户400元/户、4户及以上500元/户。原有T0客户若本月才达到有效户，只进入有效户阶梯，不享受新增开通基础50。</span></div>
-        <div><strong>参考不自动结算</strong><span>投顾单周订单竞赛、创收破冰前50、优秀联络员、下午茶和跨营业部排名依赖全量排名或后续发文，当前只作参考，不进入自动合计；如正式统计表确认金额，可在“手工更正”中补录。</span></div>
-      </div>
-      <h3 class="rule-heading">结构化规则字典</h3>
-      ${Object.entries(grouped).map(([category, items]) => `
-        <h3 class="rule-heading">${category}</h3>
-        <div class="table-wrap rule-table">
-          <table>
-            <thead><tr><th>规则</th><th>类型</th><th>默认值</th><th>依据</th></tr></thead>
-            <tbody>${items.map(r => `<tr><td>${r.name}<br><small>${r.code}</small></td><td>${r.type === "reward" ? "奖励" : "惩罚"}</td><td>${money(r.default_amount)} ${unit(r.amount_type)}</td><td>${r.rule_basis}</td></tr>`).join("")}</tbody>
-          </table>
-        </div>
-      `).join("")}
     </section>
   `;
 }
@@ -4451,14 +5672,16 @@ function groupBy(items, fn) {
 }
 
 function recordSourceName(record) {
-  if (record.settlement === "manual" || record.reason_code?.startsWith("IA_HIDDEN_")) return "手工更正";
+  if (record.reason_code?.startsWith("IA_HIDDEN_")) return "上海分公司";
+  if (record.settlement === "manual") return "手工更正";
   if (record.record_source === "department") return "营业部";
   if (record.record_source === "branch") return "上海分公司";
   return "手工更正";
 }
 
 function recordBusinessName(record) {
-  if (record.settlement === "manual" || record.reason_code?.startsWith("IA_HIDDEN_")) return "手工更正";
+  if (record.reason_code?.startsWith("IA_HIDDEN_")) return "投顾参考项";
+  if (record.settlement === "manual") return "手工更正";
   if (record.reason_code?.startsWith("T0_") || record.category?.includes("T0")) return "T0";
   if (record.reason_code?.startsWith("PENALTY_") || record.amount_type === "customer_count") return "剥离";
   if (record.category?.includes("手工")) return "手工";
@@ -4470,14 +5693,15 @@ function recordSortKey(record) {
   const biz = recordBusinessName(record);
   const bizRank = biz === "投顾" ? 1 : biz === "T0" ? 2 : biz === "剥离" ? 3 : 4;
   const groupRank = record.reason_code === "IA_BRANCH_ORDER_NET_INCREASE" ? 1
-    : ["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_EFFECTIVE_BASE", "IA_DEPT_STAGE_TARGET_EXTRA"].includes(record.reason_code) ? 2
-    : record.reason_code?.startsWith("IA_BRANCH_REVENUE_") || record.reason_code === "IA_DEPT_REVENUE_EXTRA" ? 3
-    : record.reason_code?.startsWith("IA_BRANCH_ICEBREAK_") ? 4
-    : record.reason_code?.startsWith("IA_HIDDEN_WEEKLY_") ? 5
-    : record.reason_code === "IA_HIDDEN_REVENUE_ICEBREAK_TOP50" ? 6
-    : record.reason_code?.startsWith("IA_HIDDEN_LIAISON_") ? 7
-    : record.reason_code?.startsWith("T0_") ? 8
-    : record.reason_code?.startsWith("PENALTY_") ? 9
+    : ["IA_BRANCH_NEW_CUSTOMER_BASE", "IA_BRANCH_COUNT_10_20", "IA_BRANCH_COUNT_20_PLUS", "IA_BRANCH_NEW_CUSTOMER_TIER_1_9", "IA_BRANCH_NEW_CUSTOMER_TIER_10_14", "IA_BRANCH_NEW_CUSTOMER_TIER_15_PLUS", "IA_DEPT_NEW_CUSTOMER_BASE"].includes(record.reason_code) ? 2
+    : record.reason_code?.startsWith("IA_BRANCH_REVENUE_") || ["IA_DEPT_REVENUE_0_500", "IA_DEPT_REVENUE_500_1000", "IA_DEPT_REVENUE_1000_PLUS"].includes(record.reason_code) ? 3
+    : record.reason_code?.startsWith("IA_DEPT_REVENUE_INCREMENT_") ? 4
+    : record.reason_code?.startsWith("IA_BRANCH_ICEBREAK_") ? 5
+    : record.reason_code?.startsWith("IA_HIDDEN_WEEKLY_") ? 6
+    : record.reason_code === "IA_HIDDEN_REVENUE_ICEBREAK_TOP50" ? 7
+    : record.reason_code?.startsWith("IA_HIDDEN_LIAISON_") ? 8
+    : record.reason_code?.startsWith("T0_") ? 9
+    : record.reason_code?.startsWith("PENALTY_") ? 10
     : 10;
   return [sourceRank, bizRank, groupRank, record.reason_name || ""];
 }
@@ -4554,6 +5778,7 @@ async function downloadFile(event, link, filename) {
 window.setTab = setTab;
 window.addCustomEmployee = addCustomEmployee;
 window.selectReason = selectReason;
+window.setManualEmployee = setManualEmployee;
 window.saveRecord = saveRecord;
 window.deleteRecord = deleteRecord;
 window.clearAllRecords = clearAllRecords;
@@ -4561,10 +5786,21 @@ window.fillExample = fillExample;
 window.applyFilters = applyFilters;
 window.downloadFile = downloadFile;
 window.submitAccess = submitAccess;
+window.jumpToSection = jumpToSection;
+window.writeLedgerFromNavigator = writeLedgerFromNavigator;
+window.toggleTheme = toggleTheme;
+window.handleFloatingSummaryClick = handleFloatingSummaryClick;
+window.startFloatingDrag = startFloatingDrag;
+window.moveFloatingDrag = moveFloatingDrag;
+window.endFloatingDrag = endFloatingDrag;
+
+window.addEventListener("scroll", () => requestAnimationFrame(updateFloatingArea), { passive: true });
+window.addEventListener("resize", () => requestAnimationFrame(updateFloatingArea), { passive: true });
 
 bootstrap().catch(err => {
   document.querySelector("#app").innerHTML = `<div class="section"><h1>加载失败</h1><p>${err.message}</p></div>`;
 });
-</script>
+
+  </script>
 </body>
 </html>
