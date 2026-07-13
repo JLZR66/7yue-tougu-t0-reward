@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7????T0????????</title>
+  <title>&#55;&#26376;&#25237;&#39038;&#19982;&#84;&#48;&#22870;&#21169;&#24809;&#32602;&#26680;&#31639;&#21488;&#36134;</title>
   <style>:root {
   --bg: #f6f7f9;
   --panel: #ffffff;
@@ -1519,13 +1519,22 @@ tr:last-child td {
 }
 
 .calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) {
-  grid-template-columns: minmax(220px, max-content) minmax(150px, max-content) minmax(0, 1fr);
-  align-items: end;
+  grid-template-columns: minmax(132px, max-content) minmax(220px, max-content) minmax(0, 1fr);
+  align-items: start;
+  column-gap: 18px;
+  row-gap: 10px;
 }
 
 .calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) .field {
   margin-bottom: 0;
   padding-left: 8px;
+}
+
+.calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) .field-emphasis {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) .field label {
@@ -1535,6 +1544,30 @@ tr:last-child td {
 .calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) input[name="ia_customer_count"],
 .calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) input[name="t0_customer_count"] {
   max-width: 96px;
+}
+
+.calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) input[name="ia_order_total"] {
+  max-width: 156px;
+}
+
+.field-emphasis input {
+  border-color: #9fc0cb;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(11, 107, 120, 0.08);
+}
+
+.field-emphasis input:focus {
+  border-color: var(--brand-2);
+  box-shadow: 0 0 0 3px rgba(11, 107, 120, 0.12);
+}
+
+.field-help {
+  display: block;
+  max-width: 220px;
+  margin-top: 6px;
+  color: #58707a;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .calculation-input-pane .grid.dynamic-customer-fields {
@@ -3435,6 +3468,70 @@ tr:last-child td {
   color: #b7f4f5;
 }
 
+:root[data-theme="dark"] .rule-dictionary-group {
+  background: #172a32;
+  border-color: #3b5964;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group > summary,
+:root[data-theme="dark"] .rule-dictionary-group[open] > summary {
+  background: #203842;
+  color: #dff9fb;
+  border-color: #4a6a76;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group > summary::before,
+:root[data-theme="dark"] .inline-dictionary > summary::before {
+  color: #7ee4ec;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group > summary span {
+  color: #dff9fb;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group > summary small,
+:root[data-theme="dark"] .inline-dictionary > summary small {
+  color: #b7d4dc;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group table,
+:root[data-theme="dark"] .inline-dictionary table {
+  background: #12242c;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group th,
+:root[data-theme="dark"] .inline-dictionary th {
+  background: #294652;
+  color: #e8fbfc;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group td,
+:root[data-theme="dark"] .inline-dictionary td {
+  background: #172d36;
+  color: #d8edf1;
+  border-color: #355461;
+}
+
+:root[data-theme="dark"] .rule-dictionary-group td strong,
+:root[data-theme="dark"] .inline-dictionary td strong {
+  color: #f4ffff;
+}
+
+:root[data-theme="dark"] .calculation-input-pane .field-emphasis {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+:root[data-theme="dark"] .field-emphasis input {
+  background: #10242c !important;
+  border-color: #7899a5 !important;
+  color: #f2fbfc;
+}
+
+:root[data-theme="dark"] .field-help {
+  color: #bdd5dc;
+}
+
 /* Final desktop polish: keep operational buttons together and let the region panel resize freely. */
 .header-actions {
   flex-wrap: nowrap;
@@ -3457,9 +3554,10 @@ tr:last-child td {
 .floating-navigator {
   min-width: 156px;
   max-width: min(360px, calc(100vw - 24px));
-  min-height: 44px;
-  max-height: calc(100vh - 24px);
-  resize: both;
+  min-height: 0;
+  height: auto !important;
+  max-height: none;
+  resize: horizontal;
   overflow: auto;
   touch-action: auto;
 }
@@ -3497,6 +3595,78 @@ tr:last-child td {
   background: rgba(100, 183, 192, 0.26);
 }
 
+@media (max-width: 560px) {
+  .option-note:not([open]) p {
+    display: none;
+  }
+
+  .option-note[open] p,
+  .option-note p {
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    top: auto;
+    bottom: 18px;
+    width: auto;
+    max-width: none;
+    z-index: 80;
+  }
+
+  .calculation-output-pane .table-wrap {
+    overflow-x: visible;
+  }
+
+  .calculation-output-pane table,
+  .calculation-output-pane .detail-table table,
+  .detail-table.simple-detail table,
+  .detail-table table {
+    width: 100%;
+    min-width: 0 !important;
+    table-layout: fixed;
+  }
+
+  .calculation-output-pane th,
+  .calculation-output-pane td,
+  .detail-table th,
+  .detail-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .detail-table.simple-detail th:nth-child(1),
+  .detail-table.simple-detail td:nth-child(1),
+  .detail-table th:nth-child(1),
+  .detail-table td:nth-child(1) {
+    width: 54px;
+  }
+
+  .detail-table.simple-detail th:nth-child(2),
+  .detail-table.simple-detail td:nth-child(2),
+  .detail-table th:nth-child(2),
+  .detail-table td:nth-child(2) {
+    width: 96px;
+  }
+
+  .detail-table.simple-detail th:nth-child(3),
+  .detail-table.simple-detail td:nth-child(3),
+  .detail-table th:nth-child(3),
+  .detail-table td:nth-child(3),
+  .detail-table th:nth-child(4),
+  .detail-table td:nth-child(4) {
+    width: 54px;
+  }
+
+  .detail-table.simple-detail th:nth-child(4),
+  .detail-table.simple-detail td:nth-child(4),
+  .detail-table.simple-detail .calculation-detail,
+  .detail-table .calculation-detail {
+    width: auto;
+    min-width: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .header-actions {
     flex-wrap: wrap;
@@ -3505,6 +3675,262 @@ tr:last-child td {
   .header-danger-group {
     width: 100%;
     justify-content: flex-end;
+  }
+}
+
+/* Mobile fit pass: keep the calculator readable on phones without horizontal squeezing. */
+@media (max-width: 720px) {
+  .local-shell {
+    padding: 12px;
+  }
+
+  .local-header {
+    min-height: auto;
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .local-header h1 {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  .local-header p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .header-actions,
+  .header-danger-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .header-actions > .theme-toggle,
+  .header-actions > .local-badge,
+  .header-actions > .header-export,
+  .header-danger-group {
+    grid-column: 1 / -1;
+  }
+
+  .header-danger-group {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .header-actions .btn,
+  .local-badge {
+    width: 100%;
+    min-height: 38px;
+    justify-content: center;
+    text-align: center;
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+
+  .section,
+  .calculation-output-pane .section,
+  .calculation-input-pane .calculator-block {
+    padding: 14px;
+  }
+
+  .calculation-workspace {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .entry-title-row {
+    gap: 10px;
+  }
+
+  .entry-title-row .btn {
+    width: 100%;
+  }
+
+  .score-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .source-summary,
+  .result-topline {
+    gap: 8px;
+  }
+
+  .floating-navigator {
+    width: min(168px, calc(100vw - 20px));
+    right: 10px;
+    bottom: 10px;
+    max-height: 58vh;
+  }
+}
+
+@media (max-width: 560px) {
+  .calculation-input-pane .customer-row,
+  .calculation-input-pane .ia-customer-row,
+  .calculation-input-pane .t0-customer-row {
+    padding: 10px;
+  }
+
+  .calculation-input-pane .customer-row input,
+  .calculation-input-pane .customer-row select,
+  .calculation-input-pane .manual-entry-grid select,
+  .calculation-input-pane .manual-entry-grid input[type="number"],
+  .employee-picker select,
+  .employee-new-name {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .calculation-input-pane .ia-customer-row .customer-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    justify-items: stretch;
+  }
+
+  .calculation-input-pane .ia-customer-row .customer-meta > label,
+  .calculation-input-pane .ia-customer-row .customer-meta .option-with-note,
+  .calculation-input-pane .ia-customer-row .customer-meta .effective-check,
+  .calculation-input-pane .ia-customer-row .customer-meta .mature-check,
+  .calculation-input-pane .t0-customer-row .customer-meta > label,
+  .calculation-input-pane .t0-customer-row .customer-meta .effective-check {
+    width: 100%;
+    height: auto;
+    min-height: 32px;
+    justify-content: flex-start;
+  }
+
+  .calculation-input-pane .customer-meta select {
+    max-width: none;
+  }
+
+  .calculation-input-pane .t0-customer-row .customer-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .calculation-input-pane .t0-customer-row .customer-meta small {
+    min-width: 0;
+    flex-basis: auto;
+    font-size: 11px;
+  }
+
+  .order-revenue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .customer-revenue-total {
+    width: 100%;
+  }
+
+  .floating-navigator {
+    min-width: 132px;
+    width: 146px;
+    font-size: 12px;
+  }
+
+  .floating-nav-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .option-note p {
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    top: auto;
+    bottom: 18px;
+    width: auto;
+    max-width: none;
+    z-index: 80;
+  }
+
+  .calculation-input-pane .ia-customer-row .customer-meta,
+  .calculation-input-pane .t0-customer-row .customer-meta {
+    align-items: stretch;
+  }
+
+  .calculation-input-pane .ia-customer-row .customer-meta > label,
+  .calculation-input-pane .ia-customer-row .customer-meta .option-with-note,
+  .calculation-input-pane .t0-customer-row .customer-meta > label,
+  .calculation-input-pane .t0-customer-row .customer-meta .effective-check {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 8px;
+    align-items: center;
+  }
+
+  .calculation-input-pane .ia-customer-row .customer-meta .option-with-note {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .calculation-input-pane .ia-customer-row .customer-meta .mature-check,
+  .calculation-input-pane .ia-customer-row .customer-meta .effective-check,
+  .calculation-input-pane .t0-customer-row .customer-meta .effective-check {
+    display: inline-flex;
+    width: auto;
+  }
+
+  .calculation-input-pane .ia-customer-row .customer-meta select,
+  .calculation-input-pane .t0-customer-row .customer-meta select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .option-note:not([open]) p {
+    display: none !important;
+  }
+
+  .calculation-output-pane table,
+  .calculation-output-pane .detail-table table,
+  .detail-table table {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+  }
+
+  .detail-table.has-pending th:nth-child(1),
+  .detail-table.has-pending td:nth-child(1) {
+    width: 42px;
+  }
+
+  .detail-table.has-pending th:nth-child(2),
+  .detail-table.has-pending td:nth-child(2) {
+    width: 74px;
+  }
+
+  .detail-table.has-pending th:nth-child(3),
+  .detail-table.has-pending td:nth-child(3),
+  .detail-table.has-pending th:nth-child(4),
+  .detail-table.has-pending td:nth-child(4),
+  .detail-table.has-pending th:nth-child(5),
+  .detail-table.has-pending td:nth-child(5) {
+    width: 42px;
+    min-width: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .detail-table.has-pending th:nth-child(6),
+  .detail-table.has-pending td:nth-child(6),
+  .detail-table .calculation-detail,
+  .detail-table .calculation-detail span {
+    width: auto;
+    min-width: 0 !important;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) input[name="ia_customer_count"],
+  .calculation-input-pane .calculator-block > .grid.cols-4:not(.dynamic-customer-fields) input[name="ia_order_total"] {
+    max-width: none;
+    width: 100%;
   }
 }
 </style>
@@ -4335,6 +4761,7 @@ tr:last-child td {
   expandedPanels: [],
   floatingCollapsed: localStorage.getItem("rp_floating_nav_collapsed_2026_07") === "true",
   floatingSize: localStorage.getItem("rp_floating_nav_size_2026_07") || "normal",
+  floatingWidth: Number(localStorage.getItem("rp_floating_nav_width_2026_07") || 0),
   filters: { employee_name: "", employee_id: "", type: "", start: "", end: "", project_id: "" },
 };
 
@@ -4343,6 +4770,7 @@ const PENDING_MANUAL_KEY = "rp_pending_manual_entries_2026_07_v1";
 const FLOATING_NAV_POSITION_KEY = "rp_floating_nav_position_2026_07_v1";
 const FLOATING_NAV_COLLAPSED_KEY = "rp_floating_nav_collapsed_2026_07";
 const FLOATING_NAV_SIZE_KEY = "rp_floating_nav_size_2026_07";
+const FLOATING_NAV_WIDTH_KEY = "rp_floating_nav_width_2026_07";
 const FLOATING_NAV_LINKS = [
   ["section-top", "顶部"],
   ["section-ia-input", "投顾填写"],
@@ -4585,12 +5013,14 @@ function loadFloatingNavPosition() {
 
 function floatingNavStyle() {
   const position = loadFloatingNavPosition();
-  if (!position) return "";
-  const navWidth = state.floatingSize === "large" ? 230 : 180;
+  const savedWidth = Number(state.floatingWidth || localStorage.getItem(FLOATING_NAV_WIDTH_KEY) || 0);
+  const navWidth = Number.isFinite(savedWidth) && savedWidth >= 150 ? Math.min(savedWidth, 360) : 180;
   const navHeight = state.floatingCollapsed ? 48 : 240;
+  const widthStyle = !state.floatingCollapsed && savedWidth >= 150 ? `width:${navWidth}px;` : "";
+  if (!position) return widthStyle ? `style="${widthStyle}"` : "";
   const left = Math.max(8, Math.min(position.left, window.innerWidth - navWidth - 8));
   const top = Math.max(8, Math.min(position.top, window.innerHeight - navHeight - 8));
-  return `style="left:${left}px;top:${top}px;right:auto;bottom:auto;"`;
+  return `style="left:${left}px;top:${top}px;right:auto;bottom:auto;${widthStyle}"`;
 }
 
 function setFloatingActive(ids = []) {
@@ -4598,6 +5028,21 @@ function setFloatingActive(ids = []) {
   document.querySelectorAll(".floating-nav-links button[data-target]").forEach(button => {
     button.classList.toggle("active", active.has(button.dataset.target));
   });
+}
+
+function setupFloatingResizeMemory() {
+  const nav = document.querySelector(".floating-navigator");
+  if (!nav || nav.dataset.resizeMemory === "true" || !window.ResizeObserver) return;
+  nav.dataset.resizeMemory = "true";
+  const observer = new ResizeObserver(entries => {
+    if (state.floatingCollapsed || nav.classList.contains("is-collapsed")) return;
+    const width = Math.round(entries[0]?.contentRect?.width || 0);
+    if (width >= 150 && width <= 370) {
+      state.floatingWidth = width;
+      localStorage.setItem(FLOATING_NAV_WIDTH_KEY, String(width));
+    }
+  });
+  observer.observe(nav);
 }
 
 function jumpToSection(id) {
@@ -4643,16 +5088,6 @@ function toggleFloatingCollapsed(event) {
   if (nav) nav.classList.toggle("is-collapsed", state.floatingCollapsed);
   const button = document.querySelector(".floating-nav-controls button[title='收起/展开']");
   if (button) button.textContent = state.floatingCollapsed ? "+" : "-";
-}
-
-function toggleFloatingSize(event) {
-  event?.stopPropagation?.();
-  state.floatingSize = state.floatingSize === "large" ? "normal" : "large";
-  localStorage.setItem(FLOATING_NAV_SIZE_KEY, state.floatingSize);
-  const nav = document.querySelector(".floating-navigator");
-  if (nav) nav.classList.toggle("is-large", state.floatingSize === "large");
-  const button = document.querySelector(".floating-nav-controls button[title^='快速放大']");
-  if (button) button.textContent = state.floatingSize === "large" ? "小" : "大";
 }
 
 function recalculateEmployeeFromHeader() {
@@ -5381,8 +5816,10 @@ async function clearAllRecords() {
     localStorage.removeItem(FLOATING_NAV_POSITION_KEY);
     localStorage.removeItem(FLOATING_NAV_COLLAPSED_KEY);
     localStorage.removeItem(FLOATING_NAV_SIZE_KEY);
+    localStorage.removeItem(FLOATING_NAV_WIDTH_KEY);
     state.floatingCollapsed = false;
     state.floatingSize = "normal";
+    state.floatingWidth = 0;
     await refreshRecords(false);
     await refreshStats(false);
     resetWorkingCalculations();
@@ -5457,6 +5894,7 @@ function render({ scrollToTop = false } = {}) {
     setupEmployeeAutoPreview();
     setupNumberWheelGuard();
     setupOptionNoteGuard();
+    setupFloatingResizeMemory();
     window.scrollTo({ top: scrollToTop ? 0 : scrollTop, left: 0 });
     updateFloatingArea();
   });
@@ -5511,11 +5949,10 @@ function renderEntry() {
 
 function renderFloatingNavigator() {
   return `
-    <div class="floating-navigator ${state.floatingCollapsed ? "is-collapsed" : ""} ${state.floatingSize === "large" ? "is-large" : ""}" ${floatingNavStyle()} onpointerdown="startFloatingDrag(event)" onpointermove="moveFloatingDrag(event)" onpointerup="endFloatingDrag(event)" onpointercancel="endFloatingDrag(event)">
+    <div class="floating-navigator ${state.floatingCollapsed ? "is-collapsed" : ""}" ${floatingNavStyle()} onpointerdown="startFloatingDrag(event)" onpointermove="moveFloatingDrag(event)" onpointerup="endFloatingDrag(event)" onpointercancel="endFloatingDrag(event)">
       <div class="floating-nav-title" onclick="handleFloatingSummaryClick(event)">
         <strong>区域</strong>
         <div class="floating-nav-controls">
-          <button type="button" title="快速放大/缩小，也可拖动右下角自定义大小" onclick="toggleFloatingSize(event)">${state.floatingSize === "large" ? "小" : "大"}</button>
           <button type="button" title="收起/展开" onclick="toggleFloatingCollapsed(event)">${state.floatingCollapsed ? "+" : "-"}</button>
         </div>
       </div>
@@ -5701,8 +6138,8 @@ function renderEmployeeCalculator() {
         <div class="calculator-block" id="section-ia-input">
           <h3>投顾资讯</h3>
           <div class="grid cols-4">
-            <div class="field"><label>投顾客户行数</label><input name="ia_customer_count" type="number" min="0" max="100" step="1" value="${iaCustomerCount}" oninput="refreshEmployeeCustomerFields()" /></div>
-            <div class="field"><label>投顾总新增订单数（可选）</label><input name="ia_order_total" type="number" min="0" max="300" step="1" value="${iaOrderTotal}" oninput="refreshEmployeeCustomerFields()" /></div>
+            <div class="field field-emphasis"><label>投顾客户数</label><input name="ia_customer_count" type="number" min="0" max="100" step="1" value="${iaCustomerCount}" oninput="refreshEmployeeCustomerFields()" /></div>
+            <div class="field field-emphasis"><label>投顾总新增订单数（可选）</label><input name="ia_order_total" type="number" min="0" max="300" step="1" value="${iaOrderTotal}" oninput="refreshEmployeeCustomerFields()" /><small class="field-help">这里填总新增订单数，不扣撤单；净新增会在每个客户明细里按“新增订单 - 撤单”自动计算。</small></div>
           </div>
           <p id="iaOrderCountHint" class="hint order-count-hint ${iaOrderInfo.gap === 0 ? "" : "warning-text"}">${iaOrderInfo.message}</p>
           <div class="check-row"><div class="option-with-note"><label class="compact-toggle"><input name="existing_orders_12_plus" type="checkbox" ${value("existing_orders_12_plus") !== "false" ? "checked" : ""} /><span>累计订单满12单</span></label><details class="option-note"><summary>说明</summary><p>上海分公司订单激励门槛。已知员工名下存量订单满12单就勾选；即使不勾选，只要本次“新增订单 - 撤单”的总净增达到12单，系统也会自动视为满足门槛。</p></details></div><div class="option-with-note"><label class="compact-toggle"><input name="no_first_half_effective_ia_order" type="checkbox" ${value("no_first_half_effective_ia_order") === "true" ? "checked" : ""} /><span>上半年未新增有效投顾订单</span></label><details class="option-note"><summary>说明</summary><p>7月订单破冰奖：上半年未新增过有效投顾订单的员工，本月新增任一投顾订单奖100元；若新增订单产生创收，再追加100元。</p></details></div></div>
@@ -6325,7 +6762,6 @@ window.recalculateEmployeeFromHeader = recalculateEmployeeFromHeader;
 window.updateIaCustomerRevenueTotals = updateIaCustomerRevenueTotals;
 window.handleFloatingSummaryClick = handleFloatingSummaryClick;
 window.toggleFloatingCollapsed = toggleFloatingCollapsed;
-window.toggleFloatingSize = toggleFloatingSize;
 window.startFloatingDrag = startFloatingDrag;
 window.moveFloatingDrag = moveFloatingDrag;
 window.endFloatingDrag = endFloatingDrag;
